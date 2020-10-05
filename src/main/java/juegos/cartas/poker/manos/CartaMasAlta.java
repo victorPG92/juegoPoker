@@ -21,7 +21,7 @@ public class CartaMasAlta extends ManoSegunCompararTodas //implements Comparable
 	public CartaMasAlta(List<Carta> mano)// ,ManoEnum me
 	{
 		super(mano);
-		tipo = NombreMano.high_card;
+		tipo = NombreManoPoker.high_card;
 		//List<Carta> manoOrd = (new OrdenarCartas()).ordenarPorNumero(mano);
 		//cartas = manoOrd;
 

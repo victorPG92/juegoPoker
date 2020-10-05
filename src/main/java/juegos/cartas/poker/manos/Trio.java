@@ -20,7 +20,7 @@ public class Trio extends ManoPoker
 		{
 			
 				
-				tipo=NombreMano.three_of_a_kind;
+				tipo=NombreManoPoker.three_of_a_kind;
 				List<Carta> manoOrd =  (new OrdenarCartas()).ordenarPorIguales(mano);
 				this.cartas=manoOrd;
 				

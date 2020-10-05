@@ -22,7 +22,7 @@ extends ManoPoker{
 		{
 			
 				
-				tipo=NombreMano.four_of_a_kind;
+				tipo=NombreManoPoker.four_of_a_kind;
 				List<Carta> manoOrd =  (new OrdenarCartas()).ordenarPorIguales(mano);
 				this.cartas=manoOrd;
 				kind=cartas.get(0).getNumero();

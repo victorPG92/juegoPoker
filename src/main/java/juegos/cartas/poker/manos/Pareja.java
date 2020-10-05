@@ -22,7 +22,7 @@ public class Pareja extends ManoPoker
 	{
 		
 			
-			tipo=NombreMano.pair;
+			tipo=NombreManoPoker.pair;
 			List<Carta> manoOrd =  (new OrdenarCartas()).ordenarPorIguales(mano);
 			this.cartas=manoOrd;
 			
@@ -30,9 +30,9 @@ public class Pareja extends ManoPoker
 	}
 
 	@Override
-	public NombreMano dameTipo() {
+	public NombreManoPoker dameTipo() {
 		
-		return NombreMano.pair;
+		return NombreManoPoker.pair;
 	}
 	
 	public String toString()

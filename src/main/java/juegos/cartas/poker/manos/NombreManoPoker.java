@@ -6,7 +6,7 @@ package juegos.cartas.poker.manos;
  * @author victor
  * Tipos de manos que  se pueden completar
  */
-public enum NombreMano
+public enum NombreManoPoker
 
 {
 
@@ -24,7 +24,7 @@ public enum NombreMano
 	private String esp;
 	private int valor;
 	
-	NombreMano(String s,int i)
+	NombreManoPoker(String s,int i)
 	{
 		esp=s;
 		valor=i;

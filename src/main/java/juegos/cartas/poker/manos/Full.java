@@ -21,7 +21,7 @@ public class Full extends ManoPoker
 	{
 		
 			
-			tipo=NombreMano.full_house;
+			tipo=NombreManoPoker.full_house;
 			List<Carta> manoOrd =  (new OrdenarCartas()).ordenarPorIguales(mano);
 			this.cartas=manoOrd;
 			

@@ -17,12 +17,12 @@ public abstract class ManoPoker implements /*Comparable<ManoPoker>,*/  Mano
 	
 	
 	
-	protected NombreMano tipo;
+	protected NombreManoPoker tipo;
 	protected List<Carta> cartas;
 	
 	
 	
-	public NombreMano dameTipo()
+	public NombreManoPoker dameTipo()
 	{
 		return tipo;
 	}

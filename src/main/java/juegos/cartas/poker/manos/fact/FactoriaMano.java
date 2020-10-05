@@ -10,7 +10,7 @@ import juegos.cartas.poker.manos.DoblesParejas;
 import juegos.cartas.poker.manos.Escalera;
 import juegos.cartas.poker.manos.EscaleraColor;
 import juegos.cartas.poker.manos.Full;
-import juegos.cartas.poker.manos.NombreMano;
+import juegos.cartas.poker.manos.NombreManoPoker;
 import juegos.cartas.poker.manos.Pareja;
 import juegos.cartas.poker.manos.Poker;
 import juegos.cartas.poker.manos.Trio;
@@ -49,21 +49,21 @@ public class FactoriaMano
 	}
 	*/
 	
-	public Mano creaMano(List<Carta> cartas,NombreMano me)
+	public Mano creaMano(List<Carta> cartas,NombreManoPoker me)
 	{
 		//System.out.println("fabricar "+ me.getEsp() +" con  de "+hc1+" y "+ hc2) ;
 		
 		Mano mano = null;
 		
-		if	   (me.equals(NombreMano.pair)) 			 mano = new Pareja			(cartas);
-		else if(me.equals(NombreMano.three_of_a_kind)) mano = new Trio			(cartas);
-		else if(me.equals(NombreMano.two_pair)) 		 mano = new DoblesParejas	(cartas);
-		else if(me.equals(NombreMano.straight)) 		 mano = new Escalera		(cartas);
-		else if(me.equals(NombreMano.flush)) 			 mano = new Color			(cartas);
-		else if(me.equals(NombreMano.full_house)) 	 mano = new Full			(cartas);
-		else if(me.equals(NombreMano.four_of_a_kind))  mano = new Poker			(cartas);
-		else if(me.equals(NombreMano.straight_flush))  mano = new EscaleraColor	(cartas);
-		else if(me.equals(NombreMano.high_card)) 		 mano = new CartaMasAlta	(cartas);
+		if	   (me.equals(NombreManoPoker.pair)) 			 mano = new Pareja			(cartas);
+		else if(me.equals(NombreManoPoker.three_of_a_kind)) mano = new Trio			(cartas);
+		else if(me.equals(NombreManoPoker.two_pair)) 		 mano = new DoblesParejas	(cartas);
+		else if(me.equals(NombreManoPoker.straight)) 		 mano = new Escalera		(cartas);
+		else if(me.equals(NombreManoPoker.flush)) 			 mano = new Color			(cartas);
+		else if(me.equals(NombreManoPoker.full_house)) 	 mano = new Full			(cartas);
+		else if(me.equals(NombreManoPoker.four_of_a_kind))  mano = new Poker			(cartas);
+		else if(me.equals(NombreManoPoker.straight_flush))  mano = new EscaleraColor	(cartas);
+		else if(me.equals(NombreManoPoker.high_card)) 		 mano = new CartaMasAlta	(cartas);
 		
 		
 		

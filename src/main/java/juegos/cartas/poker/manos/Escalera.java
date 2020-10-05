@@ -22,7 +22,7 @@ public class Escalera extends EscaleraMano //implements Comparable<Escalera>
 	public Escalera(List<Carta> mano )
 	{
 			super(mano);
-			tipo=NombreMano.straight;
+			tipo=NombreManoPoker.straight;
 			//cartas =  (new OrdenarCartas()).ordenarPorNumeroAscendente(mano);
             /*cartas =  (new OrdenarCartas()).ordenarPorNumero(mano);
                         

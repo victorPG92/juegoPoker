@@ -22,7 +22,7 @@ public class DoblesParejas extends ManoPoker
 	public DoblesParejas(List<Carta> mano)
 	{
 		
-		tipo=NombreMano.two_pair;
+		tipo=NombreManoPoker.two_pair;
 		List<Carta> manoOrd =  (new OrdenarCartas()).ordenarPorIguales(mano);
 		parejaMayor= manoOrd.get(0);
 		parejaMenor= manoOrd.get(2);

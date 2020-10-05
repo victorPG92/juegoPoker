@@ -18,7 +18,7 @@ public class Color extends ManoSegunCompararTodas {
 	public Color(List<Carta> mano)
 	{
 		super(mano);
-		tipo=NombreMano.flush;
+		tipo=NombreManoPoker.flush;
 		/*ArrayList<Carta> manoOrd =  (new OrdenarCartas()).ordenarPorNumero(mano);
 		this.cartas=manoOrd;
 		*/
