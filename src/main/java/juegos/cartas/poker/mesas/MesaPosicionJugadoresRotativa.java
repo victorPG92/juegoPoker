@@ -46,7 +46,7 @@ public class MesaPosicionJugadoresRotativa<C extends ICartaComparable> implement
 		if(jugadores.size()<=6)
 		{
 			PosicionJugador posIni= PosicionJugador.UTG;
-			for (Jugador jugador : jugadores)
+			for (Jugador<C> jugador : jugadores)
 			{
 				posicionesJugadas.add(posIni);
 				posIni = posIni.sig();

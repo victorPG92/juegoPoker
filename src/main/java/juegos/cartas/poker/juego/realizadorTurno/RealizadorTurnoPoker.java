@@ -11,6 +11,7 @@ import juegos.cartas.poker.crupier.CrupierPokerTexasHoldemAleatorio;
 import juegos.cartas.poker.juego.AccionPoker;
 import juegos.cartas.poker.juego.FasesPoker;
 import juegos.cartas.poker.juego.JuegoPoker;
+import juegos.cartas.poker.juego.realizadorTurno.ia.RealizadorTurnoIAPoker;
 import juegos.cartas.poker.mesas.Apuestas;
 import juegos.cartas.poker.mesas.MesaPokerTexasHoldem;
 
@@ -42,8 +43,8 @@ public  abstract class RealizadorTurnoPoker<C extends ICartaComparable>  extends
 		//		return juegoPoker.getApuestaTurno()-(Integer)juegoPoker.getApuestas().getApuestaJugador().getOrDefault(jugador,new Apuesta(AccionPoker.ABANDONAR));
 
 		int apuestaTurno=juegoPoker.getApuestaTurno();
-		Map<Jugador<C>, Apuesta> apuestasJugadores = juegoPoker.getApuestas().getApuestaJugador();
-		int apuestaJugador = apuestasJugadores.getOrDefault(jugador,new Apuesta(AccionPoker.ABANDONAR)).getFichas() ;
+		Map<Jugador<C>, Apuesta<AccionPoker>> apuestasJugadores = juegoPoker.getApuestas().getApuestaJugador();
+		int apuestaJugador = apuestasJugadores.getOrDefault(jugador,new Apuesta<AccionPoker>(AccionPoker.ABANDONAR)).getFichas() ;
 		
 		return apuestaTurno - apuestaJugador;
 		
@@ -58,7 +59,7 @@ public  abstract class RealizadorTurnoPoker<C extends ICartaComparable>  extends
 
 
 
-	public MesaPokerTexasHoldem getMesa() {
+	public MesaPokerTexasHoldem<C> getMesa() {
 		return juegoPoker.getMesa();
 	}
 
@@ -100,7 +101,7 @@ public  abstract class RealizadorTurnoPoker<C extends ICartaComparable>  extends
 
 
 
-	public Map getRealizadores() {
+	public Map<Jugador<C>, RealizadorTurnoIAPoker<C>> getRealizadores() {
 		return juegoPoker.getRealizadores();
 	}
 
@@ -118,13 +119,13 @@ public  abstract class RealizadorTurnoPoker<C extends ICartaComparable>  extends
 
 
 
-	public Apuesta getUltimaAccionRealizada() {
+	public Apuesta<AccionPoker> getUltimaAccionRealizada() {
 		return juegoPoker.getUltimaAccionRealizada();
 	}
 
 
 
-	public Apuestas getApuestas() {
+	public Apuestas<C> getApuestas() {
 		return juegoPoker.getApuestas();
 	}
 	

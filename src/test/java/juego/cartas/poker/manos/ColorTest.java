@@ -22,7 +22,7 @@ public class ColorTest
 		
 		
 		
-		List<Carta> cartas= new ArrayList<>();
+		//List<Carta> cartas= new ArrayList<>();
 		List<Carta> cartas2= new ArrayList<>();
 
 		List<Carta> cartasBase1= new ArrayList<>();

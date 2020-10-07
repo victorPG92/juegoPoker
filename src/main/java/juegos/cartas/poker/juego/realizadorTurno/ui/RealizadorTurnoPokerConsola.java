@@ -33,7 +33,7 @@ public class RealizadorTurnoPokerConsola<C extends ICartaComparable> extends Rea
 			mostrarMesa();
 			mostrarCartasjugador();
 			System.out.println("Escoge una de las acciones posibles(Tienes " +jugador.getFichas()+" fichas):");
-			JuegoPoker juegoPoker= ((JuegoPoker<C>)juegoCartas);
+			JuegoPoker<C> juegoPoker= ((JuegoPoker<C>)juegoCartas);
 			
 			//System.out.println(juegoPoker.getClass());
 			Apuesta<AccionPoker> ultimaApuesta=juegoPoker.getUltimaAccionRealizada();

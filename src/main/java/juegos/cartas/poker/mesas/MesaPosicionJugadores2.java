@@ -42,7 +42,7 @@ public class MesaPosicionJugadores2<C extends ICartaComparable> implements MesaP
 		if(jugadores.size()<=6)
 		{
 			PosicionJugador posIni= PosicionJugador.UTG;
-			for (Jugador jugador : jugadores)
+			for (Jugador<C> jugador : jugadores)
 			{
 				jugadorPorPosicion.put(posIni, jugador);
 				posIni = posIni.sig();

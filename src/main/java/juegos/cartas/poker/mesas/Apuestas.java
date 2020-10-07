@@ -11,7 +11,7 @@ import juegos.cartas.poker.juego.AccionPoker;
 public class Apuestas <C extends ICartaComparable>
 {
 	
-	private Map<Jugador<C>,Apuesta> apuestaJugador= new HashMap<>();
+	private Map<Jugador<C>,Apuesta<AccionPoker>> apuestaJugador= new HashMap<>();
 
 	/**
 	 * Indica si todas las apuestas estan finalizadas
@@ -40,11 +40,11 @@ public class Apuestas <C extends ICartaComparable>
 				map(a-> a.getFichas()).max(Integer::compareTo).get();
 	}
 	
-	public Map<Jugador<C>, Apuesta> getApuestaJugador() {
+	public Map<Jugador<C>, Apuesta<AccionPoker>> getApuestaJugador() {
 		return apuestaJugador;
 	}
 
-	public void setApuestaJugador(Map<Jugador<C>, Apuesta> apuestaJugador) {
+	public void setApuestaJugador(Map<Jugador<C>, Apuesta<AccionPoker>> apuestaJugador) {
 		this.apuestaJugador = apuestaJugador;
 	}
 	
