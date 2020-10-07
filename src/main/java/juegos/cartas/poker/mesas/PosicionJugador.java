@@ -1,4 +1,4 @@
-package juegos.cartas.poker.juego;
+package juegos.cartas.poker.mesas;
 
 /**
  * Posicion del jugador.

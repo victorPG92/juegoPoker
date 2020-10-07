@@ -1,6 +1,7 @@
-package juegos.cartas.poker.juego;
+package juegos.cartas.poker.mesas;
 
 import java.util.EnumMap;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -11,21 +12,23 @@ import juegos.cartas.cartas.mesas.Jugador;
  * Representa que jugador hay en que posicion.
  * Se implementa con EnumMap
  */
-public class MesaPosicionJugadores<C extends ICartaComparable>
+public class MesaPosicionJugadoresMapaPosJug<C extends ICartaComparable> implements MesaPosicionesJugadores<C>
 {
 	
 	//private LinkedHashMap<K, V> paa guardar en orden pero al ser enumerados mejro enummap
-	private EnumMap<PosicionJugador, Jugador<C>> jugadorPorPosicion= new EnumMap<>(PosicionJugador.class);
+	private EnumMap<PosicionJugador, PosicionConJugador<C>> jugadorPorPosicion= new EnumMap<>(PosicionJugador.class);
 
 	
 	//por si acaso lo necesito en vez de usar map.values()
 	List<Jugador<C>> jugadores;
 	
+	List<PosicionJugador> posicionesJugadas;
+	
 	/**
 	 * Como maximo deben ser 6 jugadores
 	 * @param jugadores
 	 */
-	public MesaPosicionJugadores(List<Jugador<C>> jugadores)
+	public MesaPosicionJugadoresMapaPosJug(List<Jugador<C>> jugadores)
 	{
 		super();
 		this.jugadores=jugadores;
@@ -40,9 +43,9 @@ public class MesaPosicionJugadores<C extends ICartaComparable>
 		if(jugadores.size()<=6)
 		{
 			PosicionJugador posIni= PosicionJugador.UTG;
-			for (Jugador jugador : jugadores)
+			for (Jugador<C> jugador : jugadores)
 			{
-				jugadorPorPosicion.put(posIni, jugador);
+				jugadorPorPosicion.put(posIni, new PosicionConJugador<>(posIni,jugador));
 				posIni = posIni.sig();
 			}
 		}
@@ -50,9 +53,9 @@ public class MesaPosicionJugadores<C extends ICartaComparable>
 
 
 
-	public Jugador getJugador(PosicionJugador pos)
+	public Jugador<C> getJugador(PosicionJugador pos)
 	{
-		return jugadorPorPosicion.get(pos);
+		return jugadorPorPosicion.get(pos).getJugador();
 	}
 	
 	/**
@@ -68,14 +71,22 @@ public class MesaPosicionJugadores<C extends ICartaComparable>
 			if(aux==null)
 			{
 				PosicionJugador posAntg= pos.ant();
-				aux= jugadorPorPosicion.get(posAntg);
+				aux= jugadorPorPosicion.get(posAntg).getJugador();
 			}
-			jugadorPorPosicion.put(pos, aux);
-			aux= jugadorPorPosicion.get(pos);
+			jugadorPorPosicion.get(pos).setJugador(aux);
+			aux= jugadorPorPosicion.get(pos).getJugador();
 
 			
 			
 		}
+	}
+
+
+
+	@Override
+	public Iterator<Jugador<C>> iterator() {
+		
+		return null;
 	}
 	
 	

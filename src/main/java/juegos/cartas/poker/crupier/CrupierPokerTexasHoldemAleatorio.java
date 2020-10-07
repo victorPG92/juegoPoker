@@ -6,6 +6,7 @@ import juegos.cartas.cartas.cartas.ICartaComparable;
 import juegos.cartas.cartas.mazos.modelos.MazoCartasSimple;
 import juegos.cartas.cartas.mesas.crupier.CrupierMazoAleatoria;
 import juegos.cartas.cartas.mesas.crupier.CrupierMesa;
+import juegos.cartas.poker.juego.FasesPoker;
 
 /**
  * El crupier del texas holdem sabe cuantas cartas repartir a la mesa en cada fase

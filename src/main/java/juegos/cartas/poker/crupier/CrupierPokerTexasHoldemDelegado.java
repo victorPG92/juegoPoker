@@ -5,6 +5,7 @@ import java.util.List;
 import juegos.cartas.cartas.cartas.ICartaComparable;
 import juegos.cartas.cartas.mesas.crupier.Crupier;
 import juegos.cartas.cartas.mesas.crupier.CrupierMesa;
+import juegos.cartas.poker.juego.FasesPoker;
 
 /**
  * El crupier del texas holdem sabe cuantas cartas repartir a la mesa en cada fase

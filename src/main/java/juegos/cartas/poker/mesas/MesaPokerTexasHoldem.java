@@ -1,4 +1,4 @@
-package juegos.cartas.poker.juego;
+package juegos.cartas.poker.mesas;
 
 import java.util.List;
 
@@ -14,14 +14,14 @@ import juegos.cartas.cartas.mesas.Mesa;
  */
 public class MesaPokerTexasHoldem<C extends ICartaComparable> extends Mesa<C>
 {
-	MesaPosicionJugadores<C> posiciones;
+	MesaPosicionesJugadores<C> posiciones;
 
 	public MesaPokerTexasHoldem(List<Jugador<C>> jugadores) {
 		super(jugadores);
-		posiciones= new MesaPosicionJugadores<>(jugadores);
+		posiciones= new MesaPosicionJugadoresMapaPosJug<>(jugadores);
 	}
 
-	public final MesaPosicionJugadores<C> getPosiciones() {
+	public final MesaPosicionesJugadores<C> getPosiciones() {
 		return posiciones;
 	}
 

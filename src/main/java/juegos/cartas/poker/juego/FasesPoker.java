@@ -1,4 +1,6 @@
-package juegos.cartas.poker.crupier;
+package juegos.cartas.poker.juego;
+
+import juegos.cartas.cartas.juego.FaseJuego;
 
 /**
  * representa las fases del poker
@@ -7,7 +9,7 @@ package juegos.cartas.poker.crupier;
  * @author victor
  *
  */
-public enum FasesPoker 
+public enum FasesPoker implements FaseJuego<FasesPoker>
 {
 	
 	PREFLOP,FLOP,TURN,RIVER;

@@ -4,13 +4,14 @@ import java.util.List;
 import java.util.Map;
 
 import juegos.cartas.cartas.cartas.Carta;
+import juegos.cartas.cartas.juego.Apuesta;
 import juegos.cartas.cartas.juego.RealizadorTurno;
-import juegos.cartas.poker.crupier.FasesPoker;
 import juegos.cartas.poker.juego.AccionPoker;
+import juegos.cartas.poker.juego.FasesPoker;
 import juegos.cartas.poker.juego.realizadorTurno.RealizadorTurnoPoker;
 import juegos.cartas.poker.manos.draws.Rango;
 
-public  class RealizadorTurnoIAPoker  extends RealizadorTurnoPoker
+public abstract class RealizadorTurnoIAPoker  extends RealizadorTurnoPoker
 {
 	protected double probAzar;
 	protected Map<AccionPoker,Rango> rangosPorAccion;
@@ -25,19 +26,7 @@ public  class RealizadorTurnoIAPoker  extends RealizadorTurnoPoker
 		
 	}
 	
-	public AccionPoker escogeAccion()
-	{
-		List<Carta> cartas = jugador.getCartas();
-		
-		if(FasesPoker.PREFLOP.equals(fase))
-		{
-			boolean juegaPreFlop=rango.isJuega(cartas);
-			
-		
-		}
-		
-		return null;
-	}
+	public abstract Apuesta<AccionPoker> escogeAccion();
 
 
 	public final double getProbAzar() {

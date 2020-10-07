@@ -2,30 +2,27 @@ package juegos.cartas.poker.juego;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.SortedSet;
-import java.util.TreeSet;
 
-import juegos.cartas.cartas.cartas.Carta;
 import juegos.cartas.cartas.cartas.ICartaComparable;
+import juegos.cartas.cartas.juego.Apuesta;
 import juegos.cartas.cartas.juego.JuegoCartas;
-import juegos.cartas.cartas.juego.Mano;
 import juegos.cartas.cartas.juego.ValoradorJugadores;
 import juegos.cartas.cartas.juego.ValoradorJugadoresSimple;
 import juegos.cartas.cartas.mazos.impl.gen.MazoGen;
 import juegos.cartas.cartas.mesas.Jugador;
-import juegos.cartas.cartas.mesas.Mesa;
 import juegos.cartas.poker.crupier.CrupierPokerTexasHoldemAleatorio;
-import juegos.cartas.poker.crupier.FasesPoker;
 import juegos.cartas.poker.juego.realizadorTurno.ia.RealizadorTurnoIAPoker;
+import juegos.cartas.poker.mesas.Apuestas;
+import juegos.cartas.poker.mesas.MesaPokerTexasHoldem;
+import juegos.cartas.poker.mesas.PosicionJugador;
 
 public class JuegoPoker<C extends ICartaComparable> implements JuegoCartas
 {
 	private MesaPokerTexasHoldem<C> mesa;
 	private int numJug;
-	CrupierPokerTexasHoldemAleatorio crupier;
+	CrupierPokerTexasHoldemAleatorio<C> crupier;
 	MazoGen mazo;
 	private int fichasIniciales=200;
 	FasesPoker fase;
@@ -33,7 +30,7 @@ public class JuegoPoker<C extends ICartaComparable> implements JuegoCartas
 	/**indica el numero de jugador por el que va las rondas */
 	int turno;
 	
-	Map<Jugador<C>, RealizadorTurnoIAPoker>realizadores= new HashMap<>();
+	
 	
 	/**fichas acumuladas que se estan apostando */
 	int bote;
@@ -42,13 +39,19 @@ public class JuegoPoker<C extends ICartaComparable> implements JuegoCartas
 	int apuestaTurno;
 	
 	/**fichas que se han apostado en el turno por cada jugador */
-	Map<Jugador<C>,Integer> apuestaJugador= new HashMap<>();
-	
+	//Map<Jugador<C>,Integer> apuestaJugador= new HashMap<>();
+	Apuestas<C>  apuestas= new Apuestas<>();
 	
 	/**Ultima accion realizada que afecta a las reaccines que puedan realizar los jugadores restantes */
-	AccionPoker ultimaAccionRealizada;
+	Apuesta<AccionPoker> ultimaAccionRealizada;
 	
+	/**Realiza turno de cada jugador */
+	Map<Jugador<C>, RealizadorTurnoIAPoker>realizadores= new HashMap<>();
+	
+	/**Valora los jugadores */
 	ValoradorJugadores<C> valorador= new ValoradorJugadoresSimple<>();
+	
+	
 	
 	public JuegoPoker(int numJug,MazoGen mazo)
 	{
@@ -101,12 +104,18 @@ public class JuegoPoker<C extends ICartaComparable> implements JuegoCartas
 	@Override
 	public void faseValoracionManos() 
 	{
-		Jugador<C> ganador=valorador.encontrarMejorJugada(mesa.getJugadores());
-		ganador.recibirFichas(bote);
-		bote=0;
-		apuestaJugador= new HashMap<>();
-		apuestaTurno=0;
+		while(!apuestas.estanApuestasFinalizadas())
+		{
+			Jugador<C> ganador=valorador.encontrarMejorJugada(mesa.getJugadores());
+			ganador.recibirFichas(bote);
+			bote=0;
+			
+			apuestaTurno=0;
+			
+		//	apuestas.getApuestaJugador()
+		}
 		
+		apuestas.setApuestaJugador(new HashMap<>());
 		
 	}
 	
@@ -120,6 +129,9 @@ public class JuegoPoker<C extends ICartaComparable> implements JuegoCartas
 			j.setCartas(crupier.reparteCartasJugador());
 		}
 		
+		//los jugadores realizan las apuestas despues de repartir las cartas
+		faseApuestaJugadores();
+		
 		//quien debe avanzar la fase, el juego o el crupier?
 		fase=crupier.avanzarFase();
 		
@@ -129,13 +141,26 @@ public class JuegoPoker<C extends ICartaComparable> implements JuegoCartas
 	{
 		System.out.println(crupier.getFase());
 		
-		mesa.setCartasComunes(crupier.reparteCartasMesa());
+		List<C> cartasMesa = crupier.reparteCartasMesa();
+		mesa.insertaCartasComunes(cartasMesa);
+		//mesa.setCartasComunes(crupier.reparteCartasMesa());
 		
 		//quien debe avanzar la fase, el juego o el crupier?
 		fase=crupier.avanzarFase();
 		
 	}
+	
+	
+	protected void faseApuestaJugadores()
+	{
+	
+		for(Jugador<C> jugador: mesa.getPosiciones())
+		{
+			realizadores.get(jugador).realizaTurno();
+		}
 
+		
+	}
 	public MesaPokerTexasHoldem<C> getMesa() {
 		return mesa;
 	}
@@ -176,12 +201,16 @@ public class JuegoPoker<C extends ICartaComparable> implements JuegoCartas
 		return apuestaTurno;
 	}
 
-	public Map<Jugador<C>, Integer> getApuestaJugador() {
+	/*public Map<Jugador<C>, Integer> getApuestaJugador() {
 		return apuestaJugador;
+	}*/
+
+	public Apuesta<AccionPoker> getUltimaAccionRealizada() {
+		return ultimaAccionRealizada;
 	}
 
-	public AccionPoker getUltimaAccionRealizada() {
-		return ultimaAccionRealizada;
+	public Apuestas<C> getApuestas() {
+		return apuestas;
 	}
 
 	public ValoradorJugadores<C> getValorador() {
