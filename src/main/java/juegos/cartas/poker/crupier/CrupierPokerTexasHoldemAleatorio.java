@@ -12,21 +12,26 @@ import juegos.cartas.cartas.mesas.crupier.CrupierMesa;
  * @author victor
  *
  */
-public abstract class CrupierPokerTexasHoldem<C extends ICartaComparable> 
+public class CrupierPokerTexasHoldemAleatorio<C extends ICartaComparable> 
+extends CrupierMazoAleatoria<C>
 implements CrupierMesa<C>
 {
 	
-	protected FasesPoker fase;
+	FasesPoker fase;
 	
-	protected boolean quemarCarta;
+	boolean quemarCarta;
 
-	
-	public CrupierPokerTexasHoldem() {
-		
+	public CrupierPokerTexasHoldemAleatorio(MazoCartasSimple<C> mazo) {
+		super(mazo);
 		fase=FasesPoker.PREFLOP;
 	}
-	public CrupierPokerTexasHoldem( boolean quemarCarta) {
-		
+	
+	
+
+	
+
+	public CrupierPokerTexasHoldemAleatorio(MazoCartasSimple<C> mazo, boolean quemarCarta) {
+		this(mazo);
 		this.quemarCarta = quemarCarta;
 	}
 
@@ -34,17 +39,11 @@ implements CrupierMesa<C>
 
 
 
-	/**
-	 * Reparte cartas al jugador, en este caso 2
-	 */
 	@Override
 	public List<C> reparteCartasJugador() {
 		return reparteNCartas(2);
 	}
 
-	/**
-	 * Reparte las cartas en las respectivas fases:preflop, flop, turn y river
-	 */
 	@Override
 	public List<C> reparteCartasMesa() {
 		switch (fase)
@@ -79,6 +78,10 @@ implements CrupierMesa<C>
 		
 		return fase;
 	}
+
+
+
+
 
 	public final FasesPoker getFase() {
 		return fase;

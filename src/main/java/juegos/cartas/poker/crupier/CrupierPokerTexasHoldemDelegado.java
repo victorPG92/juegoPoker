@@ -3,9 +3,7 @@ package juegos.cartas.poker.crupier;
 import java.util.List;
 
 import juegos.cartas.cartas.cartas.ICartaComparable;
-import juegos.cartas.cartas.mazos.modelos.MazoCartasSimple;
 import juegos.cartas.cartas.mesas.crupier.Crupier;
-import juegos.cartas.cartas.mesas.crupier.CrupierMazo;
 import juegos.cartas.cartas.mesas.crupier.CrupierMesa;
 
 /**
@@ -13,15 +11,15 @@ import juegos.cartas.cartas.mesas.crupier.CrupierMesa;
  * @author victor
  *
  */
-public class CrupierPokerTexasHoldemDelegado implements CrupierMesa
+public class CrupierPokerTexasHoldemDelegado<C extends ICartaComparable> implements CrupierMesa<C>
 {
 	
 	FasesPoker fase;
-	Crupier crupierDelegado;
+	Crupier<C> crupierDelegado;
 	
 	boolean quemarCarta;
 
-	public CrupierPokerTexasHoldemDelegado(Crupier cr) {
+	public CrupierPokerTexasHoldemDelegado(Crupier<C> cr) {
 		crupierDelegado=cr;
 		fase=FasesPoker.PREFLOP;
 	}
@@ -30,7 +28,7 @@ public class CrupierPokerTexasHoldemDelegado implements CrupierMesa
 
 	
 
-	public CrupierPokerTexasHoldemDelegado(Crupier cr, boolean quemarCarta) {
+	public CrupierPokerTexasHoldemDelegado(Crupier<C> cr, boolean quemarCarta) {
 		this(cr);
 		this.quemarCarta = quemarCarta;
 	}
@@ -40,12 +38,12 @@ public class CrupierPokerTexasHoldemDelegado implements CrupierMesa
 
 
 	@Override
-	public List<ICartaComparable> reparteCartasJugador() {
+	public List<C> reparteCartasJugador() {
 		return reparteNCartas(2);
 	}
 
 	@Override
-	public List<ICartaComparable> reparteCartasMesa() {
+	public List<C> reparteCartasMesa() {
 		switch (fase)
 		{
 			case PREFLOP:
@@ -81,7 +79,7 @@ public class CrupierPokerTexasHoldemDelegado implements CrupierMesa
 //////DELEGADOS
 
 
-	public ICartaComparable reparteCarta() {
+	public C reparteCarta() {
 		return crupierDelegado.reparteCarta();
 	}
 
@@ -89,7 +87,7 @@ public class CrupierPokerTexasHoldemDelegado implements CrupierMesa
 
 
 
-	public List<ICartaComparable> reparteNCartas(int numCartas) {
+	public List<C> reparteNCartas(int numCartas) {
 		return crupierDelegado.reparteNCartas(numCartas);
 	}
 

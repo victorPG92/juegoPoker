@@ -13,7 +13,8 @@ public class RealizadorTurnoPokerConsola extends RealizadorTurnoPoker{
 	{
 		AccionPoker accionJugador= null;
 	
-		do {
+		do 
+		{
 		System.out.println("Escoge una de las acciones posibles(Tienes " +jugador.getFichas()+"):");
 		JuegoPoker juegoPoker= ((JuegoPoker)juegoCartas);
 		
