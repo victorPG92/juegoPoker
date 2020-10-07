@@ -32,21 +32,34 @@ public class RealizadorTurnoPokerConsola extends RealizadorTurnoPoker{
 		{
 			mostrarMesa();
 			mostrarCartasjugador();
-			System.out.println("Escoge una de las acciones posibles(Tienes " +jugador.getFichas()+"):");
+			System.out.println("Escoge una de las acciones posibles(Tienes " +jugador.getFichas()+" fichas):");
 			JuegoPoker juegoPoker= ((JuegoPoker)juegoCartas);
 			
+			//System.out.println(juegoPoker.getClass());
 			Apuesta<AccionPoker> ultimaApuesta=juegoPoker.getUltimaAccionRealizada();
 			int fichasNecesariasParaIgualar= fichasNecesariasParaIgualar();
 
 			StringBuilder sb= new StringBuilder();
-			for(AccionPoker accion:ultimaApuesta.getAccion().permite())
+			
+			List<AccionPoker> accionesPermitidas = ultimaApuesta.getAccion().permite();
+			if(fichasNecesariasParaIgualar> jugador.getFichas())
+			{
+				accionesPermitidas.remove(AccionPoker.SUBIR);
+				accionesPermitidas.remove(AccionPoker.IGUALAR);
+				//solo se permite all in?? igualar tampoco
+			}
+			System.out.println("Acciones permitidas " + accionesPermitidas);
+			for(AccionPoker accion:accionesPermitidas)
 			{
 				if(AccionPoker.IGUALAR.equals(accion))
 				{
 					sb.append(accion+"("+fichasNecesariasParaIgualar+")"+"\n");
 				}
-				sb.append(accion);
+				else
+					sb.append(accion+"\n");
 			}
+			
+			System.out.println(sb.toString());
 			
 			Scanner sc= new Scanner(System.in);
 			
@@ -66,7 +79,7 @@ public class RealizadorTurnoPokerConsola extends RealizadorTurnoPoker{
 			{
 				apuesta.setFichas(fichasNecesariasParaIgualar);
 			}
-			if(AccionPoker.SUBIR.equals(accionJugador))
+			else  if(AccionPoker.SUBIR.equals(accionJugador))
 			{
 				int fichasSubir=0;
 				
@@ -80,7 +93,10 @@ public class RealizadorTurnoPokerConsola extends RealizadorTurnoPoker{
 				}
 				apuesta.setFichas(fichasSubir);
 			}
-			
+			else if(AccionPoker.ALL_IN.equals(accionJugador))
+			{
+				apuesta.setFichas(jugador.getFichas());
+			}
 		}while(accionJugador==null);
 		
 		

@@ -18,22 +18,25 @@ public class JuegoPokerMock extends JuegoPoker<Carta>{
 	FactJugadores<Carta> factJug= new FactJugadores<>();
 	
 	
-	public JuegoPokerMock(int numJug, MazoGen mazo)
+	public JuegoPokerMock(int numJug, MazoGen mazo,Apuesta<AccionPoker> ultA)
 	{
 		super(numJug, mazo);
 		mesaMock= new MesaPokerTexasHoldem<>(factJug.creaJugadores(numJug));
 		
 		mesaMock.setCartasComunes(new ArrayList<>());
 		factJug.creaJugadores(new TipoJugador[] {}, null);
+		ultAccion=ultA;
 	}
 	
-	public JuegoPokerMock(int numJug)
+	public JuegoPokerMock(int numJug,Apuesta<AccionPoker> ultA)
 	{
-		this(numJug, null);
+		this(numJug, null,ultA);
 	}
 	
 	@Override
-	public Apuesta<AccionPoker> getUltimaAccionRealizada() {
+	public Apuesta<AccionPoker> getUltimaAccionRealizada() 
+	{
+		//System.out.println();
 		return ultAccion;
 	}
 	

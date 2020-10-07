@@ -17,4 +17,9 @@ public class JugadorPokerTexasHoldem<C extends ICartaComparable> extends Jugador
 	{
 		return seHaRetirado;
 	}
+	
+	@Override
+	public String toString() {
+		return ""+getId()+"o"+getCartas();
+	}
 }
