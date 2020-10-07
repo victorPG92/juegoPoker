@@ -3,7 +3,7 @@ package juegos.cartas.poker.manos;
 import java.util.List;
 
 import juegos.cartas.cartas.cartas.Carta;
-import juegos.cartas.cartas.mesas.Mano;
+import juegos.cartas.cartas.juego.Mano;
 import juegos.cartas.poker.ConstantesPR1;
 
 /**

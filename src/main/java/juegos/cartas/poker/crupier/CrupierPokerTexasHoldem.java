@@ -73,11 +73,22 @@ public class CrupierPokerTexasHoldem extends CrupierMazoAleatoria<ICartaComparab
 	/**
 	 * avanza  a la fase siguiente si existe
 	 */
-	public void avanzarFase()
+	public FasesPoker avanzarFase()
 	{
 		if(fase!=null && fase.sig()!=null)
 			fase=fase.sig();
+		
+		return fase;
 	}
+
+
+
+
+
+	public final FasesPoker getFase() {
+		return fase;
+	}
+	
 	
 
 }

@@ -3,7 +3,7 @@ package juegos.cartas.poker.analisis;
 import java.util.ArrayList;
 
 import juegos.cartas.cartas.cartas.Carta;
-import juegos.cartas.cartas.mesas.Mano;
+import juegos.cartas.cartas.juego.Mano;
 import juegos.cartas.cartas.utils.Combinaciones;
 
 

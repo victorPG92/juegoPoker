@@ -2,7 +2,7 @@ package juego.cartas.poker.manos;
 
 import org.junit.Test;
 
-import juegos.cartas.cartas.mesas.Mano;
+import juegos.cartas.cartas.juego.Mano;
 import juegos.cartas.poker.manos.NombreManoPoker;
 import juegos.cartas.poker.manos.fact.FactoriaMano;
 

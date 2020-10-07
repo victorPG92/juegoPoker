@@ -5,7 +5,7 @@ import java.util.List;
 
 import juegos.cartas.cartas.cartas.Carta;
 import juegos.cartas.cartas.cartas.palos.PaloFrances;
-import juegos.cartas.cartas.mesas.Mano;
+import juegos.cartas.cartas.juego.Mano;
 import juegos.cartas.cartas.ordenar.OrdenarCartas;
 import juegos.cartas.poker.manos.NombreManoPoker;
 import juegos.cartas.poker.manos.fact.FactoriaMano;
