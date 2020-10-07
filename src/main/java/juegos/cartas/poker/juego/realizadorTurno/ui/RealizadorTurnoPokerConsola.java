@@ -16,6 +16,13 @@ public class RealizadorTurnoPokerConsola extends RealizadorTurnoPoker{
 	
 	
 	
+	
+	public RealizadorTurnoPokerConsola(JuegoPoker juegoPoker) {
+		
+		super(juegoPoker);
+		juegoPoker= ((JuegoPoker)juegoCartas);
+	}
+
 	@Override
 	public Apuesta<AccionPoker> escogeAccion()
 	{
@@ -87,7 +94,9 @@ public class RealizadorTurnoPokerConsola extends RealizadorTurnoPoker{
 		StringBuilder sb= new StringBuilder();
 		
 		sb.append("Mesa: ");
-		List<ICartaComparable> comunes = juegoPoker.getMesa().getCartasComunes();
+		List<ICartaComparable> comunes = juegoPoker.
+				getMesa().
+				getCartasComunes();
 		
 		for (ICartaComparable carta : comunes) {
 			sb.append(carta).append("\b");
