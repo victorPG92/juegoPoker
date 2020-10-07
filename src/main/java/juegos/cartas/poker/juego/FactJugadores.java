@@ -23,7 +23,7 @@ public class FactJugadores<C extends ICartaComparable>
 		List<Jugador<C>> jugs= new ArrayList<>();
 		for (int i = 0; i < jug; i++)
 		{
-			JugadorPokerTexasHoldem j=new JugadorPokerTexasHoldem();
+			JugadorPokerTexasHoldem<C> j=new JugadorPokerTexasHoldem<>();
 			j.setId("J"+i);
 			jugs.add(j);
 		}
@@ -31,19 +31,19 @@ public class FactJugadores<C extends ICartaComparable>
 		return jugs;
 	}
 	
-	public RealizadorTurnoPoker<C> creaJugador(TipoJugador tipo, JuegoPoker juegoPoker)
+	public RealizadorTurnoPoker<C> creaJugador(TipoJugador tipo, JuegoPoker<C> juegoPoker)
 	{
 
 		switch (tipo) {
-			case consola: return new RealizadorTurnoPokerConsola(juegoPoker);
-			case ia: return new RealizadorTurnoIAPokerPasota(juegoPoker);		
+			case consola: return new RealizadorTurnoPokerConsola<>(juegoPoker);
+			case ia: return new RealizadorTurnoIAPokerPasota<>(juegoPoker);		
 
 		default:
 			return null;
 		}
 	}
 	
-	public List<RealizadorTurnoPoker<C>> creaJugadores(TipoJugador[] tipos, JuegoPoker juegoPoker)
+	public List<RealizadorTurnoPoker<C>> creaJugadores(TipoJugador[] tipos, JuegoPoker<C> juegoPoker)
 	{
 		List<RealizadorTurnoPoker<C>> jugs= new ArrayList<>();
 		for (TipoJugador tipoJugador : tipos) 

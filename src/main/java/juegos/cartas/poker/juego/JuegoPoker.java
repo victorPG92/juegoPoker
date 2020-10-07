@@ -10,7 +10,7 @@ import juegos.cartas.cartas.juego.Apuesta;
 import juegos.cartas.cartas.juego.JuegoCartas;
 import juegos.cartas.cartas.juego.ValoradorJugadores;
 import juegos.cartas.cartas.juego.ValoradorJugadoresSimple;
-import juegos.cartas.cartas.mazos.impl.gen.MazoGen;
+import juegos.cartas.cartas.mazos.modelos.MazoCartasSimple;
 import juegos.cartas.cartas.mesas.Jugador;
 import juegos.cartas.poker.crupier.CrupierPokerTexasHoldemAleatorio;
 import juegos.cartas.poker.juego.realizadorTurno.ia.RealizadorTurnoIAPoker;
@@ -23,7 +23,7 @@ public class JuegoPoker<C extends ICartaComparable> implements JuegoCartas
 	private MesaPokerTexasHoldem<C> mesa;
 	private int numJug;
 	CrupierPokerTexasHoldemAleatorio<C> crupier;
-	MazoGen mazo;
+	MazoCartasSimple<C> mazo;
 	private int fichasIniciales=200;
 	FasesPoker fase;
 	
@@ -46,24 +46,24 @@ public class JuegoPoker<C extends ICartaComparable> implements JuegoCartas
 	Apuesta<AccionPoker> ultimaAccionRealizada;
 	
 	/**Realiza turno de cada jugador */
-	Map<Jugador<C>, RealizadorTurnoIAPoker>realizadores= new HashMap<>();
+	Map<Jugador<C>, RealizadorTurnoIAPoker<C>>realizadores= new HashMap<>();
 	
 	/**Valora los jugadores */
 	ValoradorJugadores<C> valorador= new ValoradorJugadoresSimple<>();
 	
 	
 	
-	public JuegoPoker(int numJug,MazoGen mazo)
+	public JuegoPoker(int numJug,MazoCartasSimple<C> mazo)
 	{
 		super();
 		this.numJug = numJug;
 		this.mazo=mazo;
-		crupier= new CrupierPokerTexasHoldemAleatorio(mazo);
+		crupier= new CrupierPokerTexasHoldemAleatorio<>(mazo);
 		
-		List<Jugador> jugadores= new ArrayList<>();
+		List<Jugador<C>> jugadores= new ArrayList<>();
 		for (int i = 0; i < this.numJug; i++) 
 		{
-			Jugador jug= new Jugador();
+			Jugador<C> jug= new Jugador<>();
 			jug.setId(""+ i);
 			jug.setFichas(fichasIniciales);
 			
@@ -71,7 +71,7 @@ public class JuegoPoker<C extends ICartaComparable> implements JuegoCartas
 			
 			
 		}
-		mesa= new MesaPokerTexasHoldem(jugadores);
+		mesa= new MesaPokerTexasHoldem<>(jugadores);
 
 		fase= crupier.getFase();
 	}
@@ -90,7 +90,7 @@ public class JuegoPoker<C extends ICartaComparable> implements JuegoCartas
 	{
 		for(PosicionJugador pos: PosicionJugador.values())
 		{
-			Jugador jugador= mesa.getPosiciones().getJugador(pos);
+			Jugador<C> jugador= mesa.getPosiciones().getJugador(pos);
 			if(jugador!=null)//puede que no esten todas las posiciones ocupadas
 			{
 				realizadores.get(jugador).realizaTurno();
@@ -124,7 +124,7 @@ public class JuegoPoker<C extends ICartaComparable> implements JuegoCartas
 	protected void fasePreflop() 
 	{
 		System.out.println(crupier.getFase());
-		for(Jugador j: mesa.getJugadores())
+		for(Jugador<C> j: mesa.getJugadores())
 		{
 			j.setCartas(crupier.reparteCartasJugador());
 		}
@@ -169,11 +169,11 @@ public class JuegoPoker<C extends ICartaComparable> implements JuegoCartas
 		return numJug;
 	}
 
-	public CrupierPokerTexasHoldemAleatorio getCrupier() {
+	public CrupierPokerTexasHoldemAleatorio<C> getCrupier() {
 		return crupier;
 	}
 
-	public MazoGen getMazo() {
+	public MazoCartasSimple<C> getMazo() {
 		return mazo;
 	}
 
@@ -189,7 +189,7 @@ public class JuegoPoker<C extends ICartaComparable> implements JuegoCartas
 		return turno;
 	}
 
-	public Map<Jugador<C>, RealizadorTurnoIAPoker> getRealizadores() {
+	public Map<Jugador<C>, RealizadorTurnoIAPoker<C>> getRealizadores() {
 		return realizadores;
 	}
 

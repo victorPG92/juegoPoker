@@ -3,6 +3,13 @@ package juegos.cartas.poker.juego;
 import juegos.cartas.cartas.cartas.ICartaComparable;
 import juegos.cartas.cartas.mesas.Jugador;
 
+/**
+ * Jugador de poker texas holdem
+ * que indica si se ha retirado o no
+ * @author victor
+ *
+ * @param <C>
+ */
 public class JugadorPokerTexasHoldem<C extends ICartaComparable> extends Jugador<C>
 {
 

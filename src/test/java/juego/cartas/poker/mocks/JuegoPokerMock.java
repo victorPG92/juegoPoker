@@ -3,6 +3,7 @@ package juego.cartas.poker.mocks;
 import java.util.ArrayList;
 
 import juegos.cartas.cartas.cartas.Carta;
+import juegos.cartas.cartas.cartas.palos.PaloFrances;
 import juegos.cartas.cartas.juego.Apuesta;
 import juegos.cartas.cartas.mazos.impl.gen.MazoGen;
 import juegos.cartas.poker.juego.AccionPoker;
@@ -18,7 +19,7 @@ public class JuegoPokerMock extends JuegoPoker<Carta>{
 	FactJugadores<Carta> factJug= new FactJugadores<>();
 	
 	
-	public JuegoPokerMock(int numJug, MazoGen mazo,Apuesta<AccionPoker> ultA)
+	public JuegoPokerMock(int numJug, MazoGen<Carta,Integer,PaloFrances> mazo,Apuesta<AccionPoker> ultA)
 	{
 		super(numJug, mazo);
 		mesaMock= new MesaPokerTexasHoldem<>(factJug.creaJugadores(numJug));

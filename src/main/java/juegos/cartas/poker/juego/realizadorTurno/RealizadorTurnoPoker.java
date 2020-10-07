@@ -2,11 +2,10 @@ package juegos.cartas.poker.juego.realizadorTurno;
 
 import java.util.Map;
 
-import juegos.cartas.cartas.cartas.Carta;
 import juegos.cartas.cartas.cartas.ICartaComparable;
 import juegos.cartas.cartas.juego.Apuesta;
 import juegos.cartas.cartas.juego.RealizadorTurno;
-import juegos.cartas.cartas.mazos.impl.gen.MazoGen;
+import juegos.cartas.cartas.mazos.modelos.MazoCartasSimple;
 import juegos.cartas.cartas.mesas.Jugador;
 import juegos.cartas.poker.crupier.CrupierPokerTexasHoldemAleatorio;
 import juegos.cartas.poker.juego.AccionPoker;
@@ -26,11 +25,11 @@ public  abstract class RealizadorTurnoPoker<C extends ICartaComparable>  extends
 	//Rango rango;
 	//FasesPoker fase;	
 	/**Con el juego puedo saber la fase, la ultima accion realizada, el dinero apostado, ... */
-	JuegoPoker juegoPoker;
+	JuegoPoker<C> juegoPoker;
 	
 	
 	
-	public RealizadorTurnoPoker(JuegoPoker juegoPoker) {
+	public RealizadorTurnoPoker(JuegoPoker<C> juegoPoker) {
 		super();
 		this.juegoPoker = juegoPoker;
 		juegoCartas= juegoPoker;
@@ -40,11 +39,19 @@ public  abstract class RealizadorTurnoPoker<C extends ICartaComparable>  extends
 
 	public int fichasNecesariasParaIgualar()
 	{
-		return juegoPoker.getApuestaTurno()-(Integer)juegoPoker.getApuestas().getApuestaJugador().getOrDefault(jugador,0);
+		//		return juegoPoker.getApuestaTurno()-(Integer)juegoPoker.getApuestas().getApuestaJugador().getOrDefault(jugador,new Apuesta(AccionPoker.ABANDONAR));
+
+		int apuestaTurno=juegoPoker.getApuestaTurno();
+		Map<Jugador<C>, Apuesta> apuestasJugadores = juegoPoker.getApuestas().getApuestaJugador();
+		int apuestaJugador = apuestasJugadores.getOrDefault(jugador,new Apuesta(AccionPoker.ABANDONAR)).getFichas() ;
+		
+		return apuestaTurno - apuestaJugador;
+		
+		//return juegoPoker.getApuestaTurno()-(Integer)juegoPoker.getApuestas().getApuestaJugador().getOrDefault(jugador,new Apuesta(AccionPoker.ABANDONAR)).getFichas();
 	}
 
 
-	public JuegoPoker getJuegoPoker()
+	public JuegoPoker<C> getJuegoPoker()
 	{
 		return juegoPoker;//(JuegoPoker ) juegoCartas;
 	}
@@ -63,13 +70,13 @@ public  abstract class RealizadorTurnoPoker<C extends ICartaComparable>  extends
 
 
 
-	public CrupierPokerTexasHoldemAleatorio getCrupier() {
+	public CrupierPokerTexasHoldemAleatorio<C> getCrupier() {
 		return juegoPoker.getCrupier();
 	}
 
 
 
-	public MazoGen getMazo() {
+	public MazoCartasSimple<C> getMazo() {
 		return juegoPoker.getMazo();
 	}
 

@@ -3,24 +3,24 @@ package juegos.cartas.poker.juego.realizadorTurno.ui;
 import java.util.List;
 import java.util.Scanner;
 
-import juegos.cartas.cartas.cartas.Carta;
 import juegos.cartas.cartas.cartas.ICartaComparable;
 import juegos.cartas.cartas.juego.Apuesta;
+import juegos.cartas.cartas.mesas.CeldaCartaMesa;
 import juegos.cartas.poker.juego.AccionPoker;
 import juegos.cartas.poker.juego.JuegoPoker;
 import juegos.cartas.poker.juego.realizadorTurno.RealizadorTurnoPoker;
 
-public class RealizadorTurnoPokerConsola extends RealizadorTurnoPoker{
+public class RealizadorTurnoPokerConsola<C extends ICartaComparable> extends RealizadorTurnoPoker<C>{
 
-	JuegoPoker juegoPoker= ((JuegoPoker)juegoCartas);
+	JuegoPoker<C> juegoPoker= ((JuegoPoker<C>)juegoCartas);
 	
 	
 	
 	
-	public RealizadorTurnoPokerConsola(JuegoPoker juegoPoker) {
+	public RealizadorTurnoPokerConsola(JuegoPoker<C> juegoPoker) {
 		
 		super(juegoPoker);
-		juegoPoker= ((JuegoPoker)juegoCartas);
+		juegoPoker= ((JuegoPoker<C>)juegoCartas);
 	}
 
 	@Override
@@ -33,7 +33,7 @@ public class RealizadorTurnoPokerConsola extends RealizadorTurnoPoker{
 			mostrarMesa();
 			mostrarCartasjugador();
 			System.out.println("Escoge una de las acciones posibles(Tienes " +jugador.getFichas()+" fichas):");
-			JuegoPoker juegoPoker= ((JuegoPoker)juegoCartas);
+			JuegoPoker juegoPoker= ((JuegoPoker<C>)juegoCartas);
 			
 			//System.out.println(juegoPoker.getClass());
 			Apuesta<AccionPoker> ultimaApuesta=juegoPoker.getUltimaAccionRealizada();
@@ -110,11 +110,11 @@ public class RealizadorTurnoPokerConsola extends RealizadorTurnoPoker{
 		StringBuilder sb= new StringBuilder();
 		
 		sb.append("Mesa: ");
-		List<ICartaComparable> comunes = juegoPoker.
+		List<CeldaCartaMesa<C>> comunes = juegoPoker.
 				getMesa().
 				getCartasComunes();
 		
-		for (ICartaComparable carta : comunes) {
+		for (CeldaCartaMesa<C> carta : comunes) {
 			sb.append(carta).append("\b");
 		}
 		
@@ -128,7 +128,7 @@ public class RealizadorTurnoPokerConsola extends RealizadorTurnoPoker{
 		StringBuilder sb= new StringBuilder();
 		
 		sb.append("Jugador: ");
-		List<Carta> comunes = jugador.getCartas();
+		List<C> comunes = jugador.getCartas();
 		
 		for (ICartaComparable carta : comunes) {
 			sb.append(carta).append("\b");

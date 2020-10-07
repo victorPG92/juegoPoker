@@ -1,13 +1,10 @@
 package juegos.cartas.poker.juego.realizadorTurno.ia;
 
-import java.util.List;
 import java.util.Map;
 
-import juegos.cartas.cartas.cartas.Carta;
+import juegos.cartas.cartas.cartas.ICartaComparable;
 import juegos.cartas.cartas.juego.Apuesta;
-import juegos.cartas.cartas.juego.RealizadorTurno;
 import juegos.cartas.poker.juego.AccionPoker;
-import juegos.cartas.poker.juego.FasesPoker;
 import juegos.cartas.poker.juego.JuegoPoker;
 import juegos.cartas.poker.juego.realizadorTurno.RealizadorTurnoPoker;
 import juegos.cartas.poker.manos.draws.Rango;
@@ -20,9 +17,9 @@ import juegos.cartas.poker.manos.draws.Rango;
  * @author victor
  *
  */
-public abstract class RealizadorTurnoIAPoker  extends RealizadorTurnoPoker
+public abstract class RealizadorTurnoIAPoker<C extends ICartaComparable>  extends RealizadorTurnoPoker<C>
 {
-	public RealizadorTurnoIAPoker(JuegoPoker juegoPoker) {
+	public RealizadorTurnoIAPoker(JuegoPoker<C> juegoPoker) {
 		super(juegoPoker);
 	}
 
