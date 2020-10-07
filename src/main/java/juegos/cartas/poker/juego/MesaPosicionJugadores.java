@@ -4,27 +4,28 @@ import java.util.EnumMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+import juegos.cartas.cartas.cartas.ICartaComparable;
 import juegos.cartas.cartas.mesas.Jugador;
 
 /**
  * Representa que jugador hay en que posicion.
  * Se implementa con EnumMap
  */
-public class MesaPosicionJugadores 
+public class MesaPosicionJugadores<C extends ICartaComparable>
 {
 	
 	//private LinkedHashMap<K, V> paa guardar en orden pero al ser enumerados mejro enummap
-	private EnumMap<PosicionJugador, Jugador> jugadorPorPosicion= new EnumMap<>(PosicionJugador.class);
+	private EnumMap<PosicionJugador, Jugador<C>> jugadorPorPosicion= new EnumMap<>(PosicionJugador.class);
 
 	
 	//por si acaso lo necesito en vez de usar map.values()
-	List<Jugador> jugadores;
+	List<Jugador<C>> jugadores;
 	
 	/**
 	 * Como maximo deben ser 6 jugadores
 	 * @param jugadores
 	 */
-	public MesaPosicionJugadores(List<Jugador> jugadores)
+	public MesaPosicionJugadores(List<Jugador<C>> jugadores)
 	{
 		super();
 		this.jugadores=jugadores;
@@ -59,7 +60,7 @@ public class MesaPosicionJugadores
 	 */
 	public void mover()
 	{
-		Jugador aux=null;
+		Jugador<C> aux=null;
 		for(PosicionJugador pos: jugadorPorPosicion.keySet())
 		{
 			//en el inicio, el primer elemento tiene como anterior al ultimo, 

@@ -1,18 +1,22 @@
-package juegos.cartas.poker.juego;
+package juegos.cartas.poker.juego.realizadorTurno.ia;
 
 import java.util.List;
+import java.util.Map;
 
 import juegos.cartas.cartas.cartas.Carta;
 import juegos.cartas.cartas.juego.RealizadorTurno;
 import juegos.cartas.poker.crupier.FasesPoker;
+import juegos.cartas.poker.juego.AccionPoker;
+import juegos.cartas.poker.juego.realizadorTurno.RealizadorTurnoPoker;
 import juegos.cartas.poker.manos.draws.Rango;
 
-public  class RealizadorTurnoIAPoker  extends RealizadorTurno<Carta,AccionPoker>
+public  class RealizadorTurnoIAPoker  extends RealizadorTurnoPoker
 {
 	protected double probAzar;
-	Rango rango;
-	FasesPoker fase;
-	AccionPoker ultimaAccionRealizada;
+	protected Map<AccionPoker,Rango> rangosPorAccion;
+	protected Rango rango;
+	protected FasesPoker fase;
+	protected AccionPoker ultimaAccionRealizada;
 	
 	
 	public void realizaTurno()
