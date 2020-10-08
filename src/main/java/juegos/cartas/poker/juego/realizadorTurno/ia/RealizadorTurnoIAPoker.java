@@ -18,7 +18,8 @@ import juegos.cartas.poker.manos.draws.RangoGenerico;
  * @author victor
  *
  */
-public abstract class RealizadorTurnoIAPoker<C extends ICartaComparable>  extends RealizadorTurnoPoker<C>
+public abstract class RealizadorTurnoIAPoker
+<C extends ICartaComparable>  extends RealizadorTurnoPoker<C>
 {
 	public RealizadorTurnoIAPoker(JuegoPoker<C> juegoPoker) {
 		super(juegoPoker);

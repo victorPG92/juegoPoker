@@ -1,7 +1,5 @@
 package juegos.cartas.poker.juego.realizadorTurno;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import juegos.cartas.cartas.cartas.ICartaComparable;
@@ -13,6 +11,7 @@ import juegos.cartas.poker.crupier.CrupierPokerTexasHoldemAleatorio;
 import juegos.cartas.poker.juego.AccionPoker;
 import juegos.cartas.poker.juego.FasesPoker;
 import juegos.cartas.poker.juego.JuegoPoker;
+import juegos.cartas.poker.juego.JugadorPokerTexasHoldem;
 import juegos.cartas.poker.juego.realizadorTurno.ia.RealizadorTurnoIAPoker;
 import juegos.cartas.poker.mesas.Apuestas;
 import juegos.cartas.poker.mesas.MesaPokerTexasHoldem;
@@ -22,7 +21,10 @@ import juegos.cartas.poker.mesas.MesaPokerTexasHoldem;
  * @author victor
  *
  */
-public  abstract class RealizadorTurnoPoker<C extends ICartaComparable>  extends RealizadorTurno<C,Apuesta<AccionPoker>>
+public  abstract class RealizadorTurnoPoker
+<C extends ICartaComparable>
+
+extends RealizadorTurno<C,Apuesta<AccionPoker>,JuegoPoker<C>,JugadorPokerTexasHoldem<C>, FasesPoker>
 {
 	
 	//Rango rango;

@@ -18,7 +18,7 @@ import juegos.cartas.poker.mesas.Apuestas;
 import juegos.cartas.poker.mesas.MesaPokerTexasHoldem;
 import juegos.cartas.poker.mesas.PosicionJugador;
 
-public class JuegoPoker<C extends ICartaComparable> implements JuegoCartas
+public class JuegoPoker<C extends ICartaComparable> implements JuegoCartas<FasesPoker>
 {
 	private MesaPokerTexasHoldem<C> mesa;
 	private int numJug;
