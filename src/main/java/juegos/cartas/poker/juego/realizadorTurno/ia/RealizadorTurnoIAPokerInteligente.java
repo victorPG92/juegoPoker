@@ -2,7 +2,6 @@ package juegos.cartas.poker.juego.realizadorTurno.ia;
 
 import java.util.List;
 
-import juegos.cartas.cartas.cartas.Carta;
 import juegos.cartas.cartas.cartas.ICartaComparable;
 import juegos.cartas.cartas.juego.Apuesta;
 import juegos.cartas.poker.juego.AccionPoker;

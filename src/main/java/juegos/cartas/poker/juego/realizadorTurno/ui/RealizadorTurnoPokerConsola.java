@@ -105,7 +105,7 @@ public class RealizadorTurnoPokerConsola<C extends ICartaComparable> extends Rea
 	
 	public void mostrarMesa()
 	{
-		juegoPoker= ((JuegoPoker)juegoCartas);
+		juegoPoker= ((JuegoPoker<C>)juegoCartas);
 		
 		StringBuilder sb= new StringBuilder();
 		
@@ -123,7 +123,7 @@ public class RealizadorTurnoPokerConsola<C extends ICartaComparable> extends Rea
 	
 	public void mostrarCartasjugador()
 	{
-		juegoPoker= ((JuegoPoker)juegoCartas);
+		juegoPoker= ((JuegoPoker<C>)juegoCartas);
 		
 		StringBuilder sb= new StringBuilder();
 		

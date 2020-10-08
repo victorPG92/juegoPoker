@@ -1,7 +1,5 @@
 package juego.cartas.poker;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.Test;
 
 import juegos.cartas.cartas.cartas.CartaNumeroPalo;

@@ -52,6 +52,19 @@ public abstract class EscaleraMano extends ManoPoker //implements Comparable<Esc
 		return retorno;
 	}
 
+	public String toString()
+	{
+		StringBuilder sb = new StringBuilder();
+		sb.append(nombre);
+		
+		sb.append(" desde ");
+		sb.append(cartaMasBaja);
+		sb.append(" hasta ");
+		sb.append(cartaMasAlta);
+		
+	
+		return sb.toString();
+	}
 	
 	/*
 	public String toString()

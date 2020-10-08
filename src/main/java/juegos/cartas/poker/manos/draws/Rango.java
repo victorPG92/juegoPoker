@@ -6,7 +6,6 @@ import java.util.Random;
 import java.util.StringTokenizer;
 
 import juegos.cartas.cartas.cartas.Carta;
-import juegos.cartas.cartas.cartas.ICartaComparable;
 import juegos.cartas.cartas.juego.RangoJugador;
 
 /**

@@ -2,7 +2,6 @@ package juegos.cartas.poker.manos.draws;
 
 import java.util.List;
 
-import juegos.cartas.cartas.cartas.Carta;
 import juegos.cartas.cartas.cartas.ICartaComparable;
 
 /**
