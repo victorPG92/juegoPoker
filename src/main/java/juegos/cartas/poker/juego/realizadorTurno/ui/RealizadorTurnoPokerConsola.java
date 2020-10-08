@@ -1,147 +1,187 @@
 package juegos.cartas.poker.juego.realizadorTurno.ui;
 
+import java.io.InputStream;
 import java.util.List;
 import java.util.Scanner;
 
 import juegos.cartas.cartas.cartas.ICartaComparable;
 import juegos.cartas.cartas.juego.Apuesta;
-import juegos.cartas.cartas.mesas.CeldaCartaMesa;
+import juegos.cartas.poker.consola.MostradorConsola;
 import juegos.cartas.poker.juego.AccionPoker;
 import juegos.cartas.poker.juego.JuegoPoker;
 import juegos.cartas.poker.juego.realizadorTurno.RealizadorTurnoPoker;
 
+/**
+ * Realiza el turno  atraves de interaccion con un usuario por consola
+ * @author victor
+ *
+ * @param <C>
+ */
 public class RealizadorTurnoPokerConsola<C extends ICartaComparable> extends RealizadorTurnoPoker<C>{
 
-	JuegoPoker<C> juegoPoker= ((JuegoPoker<C>)juegoCartas);
+	//JuegoPoker<C> juegoPoker= ((JuegoPoker<C>)juegoCartas);
+	MostradorConsola<C> consola= new MostradorConsola<>();
+	
+	/**permite flexibilizar la entrada de datos, consola o fichero */
+	private InputStream flujoIn=System.in;
 	
 	
-	
-	
-	public RealizadorTurnoPokerConsola(JuegoPoker<C> juegoPoker) {
-		
+	public RealizadorTurnoPokerConsola(JuegoPoker<C> juegoPoker) 
+	{
 		super(juegoPoker);
-		juegoPoker= ((JuegoPoker<C>)juegoCartas);
+	}
+	
+	
+
+	public RealizadorTurnoPokerConsola(JuegoPoker<C> juegoPoker, InputStream flujoIn) {
+		super(juegoPoker);
+		this.flujoIn = flujoIn;
 	}
 
+
+
+	/**
+	 * Escoge la accion del jugador en el turno
+	 */
 	@Override
 	public Apuesta<AccionPoker> escogeAccion()
 	{
-		AccionPoker accionJugador= null;
+		
 		Apuesta<AccionPoker> apuesta=null;
 		do 
 		{
-			mostrarMesa();
-			mostrarCartasjugador();
-			System.out.println("Escoge una de las acciones posibles(Tienes " +jugador.getFichas()+" fichas):");
-			JuegoPoker<C> juegoPoker= ((JuegoPoker<C>)juegoCartas);
+			mostrarEstado();
 			
-			//System.out.println(juegoPoker.getClass());
-			Apuesta<AccionPoker> ultimaApuesta=juegoPoker.getUltimaAccionRealizada();
 			int fichasNecesariasParaIgualar= fichasNecesariasParaIgualar();
 
-			StringBuilder sb= new StringBuilder();
+			mostrarAccionesPosibles(fichasNecesariasParaIgualar);
 			
-			List<AccionPoker> accionesPermitidas = ultimaApuesta.getAccion().permite();
-			if(fichasNecesariasParaIgualar> jugador.getFichas())
-			{
-				accionesPermitidas.remove(AccionPoker.SUBIR);
-				accionesPermitidas.remove(AccionPoker.IGUALAR);
-				//solo se permite all in?? igualar tampoco
-			}
-			System.out.println("Acciones permitidas " + accionesPermitidas);
-			for(AccionPoker accion:accionesPermitidas)
-			{
-				if(AccionPoker.IGUALAR.equals(accion))
-				{
-					sb.append(accion+"("+fichasNecesariasParaIgualar+")"+"\n");
-				}
-				else
-					sb.append(accion+"\n");
-			}
+			apuesta= creaApuesta(fichasNecesariasParaIgualar);
 			
-			System.out.println(sb.toString());
-			
-			Scanner sc= new Scanner(System.in);
-			
-			String respuesta=sc.next();
-			
-			if(respuesta.length()==1 && Character.isDigit(respuesta.charAt(0)))
-			{
-				accionJugador= AccionPoker.getByIndex(Integer.parseInt(respuesta));
-				
-			}
-			else
-				accionJugador= AccionPoker.parse(respuesta);
-			
-			
-			apuesta= new Apuesta<>(accionJugador);
-			if(AccionPoker.IGUALAR.equals(accionJugador))
-			{
-				apuesta.setFichas(fichasNecesariasParaIgualar);
-			}
-			else  if(AccionPoker.SUBIR.equals(accionJugador))
-			{
-				int fichasSubir=0;
-				
-				while(fichasSubir<= fichasNecesariasParaIgualar)
-				{
-					System.out.println("Introduce el numero de fichas que quieras apostar(aunque no tengas apuesta el minimo necesario y se reajusta)");
-					try {
-					fichasSubir=sc.nextInt();
-					}catch (Exception e) {
-					}
-				}
-				apuesta.setFichas(fichasSubir);
-			}
-			else if(AccionPoker.ALL_IN.equals(accionJugador))
-			{
-				apuesta.setFichas(jugador.getFichas());
-			}
-		}while(accionJugador==null);
+		}while(apuesta==null);
 		
 		
 		return apuesta;
 	}
 	
-	public void mostrarMesa()
+	/**
+	 * Muestra el estado del juego, la mesa y las cartas del jugador
+	 */
+	private void mostrarEstado() 
 	{
-		juegoPoker= ((JuegoPoker<C>)juegoCartas);
+		consola.mostrarMesa(juegoPoker.getMesa());
+		consola.mostrarCartasjugador(jugador);
 		
+		
+	}
+
+
+
+	/**
+	 * Muestra las acciones posibles
+	 * @param fichasNecesariasParaIgualar
+	 */
+	private void mostrarAccionesPosibles(int fichasNecesariasParaIgualar) 
+	{
+		
+		consola.mostrarTexto("Escoge una de las acciones posibles(Tienes " +jugador.getFichas()+" fichas):");
 		StringBuilder sb= new StringBuilder();
 		
-		sb.append("Mesa: ");
-		List<CeldaCartaMesa<C>> comunes = juegoPoker.
-				getMesa().
-				getCartasComunes();
-		
-		for (CeldaCartaMesa<C> carta : comunes) {
-			sb.append(carta).append("\b");
+		List<AccionPoker> accionesPermitidas =accionesPermitidas(fichasNecesariasParaIgualar);
+		consola.mostrarTexto("Acciones permitidas " + accionesPermitidas);
+		for(AccionPoker accion:accionesPermitidas)
+		{
+			if(AccionPoker.IGUALAR.equals(accion))
+			{
+				sb.append(accion+"("+fichasNecesariasParaIgualar+")"+"\n");
+			}
+			else
+				sb.append(accion+"\n");
 		}
 		
-		System.out.println(sb.toString());
+		consola.mostrarTexto(sb.toString());
+		
+	}
+
+
+
+	/**
+	 * Crea la apuesta a partr de los datos y entradas
+	 * @param fichasNecesariasParaIgualar
+	 * @return
+	 */
+	private Apuesta<AccionPoker> creaApuesta(int fichasNecesariasParaIgualar)
+	{
+		
+		Apuesta<AccionPoker> apuesta;
+		
+		Scanner sc= new Scanner(flujoIn);
+		
+		String respuesta=sc.next();
+		AccionPoker accionJugador = parseaRespuesta(respuesta);
+		
+		
+		if(AccionPoker.SUBIR.equals(accionJugador))
+		{
+			int fichasSubir=solicitaFichasSubir(fichasNecesariasParaIgualar, sc);				
+			apuesta= new Apuesta<>(accionJugador, fichasSubir);
+		}			
+		else
+			apuesta= accion2Apuesta(accionJugador, fichasNecesariasParaIgualar);
+		
+		
+		return apuesta;
 	}
 	
-	public void mostrarCartasjugador()
-	{
-		juegoPoker= ((JuegoPoker<C>)juegoCartas);
+	/**
+	 * Parsea la respuesta sobre la peticion de accion
+	 * @param respuesta
+	 * @return
+	 */
+	private AccionPoker parseaRespuesta(String respuesta) {
 		
-		StringBuilder sb= new StringBuilder();
+		AccionPoker accionJugador;
 		
-		sb.append("Jugador: ");
-		List<C> comunes = jugador.getCartas();
-		
-		for (ICartaComparable carta : comunes) {
-			sb.append(carta).append("\b");
+		if(respuesta.length()==1 && Character.isDigit(respuesta.charAt(0)))
+		{
+			accionJugador= AccionPoker.getByIndex(Integer.parseInt(respuesta));			
+		}
+		else
+		{
+			accionJugador= AccionPoker.parse(respuesta);		
 		}
 		
-		System.out.println(sb.toString());
+		return accionJugador;
 	}
+	
+	/**
+	 * Solicita las fichas para subir de una entrada con scanner
+	 * @param fichasNecesariasParaIgualar
+	 * @param sc
+	 * @return
+	 */
+	private int solicitaFichasSubir(int fichasNecesariasParaIgualar,Scanner sc)
+	{
+		int fichasSubir=0;
+		while(fichasSubir<= fichasNecesariasParaIgualar)
+		{
+			consola.mostrarTexto("Introduce el numero de fichas que quieras apostar(aunque no tengas apuesta el minimo necesario y se reajusta)");
+			try {
+			fichasSubir=sc.nextInt();
+			}catch (Exception e) {
+			}
+		}
+		
+		return fichasSubir;
+	}
+
+	
+
+	
 
 	@Override
 	public void realizaTurno()
-	{
-	
-		
+	{		
 		escogeAccion();
 		
 	}
