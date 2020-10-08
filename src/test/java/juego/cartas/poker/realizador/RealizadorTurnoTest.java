@@ -1,5 +1,6 @@
 package juego.cartas.poker.realizador;
 
+import java.io.File;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -15,12 +16,42 @@ import juegos.cartas.poker.juego.realizadorTurno.ui.RealizadorTurnoPokerConsola;
 
 class RealizadorTurnoTest {
 
+	/*
 	@Test
-	void test() 
+	void testConsola() 
 	{
 		Apuesta<AccionPoker> apuesta= new Apuesta<AccionPoker>(AccionPoker.PASAR); 
 		RealizadorTurnoPoker<Carta> r= new RealizadorTurnoPokerConsola<>(new JuegoPokerMock(2,apuesta));
 		
+		escogerAccionTurno(r);
+		
+		
+	}*/
+	
+	@Test
+	void testFichero() 
+	{
+		
+		Apuesta<AccionPoker> apuesta= new Apuesta<AccionPoker>(AccionPoker.PASAR); 		
+		String path= "C:\\Users\\victor\\git\\juegoPoker\\src\\test\\java\\accionestest\\";
+		File dir= new File(path);
+		
+		
+		if(dir.exists() && dir.isDirectory())
+		{
+			for(File fichero: dir.listFiles())
+			{
+				RealizadorTurnoPoker<Carta> r= new RealizadorTurnoPokerConsola<Carta>(new JuegoPokerMock(2,apuesta), fichero);
+				escogerAccionTurno(r);
+			}
+		}
+		
+		
+		
+	}
+	
+	public void escogerAccionTurno(RealizadorTurnoPoker<Carta> r)
+	{
 		r.setJugador(new JugadorPokerTexasHoldem<>());
 		r.getJugador().setId("67");
 		Carta c1=new Carta(1, PaloFrances.CORAZONES);
@@ -31,9 +62,12 @@ class RealizadorTurnoTest {
 		
 		System.out.println(r.getJugador());
 		
-		r.escogeAccion();
+		Apuesta<AccionPoker> apuesta = r.escogeAccion();
 		
 		
+		System.out.println("accion elegida "+apuesta+"-----------------");
 	}
+	
+	
 
 }

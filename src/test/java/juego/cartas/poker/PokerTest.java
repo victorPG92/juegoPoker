@@ -16,8 +16,11 @@ class PokerTest {
 		JuegoPoker<CartaNumeroPalo<Integer, PaloFrances>> poker=
 				new FactPoker().creaPoker(2);
 		
-		//PokerLauncherConsola<ICartaComparable>
-	
+		PokerLauncherConsola<CartaNumeroPalo<Integer, PaloFrances>> launcher= new PokerLauncherConsola<>();
+		
+		launcher.loadPoker(poker);
+
+		
 	}
 
 }

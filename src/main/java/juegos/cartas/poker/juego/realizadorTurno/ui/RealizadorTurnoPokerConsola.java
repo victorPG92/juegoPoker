@@ -1,5 +1,7 @@
 package juegos.cartas.poker.juego.realizadorTurno.ui;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.List;
 import java.util.Scanner;
@@ -24,7 +26,9 @@ public class RealizadorTurnoPokerConsola<C extends ICartaComparable> extends Rea
 	MostradorConsola<C> consola= new MostradorConsola<>();
 	
 	/**permite flexibilizar la entrada de datos, consola o fichero */
-	private InputStream flujoIn=System.in;
+	private InputStream flujoIn;//=System.in;
+	private Readable readable;
+	private File file;
 	
 	
 	ConocedorAccionesJugador<C>conocedorAccionesJugador= new ConocedorAccionesJugador<>();
@@ -33,6 +37,7 @@ public class RealizadorTurnoPokerConsola<C extends ICartaComparable> extends Rea
 	public RealizadorTurnoPokerConsola(JuegoPoker<C> juegoPoker) 
 	{
 		super(juegoPoker);
+		flujoIn=System.in;
 	}
 	
 	
@@ -40,6 +45,16 @@ public class RealizadorTurnoPokerConsola<C extends ICartaComparable> extends Rea
 	public RealizadorTurnoPokerConsola(JuegoPoker<C> juegoPoker, InputStream flujoIn) {
 		super(juegoPoker);
 		this.flujoIn = flujoIn;
+	}
+	
+	public RealizadorTurnoPokerConsola(JuegoPoker<C> juegoPoker, Readable readable) {
+		super(juegoPoker);
+		this.readable = readable;
+	}
+	
+	public RealizadorTurnoPokerConsola(JuegoPoker<C> juegoPoker, File file) {
+		super(juegoPoker);
+		this.file = file;
 	}
 
 
@@ -119,7 +134,20 @@ public class RealizadorTurnoPokerConsola<C extends ICartaComparable> extends Rea
 		
 		Apuesta<AccionPoker> apuesta;
 		
-		Scanner sc= new Scanner(flujoIn);
+		Scanner sc;
+		if(flujoIn!=null)
+			sc= new Scanner(flujoIn);
+		else if(readable!=null)
+			sc = new Scanner(readable);
+		else if(file!=null)
+			try {
+				sc = new Scanner(file);
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+				return null;
+			}
+		else 
+			return null;
 		
 		String respuesta=sc.next();
 		AccionPoker accionJugador = parseaRespuesta(respuesta);
@@ -133,6 +161,9 @@ public class RealizadorTurnoPokerConsola<C extends ICartaComparable> extends Rea
 		else
 			apuesta= conocedorAccionesJugador.accion2Apuesta(accionJugador, fichasNecesariasParaIgualar,jugador);
 		
+		
+		if(!System.in.equals(flujoIn))
+			sc.close();
 		
 		return apuesta;
 	}
