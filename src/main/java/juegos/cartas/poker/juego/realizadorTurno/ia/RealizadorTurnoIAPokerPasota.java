@@ -4,6 +4,7 @@ import juegos.cartas.cartas.cartas.ICartaComparable;
 import juegos.cartas.cartas.juego.Apuesta;
 import juegos.cartas.poker.juego.AccionPoker;
 import juegos.cartas.poker.juego.JuegoPoker;
+import juegos.cartas.poker.juego.JugadorPokerTexasHoldem;
 
 /**
  * Lo unico que hace este jugador es pasar
@@ -12,13 +13,10 @@ import juegos.cartas.poker.juego.JuegoPoker;
  */
 public  class RealizadorTurnoIAPokerPasota<C extends ICartaComparable> 
 extends RealizadorTurnoIAPoker<C>
-{
-	
-	
-	
-	
-	public RealizadorTurnoIAPokerPasota(JuegoPoker<C> juegoPoker) {
-		super(juegoPoker);
+{	
+
+	public RealizadorTurnoIAPokerPasota(JugadorPokerTexasHoldem<C> jugador, JuegoPoker<C> juegoCartas) {
+		super(jugador, juegoCartas);
 	}
 
 	public Apuesta<AccionPoker> escogeAccion()

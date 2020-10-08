@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import juegos.cartas.cartas.cartas.ICartaComparable;
-import juegos.cartas.cartas.mesas.Jugador;
 import juegos.cartas.poker.juego.realizadorTurno.RealizadorTurnoPoker;
 import juegos.cartas.poker.juego.realizadorTurno.ia.RealizadorTurnoIAPokerPasota;
 import juegos.cartas.poker.juego.realizadorTurno.ui.RealizadorTurnoPokerConsola;
@@ -18,9 +17,9 @@ import juegos.cartas.poker.juego.realizadorTurno.ui.RealizadorTurnoPokerConsola;
 public class FactJugadores<C extends ICartaComparable> 
 {
 	
-	public List<Jugador<C>> creaJugadores(int jug)
+	public List<JugadorPokerTexasHoldem<C>> creaJugadores(int jug)
 	{
-		List<Jugador<C>> jugs= new ArrayList<>();
+		List<JugadorPokerTexasHoldem<C>> jugs= new ArrayList<>();
 		for (int i = 0; i < jug; i++)
 		{
 			JugadorPokerTexasHoldem<C> j=new JugadorPokerTexasHoldem<>();
@@ -31,24 +30,32 @@ public class FactJugadores<C extends ICartaComparable>
 		return jugs;
 	}
 	
-	public RealizadorTurnoPoker<C> creaJugador(TipoJugador tipo, JuegoPoker<C> juegoPoker)
+	public RealizadorTurnoPoker<C> creaJugador(JugadorPokerTexasHoldem<C> jugador,TipoJugador tipo, JuegoPoker<C> juegoPoker)
 	{
 
 		switch (tipo) {
-			case consola: return new RealizadorTurnoPokerConsola<>(juegoPoker);
-			case ia: return new RealizadorTurnoIAPokerPasota<>(juegoPoker);		
+			case consola: return new RealizadorTurnoPokerConsola<>(jugador,juegoPoker);
+			case ia: return new RealizadorTurnoIAPokerPasota<>(jugador,juegoPoker);		
 
 		default:
 			return null;
 		}
 	}
 	
-	public List<RealizadorTurnoPoker<C>> creaJugadores(TipoJugador[] tipos, JuegoPoker<C> juegoPoker)
+	public List<RealizadorTurnoPoker<C>> creaJugadores(List<JugadorPokerTexasHoldem<C>> jugadores,TipoJugador[] tipos, JuegoPoker<C> juegoPoker)
 	{
 		List<RealizadorTurnoPoker<C>> jugs= new ArrayList<>();
-		for (TipoJugador tipoJugador : tipos) 
+		
+		//for (TipoJugador tipoJugador : tipos) 
+		int n=Math.min(jugadores.size(),tipos.length);//si son iguales es el mismo
+		
+			
+		for (int i = 0; i < n; i++)
 		{
-			jugs.add(creaJugador(tipoJugador, juegoPoker));
+			JugadorPokerTexasHoldem<C> jugador= jugadores.get(i);			
+			TipoJugador tipoJugador= tipos[i];
+			
+			jugs.add(creaJugador(jugador,tipoJugador, juegoPoker));
 			
 		}
 		

@@ -6,6 +6,7 @@ import juegos.cartas.cartas.cartas.ICartaComparable;
 import juegos.cartas.cartas.juego.Apuesta;
 import juegos.cartas.poker.juego.AccionPoker;
 import juegos.cartas.poker.juego.JuegoPoker;
+import juegos.cartas.poker.juego.JugadorPokerTexasHoldem;
 import juegos.cartas.poker.juego.realizadorTurno.RealizadorTurnoPoker;
 import juegos.cartas.poker.manos.draws.Rango;
 import juegos.cartas.poker.manos.draws.RangoGenerico;
@@ -21,8 +22,11 @@ import juegos.cartas.poker.manos.draws.RangoGenerico;
 public abstract class RealizadorTurnoIAPoker
 <C extends ICartaComparable>  extends RealizadorTurnoPoker<C>
 {
-	public RealizadorTurnoIAPoker(JuegoPoker<C> juegoPoker) {
-		super(juegoPoker);
+	
+
+
+	public RealizadorTurnoIAPoker(JugadorPokerTexasHoldem<C> jugador, JuegoPoker<C> juegoCartas) {
+		super(jugador, juegoCartas);
 	}
 
 

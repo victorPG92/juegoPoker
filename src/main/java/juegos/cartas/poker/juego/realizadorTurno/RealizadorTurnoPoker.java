@@ -28,17 +28,12 @@ extends RealizadorTurno<C,Apuesta<AccionPoker>,JuegoPoker<C>,JugadorPokerTexasHo
 {
 	
 	//Rango rango;
-	//FasesPoker fase;	
-	/**Con el juego puedo saber la fase, la ultima accion realizada, el dinero apostado, ... */
-	protected JuegoPoker<C> juegoPoker;
 	
-	
-	
-	public RealizadorTurnoPoker(JuegoPoker<C> juegoPoker) {
-		super();
-		this.juegoPoker = juegoPoker;
-		juegoCartas= juegoPoker;
+	public RealizadorTurnoPoker(JugadorPokerTexasHoldem<C> jugador, JuegoPoker<C> juegoCartas) {
+		super(jugador, juegoCartas);
 	}
+	
+
 
 
 
@@ -48,95 +43,100 @@ extends RealizadorTurno<C,Apuesta<AccionPoker>,JuegoPoker<C>,JugadorPokerTexasHo
 	 */
 	public int fichasNecesariasParaIgualar()
 	{
-		//		return juegoPoker.getApuestaTurno()-(Integer)juegoPoker.getApuestas().getApuestaJugador().getOrDefault(jugador,new Apuesta(AccionPoker.ABANDONAR));
+		//		return juegoCartas.getApuestaTurno()-(Integer)juegoCartas.getApuestas().getApuestaJugador().getOrDefault(jugador,new Apuesta(AccionPoker.ABANDONAR));
 
-		int apuestaTurno=juegoPoker.getApuestaTurno();
-		Map<Jugador<C>, Apuesta<AccionPoker>> apuestasJugadores = juegoPoker.getApuestas().getApuestaJugador();
+		int apuestaTurno=juegoCartas.getApuestaTurno();
+		Map<Jugador<C>, Apuesta<AccionPoker>> apuestasJugadores = juegoCartas.getApuestas().getApuestaJugador();
 		int apuestaJugador = apuestasJugadores.getOrDefault(jugador,new Apuesta<AccionPoker>(AccionPoker.ABANDONAR)).getFichas() ;
 		
 		return apuestaTurno - apuestaJugador;
 		
-		//return juegoPoker.getApuestaTurno()-(Integer)juegoPoker.getApuestas().getApuestaJugador().getOrDefault(jugador,new Apuesta(AccionPoker.ABANDONAR)).getFichas();
+		//return juegoCartas.getApuestaTurno()-(Integer)juegoCartas.getApuestas().getApuestaJugador().getOrDefault(jugador,new Apuesta(AccionPoker.ABANDONAR)).getFichas();
 	}
 	
 	
 
 
+	
+
+
+
+
 	public JuegoPoker<C> getJuegoPoker()
 	{
-		return juegoPoker;//(JuegoPoker ) juegoCartas;
+		return juegoCartas;//(JuegoPoker ) juegoCartas;
 	}
 
 
 
 	public MesaPokerTexasHoldem<C> getMesa() {
-		return juegoPoker.getMesa();
+		return juegoCartas.getMesa();
 	}
 
 
 
 	public int getNumJug() {
-		return juegoPoker.getNumJug();
+		return juegoCartas.getNumJug();
 	}
 
 
 
 	public CrupierPokerTexasHoldemAleatorio<C> getCrupier() {
-		return juegoPoker.getCrupier();
+		return juegoCartas.getCrupier();
 	}
 
 
 
 	public MazoCartasSimple<C> getMazo() {
-		return juegoPoker.getMazo();
+		return juegoCartas.getMazo();
 	}
 
 
 
 	public int getFichasIniciales() {
-		return juegoPoker.getFichasIniciales();
+		return juegoCartas.getFichasIniciales();
 	}
 
 
 
 	public FasesPoker getFase() {
-		return juegoPoker.getFase();
+		return juegoCartas.getFase();
 	}
 
 
 
 	public int getTurno() {
-		return juegoPoker.getTurno();
+		return juegoCartas.getTurno();
 	}
 
 
 
 	public Map<Jugador<C>, RealizadorTurnoIAPoker<C>> getRealizadores() {
-		return juegoPoker.getRealizadores();
+		return juegoCartas.getRealizadores();
 	}
 
 
 
 	public int getBote() {
-		return juegoPoker.getBote();
+		return juegoCartas.getBote();
 	}
 
 
 
 	public int getApuestaTurno() {
-		return juegoPoker.getApuestaTurno();
+		return juegoCartas.getApuestaTurno();
 	}
 
 
 
 	public Apuesta<AccionPoker> getUltimaAccionRealizada() {
-		return juegoPoker.getUltimaAccionRealizada();
+		return juegoCartas.getUltimaAccionRealizada();
 	}
 
 
 
 	public Apuestas<C> getApuestas() {
-		return juegoPoker.getApuestas();
+		return juegoCartas.getApuestas();
 	}
 	
 	public Jugador<C> getJugador()

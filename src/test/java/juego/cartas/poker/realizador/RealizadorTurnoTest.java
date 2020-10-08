@@ -28,6 +28,8 @@ class RealizadorTurnoTest {
 		
 	}*/
 	
+	private JugadorPokerTexasHoldem<Carta> jugador=new JugadorPokerTexasHoldem<>();
+
 	@Test
 	void testFichero() 
 	{
@@ -41,7 +43,7 @@ class RealizadorTurnoTest {
 		{
 			for(File fichero: dir.listFiles())
 			{
-				RealizadorTurnoPoker<Carta> r= new RealizadorTurnoPokerConsola<Carta>(new JuegoPokerMock(2,apuesta), fichero);
+				RealizadorTurnoPoker<Carta> r= new RealizadorTurnoPokerConsola<Carta>(jugador,new JuegoPokerMock(2,apuesta), fichero);
 				escogerAccionTurno(r);
 			}
 		}
@@ -52,7 +54,7 @@ class RealizadorTurnoTest {
 	
 	public void escogerAccionTurno(RealizadorTurnoPoker<Carta> r)
 	{
-		r.setJugador(new JugadorPokerTexasHoldem<>());
+		r.setJugador(jugador);
 		r.getJugador().setId("67");
 		Carta c1=new Carta(1, PaloFrances.CORAZONES);
 		Carta c2= new Carta(2, PaloFrances.CORAZONES);

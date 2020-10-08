@@ -12,6 +12,7 @@ import juegos.cartas.poker.consola.MostradorConsola;
 import juegos.cartas.poker.juego.AccionPoker;
 import juegos.cartas.poker.juego.ConocedorAccionesJugador;
 import juegos.cartas.poker.juego.JuegoPoker;
+import juegos.cartas.poker.juego.JugadorPokerTexasHoldem;
 import juegos.cartas.poker.juego.realizadorTurno.RealizadorTurnoPoker;
 
 /**
@@ -23,7 +24,7 @@ import juegos.cartas.poker.juego.realizadorTurno.RealizadorTurnoPoker;
 public class RealizadorTurnoPokerConsola<C extends ICartaComparable> extends RealizadorTurnoPoker<C>{
 
 	//JuegoPoker<C> juegoPoker= ((JuegoPoker<C>)juegoCartas);
-	MostradorConsola<C> consola= new MostradorConsola<>();
+	private MostradorConsola<C> consola= new MostradorConsola<>();
 	
 	/**permite flexibilizar la entrada de datos, consola o fichero */
 	private InputStream flujoIn;//=System.in;
@@ -31,29 +32,29 @@ public class RealizadorTurnoPokerConsola<C extends ICartaComparable> extends Rea
 	private File file;
 	
 	
-	ConocedorAccionesJugador<C>conocedorAccionesJugador= new ConocedorAccionesJugador<>();
+	private ConocedorAccionesJugador<C>conocedorAccionesJugador= new ConocedorAccionesJugador<>();
 	
-	
-	public RealizadorTurnoPokerConsola(JuegoPoker<C> juegoPoker) 
-	{
-		super(juegoPoker);
+	public RealizadorTurnoPokerConsola(JugadorPokerTexasHoldem<C> jugador, JuegoPoker<C> juegoCartas) {
+		super(jugador, juegoCartas);
 		flujoIn=System.in;
 	}
 	
 	
+	
+	
 
-	public RealizadorTurnoPokerConsola(JuegoPoker<C> juegoPoker, InputStream flujoIn) {
-		super(juegoPoker);
+	public RealizadorTurnoPokerConsola(JugadorPokerTexasHoldem<C> jugador, JuegoPoker<C> juegoCartas, InputStream flujoIn) {
+		this(jugador,juegoCartas);
 		this.flujoIn = flujoIn;
 	}
 	
-	public RealizadorTurnoPokerConsola(JuegoPoker<C> juegoPoker, Readable readable) {
-		super(juegoPoker);
+	public RealizadorTurnoPokerConsola(JugadorPokerTexasHoldem<C> jugador, JuegoPoker<C> juegoCartas, Readable readable) {
+		this(jugador,juegoCartas);
 		this.readable = readable;
 	}
 	
-	public RealizadorTurnoPokerConsola(JuegoPoker<C> juegoPoker, File file) {
-		super(juegoPoker);
+	public RealizadorTurnoPokerConsola(JugadorPokerTexasHoldem<C> jugador, JuegoPoker<C> juegoCartas, File file) {
+		this(jugador,juegoCartas);
 		this.file = file;
 	}
 
@@ -88,7 +89,7 @@ public class RealizadorTurnoPokerConsola<C extends ICartaComparable> extends Rea
 	 */
 	private void mostrarEstado() 
 	{
-		consola.mostrarMesa(juegoPoker.getMesa());
+		consola.mostrarMesa(juegoCartas.getMesa());
 		consola.mostrarCartasjugador(jugador);
 		
 		
@@ -106,7 +107,7 @@ public class RealizadorTurnoPokerConsola<C extends ICartaComparable> extends Rea
 		consola.mostrarTexto("Escoge una de las acciones posibles(Tienes " +jugador.getFichas()+" fichas):");
 		StringBuilder sb= new StringBuilder();
 		
-		List<AccionPoker> accionesPermitidas =conocedorAccionesJugador.accionesPermitidas(fichasNecesariasParaIgualar,jugador,juegoPoker);
+		List<AccionPoker> accionesPermitidas =conocedorAccionesJugador.accionesPermitidas(fichasNecesariasParaIgualar,jugador,juegoCartas);
 		consola.mostrarTexto("Acciones permitidas " + accionesPermitidas);
 		for(AccionPoker accion:accionesPermitidas)
 		{

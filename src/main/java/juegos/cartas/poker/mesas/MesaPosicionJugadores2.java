@@ -11,15 +11,15 @@ import juegos.cartas.cartas.mesas.Jugador;
  * Representa que jugador hay en que posicion.
  * Se implementa con EnumMap
  */
-public class MesaPosicionJugadores2<C extends ICartaComparable> implements MesaPosicionesJugadores<C>
+public class MesaPosicionJugadores2<C extends ICartaComparable,J extends Jugador<C>> implements MesaPosicionesJugadores<C,J>
 {
 	
 	//private LinkedHashMap<K, V> paa guardar en orden pero al ser enumerados mejro enummap
-	private EnumMap<PosicionJugador, Jugador<C>> jugadorPorPosicion= new EnumMap<>(PosicionJugador.class);
+	private EnumMap<PosicionJugador, J> jugadorPorPosicion= new EnumMap<>(PosicionJugador.class);
 
 	
 	//por si acaso lo necesito en vez de usar map.values()
-	List<Jugador<C>> jugadores;
+	List<J> jugadores;
 	
 	List<PosicionJugador> posicionesJugadas;
 	
@@ -27,7 +27,7 @@ public class MesaPosicionJugadores2<C extends ICartaComparable> implements MesaP
 	 * Como maximo deben ser 6 jugadores
 	 * @param jugadores
 	 */
-	public MesaPosicionJugadores2(List<Jugador<C>> jugadores)
+	public MesaPosicionJugadores2(List<J> jugadores)
 	{
 		super();
 		this.jugadores=jugadores;
@@ -42,7 +42,7 @@ public class MesaPosicionJugadores2<C extends ICartaComparable> implements MesaP
 		if(jugadores.size()<=6)
 		{
 			PosicionJugador posIni= PosicionJugador.UTG;
-			for (Jugador<C> jugador : jugadores)
+			for (J jugador : jugadores)
 			{
 				jugadorPorPosicion.put(posIni, jugador);
 				posIni = posIni.sig();
@@ -52,7 +52,7 @@ public class MesaPosicionJugadores2<C extends ICartaComparable> implements MesaP
 
 
 
-	public Jugador<C> getJugador(PosicionJugador pos)
+	public J getJugador(PosicionJugador pos)
 	{
 		return jugadorPorPosicion.get(pos);
 	}
@@ -62,7 +62,7 @@ public class MesaPosicionJugadores2<C extends ICartaComparable> implements MesaP
 	 */
 	public void mover()
 	{
-		Jugador<C> aux=null;
+		J aux=null;
 		for(PosicionJugador pos: jugadorPorPosicion.keySet())
 		{
 			//en el inicio, el primer elemento tiene como anterior al ultimo, 
@@ -83,7 +83,7 @@ public class MesaPosicionJugadores2<C extends ICartaComparable> implements MesaP
 
 
 	@Override
-	public Iterator<Jugador<C>> iterator() {
+	public Iterator<J> iterator() {
 		
 		return null;
 	}

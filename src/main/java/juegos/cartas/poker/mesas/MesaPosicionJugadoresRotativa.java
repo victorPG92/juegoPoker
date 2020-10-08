@@ -11,13 +11,13 @@ import juegos.cartas.cartas.mesas.Jugador;
  * Representa que jugador hay en que posicion.
  * Se implementa con EnumMap
  */
-public class MesaPosicionJugadoresRotativa<C extends ICartaComparable> implements MesaPosicionesJugadores<C>
+public class MesaPosicionJugadoresRotativa<C extends ICartaComparable,J extends Jugador<C>> implements MesaPosicionesJugadores<C,J>
 {
 	
 	
 	
 	//por si acaso lo necesito en vez de usar map.values()
-	LinkedList<Jugador<C>> jugadores;
+	LinkedList<J> jugadores;
 	
 	List<PosicionJugador> posicionesJugadas;
 	
@@ -26,11 +26,11 @@ public class MesaPosicionJugadoresRotativa<C extends ICartaComparable> implement
 	 * Como maximo deben ser 6 jugadores
 	 * @param jugadores
 	 */
-	public MesaPosicionJugadoresRotativa(List<Jugador<C>> jugadores)
+	public MesaPosicionJugadoresRotativa(List<J> jugadores)
 	{
 		super();
 		if(jugadores instanceof LinkedList)
-			this.jugadores=(LinkedList<Jugador<C>>) jugadores;
+			this.jugadores=(LinkedList<J>) jugadores;
 		else
 		{
 			this.jugadores= new LinkedList<>();
@@ -46,7 +46,7 @@ public class MesaPosicionJugadoresRotativa<C extends ICartaComparable> implement
 		if(jugadores.size()<=6)
 		{
 			PosicionJugador posIni= PosicionJugador.UTG;
-			for (Jugador<C> jugador : jugadores)
+			for (J jugador : jugadores)
 			{
 				posicionesJugadas.add(posIni);
 				posIni = posIni.sig();
@@ -56,7 +56,7 @@ public class MesaPosicionJugadoresRotativa<C extends ICartaComparable> implement
 
 
 
-	public Jugador<C> getJugador(PosicionJugador pos)
+	public J getJugador(PosicionJugador pos)
 	{
 		return jugadores.get(posicionesJugadas.indexOf(pos));
 	}
@@ -67,7 +67,7 @@ public class MesaPosicionJugadoresRotativa<C extends ICartaComparable> implement
 	public void mover()
 	{
 		int ultPos=jugadores.size()-1;
-		Jugador<C> ultimoJugador= jugadores.get(ultPos);
+		J ultimoJugador= jugadores.get(ultPos);
 		jugadores.remove(ultPos);
 		jugadores.add(0,ultimoJugador);
 		
@@ -76,7 +76,7 @@ public class MesaPosicionJugadoresRotativa<C extends ICartaComparable> implement
 
 
 	@Override
-	public Iterator<Jugador<C>> iterator() {
+	public Iterator<J> iterator() {
 		
 		return jugadores.iterator();
 	}

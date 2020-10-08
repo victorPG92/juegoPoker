@@ -8,8 +8,8 @@ import java.util.Map;
 import juegos.cartas.cartas.cartas.ICartaComparable;
 import juegos.cartas.cartas.juego.Apuesta;
 import juegos.cartas.cartas.juego.JuegoCartas;
-import juegos.cartas.cartas.juego.ValoradorJugadores;
-import juegos.cartas.cartas.juego.ValoradorJugadoresSimple;
+import juegos.cartas.cartas.juego.valorador.ValoradorJugadores;
+import juegos.cartas.cartas.juego.valorador.ValoradorJugadoresPorMano;
 import juegos.cartas.cartas.mazos.modelos.MazoCartasSimple;
 import juegos.cartas.cartas.mesas.Jugador;
 import juegos.cartas.poker.crupier.CrupierPokerTexasHoldemAleatorio;
@@ -49,7 +49,7 @@ public class JuegoPoker<C extends ICartaComparable> implements JuegoCartas<Fases
 	Map<Jugador<C>, RealizadorTurnoIAPoker<C>>realizadores= new HashMap<>();
 	
 	/**Valora los jugadores */
-	ValoradorJugadores<C> valorador= new ValoradorJugadoresSimple<>();
+	ValoradorJugadores<C,JugadorPokerTexasHoldem<C>> valorador= new ValoradorJugadoresPorMano<>();
 	
 	
 	
@@ -60,10 +60,10 @@ public class JuegoPoker<C extends ICartaComparable> implements JuegoCartas<Fases
 		this.mazo=mazo;
 		crupier= new CrupierPokerTexasHoldemAleatorio<>(mazo);
 		
-		List<Jugador<C>> jugadores= new ArrayList<>();
+		List<JugadorPokerTexasHoldem<C>> jugadores= new ArrayList<>();
 		for (int i = 0; i < this.numJug; i++) 
 		{
-			Jugador<C> jug= new Jugador<>();
+			JugadorPokerTexasHoldem<C> jug= new JugadorPokerTexasHoldem<>();
 			jug.setId(""+ i);
 			jug.setFichas(fichasIniciales);
 			
@@ -106,7 +106,7 @@ public class JuegoPoker<C extends ICartaComparable> implements JuegoCartas<Fases
 	{
 		while(!apuestas.estanApuestasFinalizadas())
 		{
-			Jugador<C> ganador=valorador.encontrarMejorJugada(mesa.getJugadores());
+			JugadorPokerTexasHoldem<C> ganador=valorador.encontrarMejorJugador(mesa.getJugadores());
 			ganador.recibirFichas(bote);
 			bote=0;
 			
@@ -213,7 +213,7 @@ public class JuegoPoker<C extends ICartaComparable> implements JuegoCartas<Fases
 		return apuestas;
 	}
 
-	public ValoradorJugadores<C> getValorador() {
+	public ValoradorJugadores<C,JugadorPokerTexasHoldem<C>> getValorador() {
 		return valorador;
 	}
 	

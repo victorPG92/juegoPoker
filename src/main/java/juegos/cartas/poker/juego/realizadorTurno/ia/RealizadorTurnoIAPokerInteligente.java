@@ -7,6 +7,7 @@ import juegos.cartas.cartas.juego.Apuesta;
 import juegos.cartas.poker.juego.AccionPoker;
 import juegos.cartas.poker.juego.FasesPoker;
 import juegos.cartas.poker.juego.JuegoPoker;
+import juegos.cartas.poker.juego.JugadorPokerTexasHoldem;
 
 /**
  * Crea estrategia inteligente
@@ -16,11 +17,8 @@ import juegos.cartas.poker.juego.JuegoPoker;
 public  class RealizadorTurnoIAPokerInteligente<C extends ICartaComparable>  extends RealizadorTurnoIAPoker<C>
 {
 	
-	
-	
-	
-	public RealizadorTurnoIAPokerInteligente(JuegoPoker<C> juegoPoker) {
-		super(juegoPoker);
+	public RealizadorTurnoIAPokerInteligente(JugadorPokerTexasHoldem<C> jugador, JuegoPoker<C> juegoCartas) {
+		super(jugador, juegoCartas);
 	}
 
 	public Apuesta<AccionPoker> escogeAccion()

@@ -1,6 +1,7 @@
 package juego.cartas.poker.mocks;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import juegos.cartas.cartas.cartas.Carta;
 import juegos.cartas.cartas.cartas.palos.PaloFrances;
@@ -9,6 +10,7 @@ import juegos.cartas.cartas.mazos.impl.gen.MazoGen;
 import juegos.cartas.poker.juego.AccionPoker;
 import juegos.cartas.poker.juego.FactJugadores;
 import juegos.cartas.poker.juego.JuegoPoker;
+import juegos.cartas.poker.juego.JugadorPokerTexasHoldem;
 import juegos.cartas.poker.juego.TipoJugador;
 import juegos.cartas.poker.mesas.MesaPokerTexasHoldem;
 
@@ -22,10 +24,11 @@ public class JuegoPokerMock extends JuegoPoker<Carta>{
 	public JuegoPokerMock(int numJug, MazoGen<Carta,Integer,PaloFrances> mazo,Apuesta<AccionPoker> ultA)
 	{
 		super(numJug, mazo);
-		mesaMock= new MesaPokerTexasHoldem<>(factJug.creaJugadores(numJug));
+		List<JugadorPokerTexasHoldem<Carta>> jugadores = factJug.creaJugadores(numJug);
+		mesaMock= new MesaPokerTexasHoldem<Carta>(jugadores);
 		
 		mesaMock.setCartasComunes(new ArrayList<>());
-		factJug.creaJugadores(new TipoJugador[] {}, null);
+		factJug.creaJugadores(jugadores,new TipoJugador[] {}, null);
 		ultAccion=ultA;
 	}
 	

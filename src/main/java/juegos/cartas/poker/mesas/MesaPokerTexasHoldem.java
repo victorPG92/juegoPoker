@@ -3,8 +3,8 @@ package juegos.cartas.poker.mesas;
 import java.util.List;
 
 import juegos.cartas.cartas.cartas.ICartaComparable;
-import juegos.cartas.cartas.mesas.Jugador;
 import juegos.cartas.cartas.mesas.Mesa;
+import juegos.cartas.poker.juego.JugadorPokerTexasHoldem;
 
 /**
  * Mesa para jugar al poker texas holdem
@@ -12,16 +12,16 @@ import juegos.cartas.cartas.mesas.Mesa;
  * @author victor
  *
  */
-public class MesaPokerTexasHoldem<C extends ICartaComparable> extends Mesa<C>
+public class MesaPokerTexasHoldem<C extends ICartaComparable> extends Mesa<C,JugadorPokerTexasHoldem<C>>
 {
-	MesaPosicionesJugadores<C> posiciones;
+	MesaPosicionesJugadores<C,JugadorPokerTexasHoldem<C>> posiciones;
 
-	public MesaPokerTexasHoldem(List<Jugador<C>> jugadores) {
+	public MesaPokerTexasHoldem(List<JugadorPokerTexasHoldem<C>> jugadores) {
 		super(jugadores);
 		posiciones= new MesaPosicionJugadoresMapaPosJug<>(jugadores);
 	}
 
-	public final MesaPosicionesJugadores<C> getPosiciones() {
+	public final MesaPosicionesJugadores<C,JugadorPokerTexasHoldem<C>> getPosiciones() {
 		return posiciones;
 	}
 

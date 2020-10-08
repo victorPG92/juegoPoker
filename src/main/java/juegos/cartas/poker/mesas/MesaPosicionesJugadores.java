@@ -12,8 +12,8 @@ import juegos.cartas.cartas.mesas.Jugador;
  * @param pos
  * @return
  */
-public interface MesaPosicionesJugadores<C extends ICartaComparable>
-extends Iterable<Jugador<C>>
+public interface MesaPosicionesJugadores<C extends ICartaComparable, J extends Jugador<C>>
+extends Iterable<J>
 {
 	
 	
@@ -22,7 +22,7 @@ extends Iterable<Jugador<C>>
 	 * @param pos
 	 * @return
 	 */
-	public Jugador<C> getJugador(PosicionJugador pos);
+	public J getJugador(PosicionJugador pos);
 	
 	
 	/**
@@ -30,6 +30,6 @@ extends Iterable<Jugador<C>>
 	 * @param pos
 	 * @return
 	 */
-	public Iterator<Jugador<C>> iterator() ;
+	public Iterator<J> iterator() ;
 
 }

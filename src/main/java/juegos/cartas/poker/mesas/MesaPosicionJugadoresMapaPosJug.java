@@ -11,15 +11,15 @@ import juegos.cartas.cartas.mesas.Jugador;
  * Representa que jugador hay en que posicion.
  * Se implementa con EnumMap
  */
-public class MesaPosicionJugadoresMapaPosJug<C extends ICartaComparable> implements MesaPosicionesJugadores<C>
+public class MesaPosicionJugadoresMapaPosJug<C extends ICartaComparable,J extends Jugador<C>> implements MesaPosicionesJugadores<C,J>
 {
 	
 	//private LinkedHashMap<K, V> paa guardar en orden pero al ser enumerados mejro enummap
-	private EnumMap<PosicionJugador, PosicionConJugador<C>> jugadorPorPosicion= new EnumMap<>(PosicionJugador.class);
+	private EnumMap<PosicionJugador, PosicionConJugador<C,J>> jugadorPorPosicion= new EnumMap<>(PosicionJugador.class);
 
 	
 	//por si acaso lo necesito en vez de usar map.values()
-	List<Jugador<C>> jugadores;
+	List<J> jugadores;
 	
 	List<PosicionJugador> posicionesJugadas;
 	
@@ -27,7 +27,7 @@ public class MesaPosicionJugadoresMapaPosJug<C extends ICartaComparable> impleme
 	 * Como maximo deben ser 6 jugadores
 	 * @param jugadores
 	 */
-	public MesaPosicionJugadoresMapaPosJug(List<Jugador<C>> jugadores)
+	public MesaPosicionJugadoresMapaPosJug(List<J> jugadores)
 	{
 		super();
 		this.jugadores=jugadores;
@@ -42,7 +42,7 @@ public class MesaPosicionJugadoresMapaPosJug<C extends ICartaComparable> impleme
 		if(jugadores.size()<=6)
 		{
 			PosicionJugador posIni= PosicionJugador.UTG;
-			for (Jugador<C> jugador : jugadores)
+			for (J jugador : jugadores)
 			{
 				jugadorPorPosicion.put(posIni, new PosicionConJugador<>(posIni,jugador));
 				posIni = posIni.sig();
@@ -52,7 +52,7 @@ public class MesaPosicionJugadoresMapaPosJug<C extends ICartaComparable> impleme
 
 
 
-	public Jugador<C> getJugador(PosicionJugador pos)
+	public J getJugador(PosicionJugador pos)
 	{
 		return jugadorPorPosicion.get(pos).getJugador();
 	}
@@ -62,7 +62,7 @@ public class MesaPosicionJugadoresMapaPosJug<C extends ICartaComparable> impleme
 	 */
 	public void mover()
 	{
-		Jugador<C> aux=null;
+		J aux=null;
 		for(PosicionJugador pos: jugadorPorPosicion.keySet())
 		{
 			//en el inicio, el primer elemento tiene como anterior al ultimo, 
@@ -83,7 +83,7 @@ public class MesaPosicionJugadoresMapaPosJug<C extends ICartaComparable> impleme
 
 
 	@Override
-	public Iterator<Jugador<C>> iterator() {
+	public Iterator<J> iterator() {
 		
 		return null;
 	}
