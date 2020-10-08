@@ -8,6 +8,7 @@ import juegos.cartas.poker.juego.AccionPoker;
 import juegos.cartas.poker.juego.JuegoPoker;
 import juegos.cartas.poker.juego.realizadorTurno.RealizadorTurnoPoker;
 import juegos.cartas.poker.manos.draws.Rango;
+import juegos.cartas.poker.manos.draws.RangoGenerico;
 
 /**
  * Realiza el turno en el juego de poker
@@ -26,7 +27,7 @@ public abstract class RealizadorTurnoIAPoker<C extends ICartaComparable>  extend
 
 	protected double probAzar;
 	protected Map<AccionPoker,Rango> rangosPorAccion;
-	protected Rango rango;
+	protected RangoGenerico<C> rango;
 	//protected FasesPoker fase; de juego
 	protected AccionPoker ultimaAccionRealizada;
 	
@@ -50,12 +51,12 @@ public abstract class RealizadorTurnoIAPoker<C extends ICartaComparable>  extend
 	}
 
 
-	public final Rango getRango() {
+	public final RangoGenerico<C> getRango() {
 		return rango;
 	}
 
 
-	public final void setRango(Rango rango) {
+	public final void setRango(RangoGenerico<C> rango) {
 		this.rango = rango;
 	}
 

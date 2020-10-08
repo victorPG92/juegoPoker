@@ -26,7 +26,7 @@ public  class RealizadorTurnoIAPokerInteligente<C extends ICartaComparable>  ext
 
 	public Apuesta<AccionPoker> escogeAccion()
 	{
-		List<Carta> cartas = (List<Carta>) jugador.getCartas();//TODO
+		List<C> cartas = (List<C>) jugador.getCartas();//TODO
 		
 		if(FasesPoker.PREFLOP.equals(getJuegoPoker().getFase()))
 		{
