@@ -57,64 +57,7 @@ public  abstract class RealizadorTurnoPoker<C extends ICartaComparable>  extends
 		//return juegoPoker.getApuestaTurno()-(Integer)juegoPoker.getApuestas().getApuestaJugador().getOrDefault(jugador,new Apuesta(AccionPoker.ABANDONAR)).getFichas();
 	}
 	
-	/**
-	 * Obtiene las acciones permtidas, segun el jugador y el estado del juego
-	 * @param fichasNecesariasParaIgualar
-	 * @return
-	 */
-	protected List<AccionPoker> accionesPermitidas(int fichasNecesariasParaIgualar) 
-	{
-		Apuesta<AccionPoker> ultimaApuesta=juegoPoker.getUltimaAccionRealizada();
-		List<AccionPoker> accionesPermitidas = ultimaApuesta.getAccion().permite();
-		if(fichasNecesariasParaIgualar> jugador.getFichas())
-		{
-			accionesPermitidas.remove(AccionPoker.SUBIR);
-			accionesPermitidas.remove(AccionPoker.IGUALAR);
-			//solo se permite all in y retirarse?? igualar tampoco
-		}
-		return accionesPermitidas;
-	}
 	
-	/**
-	 * Obtiene las acciones con fichas, apuestas, permitidas, segun el jugador y el estado del juego
-	 * @param fichasNecesariasParaIgualar
-	 * @return
-	 */
-	protected List<Apuesta<AccionPoker>> accionesFichasPermitidas(int fichasNecesariasParaIgualar) 
-	{
-		List<Apuesta<AccionPoker>> acciones= new ArrayList<>();
-		
-		List<AccionPoker> accionesPermitidas=accionesPermitidas(fichasNecesariasParaIgualar);
-		for (AccionPoker accionPoker : accionesPermitidas)
-		{			
-			acciones.add(accion2Apuesta(accionPoker, fichasNecesariasParaIgualar));
-		}
-		
-
-		return acciones;
-	}
-	
-	/**
-	 * Trasforma una accion en apuesta
-	 * @param accionPoker
-	 * @param fichasNecesariasParaIgualar
-	 * @return
-	 */
-	protected Apuesta<AccionPoker> accion2Apuesta(AccionPoker accionPoker,int fichasNecesariasParaIgualar)
-	{
-		Apuesta<AccionPoker> apuesta = new Apuesta<>(accionPoker);
-		
-		if(AccionPoker.IGUALAR.equals(accionPoker))
-		{
-			apuesta.setFichas(fichasNecesariasParaIgualar);
-		}
-		else if(AccionPoker.ALL_IN.equals(accionPoker))
-		{
-			apuesta.setFichas(jugador.getFichas());
-		}
-		
-		return apuesta;
-	}
 
 
 	public JuegoPoker<C> getJuegoPoker()

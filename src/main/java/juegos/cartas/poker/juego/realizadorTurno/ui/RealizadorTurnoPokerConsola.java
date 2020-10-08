@@ -8,6 +8,7 @@ import juegos.cartas.cartas.cartas.ICartaComparable;
 import juegos.cartas.cartas.juego.Apuesta;
 import juegos.cartas.poker.consola.MostradorConsola;
 import juegos.cartas.poker.juego.AccionPoker;
+import juegos.cartas.poker.juego.ConocedorAccionesJugador;
 import juegos.cartas.poker.juego.JuegoPoker;
 import juegos.cartas.poker.juego.realizadorTurno.RealizadorTurnoPoker;
 
@@ -24,6 +25,9 @@ public class RealizadorTurnoPokerConsola<C extends ICartaComparable> extends Rea
 	
 	/**permite flexibilizar la entrada de datos, consola o fichero */
 	private InputStream flujoIn=System.in;
+	
+	
+	ConocedorAccionesJugador<C>conocedorAccionesJugador= new ConocedorAccionesJugador<>();
 	
 	
 	public RealizadorTurnoPokerConsola(JuegoPoker<C> juegoPoker) 
@@ -87,7 +91,7 @@ public class RealizadorTurnoPokerConsola<C extends ICartaComparable> extends Rea
 		consola.mostrarTexto("Escoge una de las acciones posibles(Tienes " +jugador.getFichas()+" fichas):");
 		StringBuilder sb= new StringBuilder();
 		
-		List<AccionPoker> accionesPermitidas =accionesPermitidas(fichasNecesariasParaIgualar);
+		List<AccionPoker> accionesPermitidas =conocedorAccionesJugador.accionesPermitidas(fichasNecesariasParaIgualar,jugador,juegoPoker);
 		consola.mostrarTexto("Acciones permitidas " + accionesPermitidas);
 		for(AccionPoker accion:accionesPermitidas)
 		{
@@ -127,7 +131,7 @@ public class RealizadorTurnoPokerConsola<C extends ICartaComparable> extends Rea
 			apuesta= new Apuesta<>(accionJugador, fichasSubir);
 		}			
 		else
-			apuesta= accion2Apuesta(accionJugador, fichasNecesariasParaIgualar);
+			apuesta= conocedorAccionesJugador.accion2Apuesta(accionJugador, fichasNecesariasParaIgualar,jugador);
 		
 		
 		return apuesta;
