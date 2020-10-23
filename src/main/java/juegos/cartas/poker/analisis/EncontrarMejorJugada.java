@@ -2,7 +2,7 @@ package juegos.cartas.poker.analisis;
 
 import java.util.ArrayList;
 
-import juegos.cartas.cartas.cartas.Carta;
+import juegos.cartas.cartas.cartas.CartaFrancesaOld;
 import juegos.cartas.cartas.juego.Mano;
 import juegos.cartas.cartas.utils.Combinaciones;
 
@@ -18,18 +18,18 @@ import juegos.cartas.cartas.utils.Combinaciones;
 public class EncontrarMejorJugada {
 	
 	
-	private ArrayList<Carta> cartas;
+	private ArrayList<CartaFrancesaOld> cartas;
 	
-	private ArrayList<Carta> manoTemp;
+	private ArrayList<CartaFrancesaOld> manoTemp;
 	//private int valor;
 	//private int valorMejor;
-	//private ArrayList<Carta> manoMejor;
+	//private ArrayList<CartaFrancesaOld> manoMejor;
 	private Mano manoMejor;//cambiado
 	
 	
 	
 	
-	public EncontrarMejorJugada(ArrayList<Carta> cartas)
+	public EncontrarMejorJugada(ArrayList<CartaFrancesaOld> cartas)
 	{
 		if(cartas.size()>=5  && cartas.size()<=7)
 		{
@@ -56,7 +56,7 @@ public class EncontrarMejorJugada {
 		
 		for(ArrayList<Integer> indices : combinaciones)
 		{
-			manoTemp = new  ArrayList<Carta >();
+			manoTemp = new  ArrayList<CartaFrancesaOld >();
 			for(Integer i : indices)
 				manoTemp.add(cartas.get(i));
 
@@ -100,10 +100,10 @@ public class EncontrarMejorJugada {
 	{
 		Mazo m = new Mazo();
 		
-		ArrayList<Carta> cartas = new ArrayList<Carta>();
+		ArrayList<CartaFrancesaOld> cartas = new ArrayList<CartaFrancesaOld>();
 		
 		for(int i=0;i<7;i++)
-			cartas.add(m.dameCartaAleatoria());
+			cartas.add(m.dameCartaFrancesaOldAleatoria());
 		
 		System.out.println(cartas);
 		EncontrarMejorJugada e = new EncontrarMejorJugada(cartas);
@@ -152,7 +152,7 @@ public class EncontrarMejorJugada {
 
 
 	/*
-	public EncontrarMejorJugada(ArrayList<Carta> manos)
+	public EncontrarMejorJugada(ArrayList<CartaFrancesaOld> manos)
 	{
 		if(manos.size()==7)
 		{
@@ -163,7 +163,7 @@ public class EncontrarMejorJugada {
 			for(int i=0;i<7;i++)
 				for(int j=0;j<7;j++)
 				{
-					manoTemp = new ArrayList<Carta>();
+					manoTemp = new ArrayList<CartaFrancesaOld>();
 					for(int k=0;k<7;k++)
 					{
 						if(k!= i && k != j) 

@@ -3,7 +3,7 @@ package juegos.cartas.poker.analisis;
 import java.util.ArrayList;
 import java.util.List;
 
-import juegos.cartas.cartas.cartas.Carta;
+import juegos.cartas.cartas.cartas.CartaFrancesaOld;
 import juegos.cartas.cartas.cartas.palos.PaloFrances;
 import juegos.cartas.cartas.juego.Mano;
 import juegos.cartas.cartas.ordenar.OrdenarCartas;
@@ -19,7 +19,7 @@ import juegos.cartas.poker.manos.fact.FactoriaMano;
 public class SaberJugada 
 {
 	
-	private ArrayList<Carta> cartas;
+	private ArrayList<CartaFrancesaOld> cartas;
 	
 	private boolean hayPareja;
 	private boolean hayDoblePareja;
@@ -42,7 +42,7 @@ public class SaberJugada
 	
 	
 	
-	public SaberJugada(ArrayList<Carta> manos)
+	public SaberJugada(ArrayList<CartaFrancesaOld> manos)
 	{
 		if(manos.size()==5)
 		{
@@ -113,14 +113,14 @@ public class SaberJugada
 	{
 		int n;
 		int i=0;
-		for(Carta c : cartas)
+		for(CartaFrancesaOld c : cartas)
 		{
 			
 			n= c.getNumero();
 			if(n!=hc1)
 			{
 				i=1;
-				for(Carta c2 : cartas)
+				for(CartaFrancesaOld c2 : cartas)
 				{
 					if(c!=c2) // mismo objeto, no con equals
 					{
@@ -188,7 +188,7 @@ public class SaberJugada
 		
 		PaloFrances p = cartas.get(0).getPalo();
 		
-		for(Carta c : cartas)
+		for(CartaFrancesaOld c : cartas)
 		{
 			
 			if(!c.getPalo().equals(p))
@@ -228,7 +228,7 @@ public class SaberJugada
 		ArrayList<Integer> esc = new ArrayList<Integer>();
 		int max=0;
 		
-		for(Carta c : cartas)
+		for(CartaFrancesaOld c : cartas)
 		{
 			if(esc.isEmpty()){esc.add(c.getNum());if(c.getNum()>max) max=c.getNum();}
 			else
@@ -261,8 +261,8 @@ public class SaberJugada
 	public void comprobarEscalera()
 	{
 		OrdenarCartas o = new OrdenarCartas();
-		//ArrayList<Carta > cartasOrdenadas= o.ordenarPorEscalera(cartas);
-        List<Carta > cartasOrdenadas= o.ordenarPorNumero(cartas);
+		//ArrayList<CartaFrancesaOld > cartasOrdenadas= o.ordenarPorEscalera(cartas);
+        List<CartaFrancesaOld > cartasOrdenadas= o.ordenarPorNumero(cartas);
 		
 		boolean as=false;
 		
@@ -272,8 +272,8 @@ public class SaberJugada
 		int esc=1;
 		while(i<cartasOrdenadas.size()-1)
 		{
-			Carta c = cartasOrdenadas.get(i);
-			Carta c1 = cartasOrdenadas.get(i+1);
+			CartaFrancesaOld c = cartasOrdenadas.get(i);
+			CartaFrancesaOld c1 = cartasOrdenadas.get(i+1);
 			int n1= c.getNumero();
 			int n2 = c1.getNumero();
 			
@@ -304,13 +304,13 @@ public class SaberJugada
 		if(as)
 		{
 			//System.out.println("Hay as");
-			ArrayList<Carta> manoTemp1 = new ArrayList<Carta>();
+			ArrayList<CartaFrancesaOld> manoTemp1 = new ArrayList<CartaFrancesaOld>();
 			manoTemp1.addAll(cartasOrdenadas);
 			esc=1;
 			
                        
 			// si la primera carta es un as, la muevo al final 
-			Carta cAs= manoTemp1.get(0);
+			CartaFrancesaOld cAs= manoTemp1.get(0);
 			if(cAs.getNumero()==1)
 			{
 				manoTemp1.add(cAs);
@@ -322,8 +322,8 @@ public class SaberJugada
                          i=0;
 			while(i<manoTemp1.size()-1)
 			{
-                            Carta c = manoTemp1.get(i);
-                            Carta c1 = manoTemp1.get(i+1);
+                            CartaFrancesaOld c = manoTemp1.get(i);
+                            CartaFrancesaOld c1 = manoTemp1.get(i+1);
                             int n1= c.getNumero();
                             int n2 = c1.getNumero();
 
@@ -343,12 +343,12 @@ public class SaberJugada
 	public void comprobarEscalera1()
 	{
 		/*
-		OrdenarCartas o = new OrdenarCartas();
-		ArrayList<Carta > cartasOrdenadas= o.ordenarPorNumero(cartas);
+		OrdenarCartaFrancesaOlds o = new OrdenarCartaFrancesaOlds();
+		ArrayList<CartaFrancesaOld > cartasOrdenadas= o.ordenarPorNumero(cartas);
 		
 		boolean as=false;
 		int esc =0;
-		Carta c = cartasOrdenadas.get(0);
+		CartaFrancesaOld c = cartasOrdenadas.get(0);
 		for(int i=1;i<cartasOrdenadas.size();i++)
 		{
 			int n1= c.getNum();

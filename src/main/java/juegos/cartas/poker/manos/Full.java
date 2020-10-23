@@ -2,7 +2,8 @@ package juegos.cartas.poker.manos;
 
 import java.util.List;
 
-import juegos.cartas.cartas.cartas.Carta;
+import juegos.cartas.cartas.cartas.CartaNumeroPalo;
+import juegos.cartas.cartas.cartas.dom.dominios.DominioValorPalo;
 import juegos.cartas.cartas.juego.Mano;
 import juegos.cartas.cartas.ordenar.OrdenarCartas;
 import juegos.cartas.poker.ConstantesPR1;
@@ -12,25 +13,25 @@ import juegos.cartas.poker.ConstantesPR1;
  * @author victor
  *
  */
-public class Full extends ManoPoker
+public class Full<C extends CartaNumeroPalo<N, P>,N,P> extends ManoPoker<C,N,P>
 {
-	private int trio;
-	private int pareja;
+	private N trio;
+	private N pareja;
 	
-	public Full(List<Carta> mano )
+	public Full(List<C> mano, DominioValorPalo dom )
 	{
+		super(mano, dom);
+			
+		tipo=NombreManoPoker.full_house;
+		List<C> manoOrd =  (new OrdenarCartas()).ordenarPorIguales(mano);
+		this.cartas=manoOrd;
 		
-			
-			tipo=NombreManoPoker.full_house;
-			List<Carta> manoOrd =  (new OrdenarCartas()).ordenarPorIguales(mano);
-			this.cartas=manoOrd;
-			
-			trio=cartas.get(2).getNumero();
-			
-			if(cartas.get(0).getNumero()==trio)
-				pareja= cartas.get(4).getNumero();
-			else
-				pareja= cartas.get(0).getNumero();
+		trio=cartas.get(2).getNumero();
+		
+		if(cartas.get(0).getNumero()==trio)
+			pareja= cartas.get(4).getNumero();
+		else
+			pareja= cartas.get(0).getNumero();
 			
 		
 	}
@@ -38,16 +39,16 @@ public class Full extends ManoPoker
 	@Override
 	public int compareTo(Mano m)
 	{
-		ManoPoker m2= (ManoPoker) m;
+		ManoPoker<C,N,P> m2= (ManoPoker) m;
 			int retorno=super.compareTo(m2);
 			if(retorno!=0)
 				return retorno;
-			Full full2= (Full) m2;
-			retorno= Integer.compare(trio, full2.trio);
+			Full<C,N,P> full2= (Full<C,N,P>) m2;
+			retorno= compValor.compare(trio, full2.trio);//Integer.compare(trio, full2.trio);
 			if(retorno!=0)
 				return retorno;
 			
-			retorno= Integer.compare(pareja, full2.pareja);
+			retorno= compValor.compare(pareja, full2.pareja);
 			
 			return retorno;
 		}

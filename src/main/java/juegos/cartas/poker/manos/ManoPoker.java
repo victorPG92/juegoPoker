@@ -1,8 +1,11 @@
 package juegos.cartas.poker.manos;
 
+import java.util.Comparator;
 import java.util.List;
 
-import juegos.cartas.cartas.cartas.Carta;
+import juegos.cartas.cartas.cartas.CartaNumeroPalo;
+import juegos.cartas.cartas.cartas.ICartaComparable;
+import juegos.cartas.cartas.cartas.dom.dominios.DominioValorPalo;
 import juegos.cartas.cartas.juego.Mano;
 
 
@@ -12,16 +15,30 @@ import juegos.cartas.cartas.juego.Mano;
  * Estructura de mano
  *
  */
-public abstract class ManoPoker implements /*Comparable<ManoPoker>,*/  Mano
+public abstract class ManoPoker<C extends CartaNumeroPalo<N, P>,N,P> implements /*Comparable<ManoPoker>,*/  Mano
 {
 	
 	
 	
 	protected NombreManoPoker tipo;
-	protected List<Carta> cartas;
+	protected List<C> cartas;
+	protected Comparator<C> comp;
+	protected Comparator<N> compValor;
+	protected Comparator<P> compPalo;
+	
+	protected DominioValorPalo<N, P, C> dom;
 	
 	
 	
+	public ManoPoker(List<C> cartas, DominioValorPalo<N, P, C> dom)
+	{
+		super();
+		this.cartas = cartas;
+		this.dom = dom;
+	}
+
+
+
 	public NombreManoPoker dameTipo()
 	{
 		return tipo;
@@ -30,21 +47,21 @@ public abstract class ManoPoker implements /*Comparable<ManoPoker>,*/  Mano
 	
 	
 	/// nuevo
-	public List<Carta> dameCartas()
+	public List<C> dameCartas()
 	{
 		return cartas;
 	}
 	
 	
-	
+	/*
 	public String manoReducida()
 	{
 		StringBuffer sb = new StringBuffer();
-		for(Carta c : cartas)
+		for(C c : cartas)
 		sb.append(c.dameLetras());	
 		
 		return sb.toString();
-	}
+	}*/
 	
 	
 	/**
@@ -54,7 +71,7 @@ public abstract class ManoPoker implements /*Comparable<ManoPoker>,*/  Mano
 	public int compareTo(Mano m)
 	{
 		
-		ManoPoker m2 =(ManoPoker) m;
+		ManoPoker<C,N,P> m2 =(ManoPoker) m;
 		int r=0;
 		
 		if(tipo.getValor()		<	m2.tipo.getValor())  r = -1;
@@ -66,7 +83,8 @@ public abstract class ManoPoker implements /*Comparable<ManoPoker>,*/  Mano
 			
 			while(r==0 && i< cartas.size() )
 			{
-				r = cartas.get(i).compareTo(m2.cartas.get(i));
+				r = comp.compare(cartas.get(i), m2.cartas.get(i));
+				//cartas.get(i).compareTo(m2.cartas.get(i));
 				i++;
 			}
 			

@@ -2,8 +2,8 @@ package juegos.cartas.poker.manos;
 
 import java.util.List;
 
-import juegos.cartas.cartas.cartas.Carta;
-import juegos.cartas.cartas.cartas.palos.PaloFrances;
+import juegos.cartas.cartas.cartas.CartaNumeroPalo;
+import juegos.cartas.cartas.cartas.dom.dominios.DominioValorPalo;
 import juegos.cartas.poker.ConstantesPR1;
 
 /**
@@ -11,13 +11,13 @@ import juegos.cartas.poker.ConstantesPR1;
  * @author victor
  *
  */
-public class EscaleraColor extends EscaleraMano
+public class EscaleraColor<C extends CartaNumeroPalo<N, P>,N,P> extends EscaleraMano<C,N,P>
 {
-	PaloFrances color;
+	P color;
 
-	public EscaleraColor(List<Carta> mano)
+	public EscaleraColor(List<C> mano, DominioValorPalo<N, P, C> dom)
 	{
-		super(mano);
+		super(mano,dom);
 		
 		tipo=NombreManoPoker.straight_flush;
 		nombre=ConstantesPR1.ESCALERA_COLOR;

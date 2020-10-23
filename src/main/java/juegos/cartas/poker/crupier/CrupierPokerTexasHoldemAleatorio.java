@@ -3,7 +3,7 @@ package juegos.cartas.poker.crupier;
 import java.util.List;
 
 import juegos.cartas.cartas.cartas.ICartaComparable;
-import juegos.cartas.cartas.mazos.modelos.MazoCartasSimple;
+import juegos.cartas.cartas.mazos.modelos.func.MazoCartasSimple;
 import juegos.cartas.cartas.mesas.crupier.CrupierMazoAleatoria;
 import juegos.cartas.cartas.mesas.crupier.CrupierMesa;
 import juegos.cartas.poker.juego.FasesPoker;

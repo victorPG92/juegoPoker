@@ -3,7 +3,7 @@ package juegos.cartas.poker.analisis;
 import java.util.ArrayList;
 import java.util.List;
 
-import juegos.cartas.cartas.cartas.Carta;
+import juegos.cartas.cartas.cartas.CartaFrancesaOld;
 import juegos.cartas.cartas.juego.Mano;
 import juegos.cartas.cartas.utils.CombinacionesMultiples;
 import juegos.cartas.cartas.utils.ParTipo;
@@ -12,14 +12,14 @@ public class EncontrarMejorJugadaOmaha
 {
 
 	
-	private ArrayList<Carta> cartasJug;
-	private ArrayList<Carta> cartasComunes;
+	private ArrayList<CartaFrancesaOld> cartasJug;
+	private ArrayList<CartaFrancesaOld> cartasComunes;
 	
-	private ArrayList<Carta> manoTemp;
+	private ArrayList<CartaFrancesaOld> manoTemp;
 	
 	private Mano manoMejor;//cambiado
 	     
-	public EncontrarMejorJugadaOmaha(ArrayList<Carta> cartasJug,ArrayList<Carta> cartasComunes)
+	public EncontrarMejorJugadaOmaha(ArrayList<CartaFrancesaOld> cartasJug,ArrayList<CartaFrancesaOld> cartasComunes)
 	{
 		
 		/*
@@ -55,7 +55,7 @@ public class EncontrarMejorJugadaOmaha
 		//System.out.println(combinaciones.size());// 6 * (4 3) = 6*4=24 correcto 
 		for(ParTipo<ArrayList<Integer>> indices : combinaciones)///
 		{
-			manoTemp = new  ArrayList<Carta >();
+			manoTemp = new  ArrayList<CartaFrancesaOld >();
 			
 			for(Integer i : indices.getElem1())
 				manoTemp.add(cartasJug.get(i));
@@ -93,10 +93,10 @@ public class EncontrarMejorJugadaOmaha
 	{
 		Mazo m = new Mazo();
 		
-		ArrayList<Carta> cartas = new ArrayList<Carta>();
+		ArrayList<CartaFrancesaOld> cartas = new ArrayList<CartaFrancesaOld>();
 		
 		for(int i=0;i<7;i++)
-			cartas.add(m.dameCartaAleatoria());
+			cartas.add(m.dameCartaFrancesaOldAleatoria());
 		
 		System.out.println(cartas);
 		EncontrarMejorJugada e = new EncontrarMejorJugada(cartas);

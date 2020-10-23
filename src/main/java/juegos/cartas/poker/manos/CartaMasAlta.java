@@ -2,7 +2,8 @@ package juegos.cartas.poker.manos;
 
 import java.util.List;
 
-import juegos.cartas.cartas.cartas.Carta;
+import juegos.cartas.cartas.cartas.CartaNumeroPalo;
+import juegos.cartas.cartas.cartas.dom.dominios.DominioValorPalo;
 import juegos.cartas.cartas.juego.Mano;
 import juegos.cartas.poker.ConstantesPR1;
 
@@ -12,15 +13,16 @@ import juegos.cartas.poker.ConstantesPR1;
  * @author victor
  *
  */
-public class CartaMasAlta extends ManoSegunCompararTodas //implements Comparable<ManoPoker> {
+public class CartaMasAlta<C extends CartaNumeroPalo<N, P>,N,P> extends ManoSegunCompararTodas<C,N,P> //implements Comparable<ManoPoker> {
 {
 	/** Constructor de carta mas alta
 	 * 
 	 * @param mano
+	 * @param dom 
 	 */
-	public CartaMasAlta(List<Carta> mano)// ,ManoEnum me
+	public CartaMasAlta(List<C> mano, DominioValorPalo<N, P, C> dom)// ,ManoEnum me
 	{
-		super(mano);
+		super(mano,dom);
 		tipo = NombreManoPoker.high_card;
 		//List<Carta> manoOrd = (new OrdenarCartas()).ordenarPorNumero(mano);
 		//cartas = manoOrd;
@@ -50,7 +52,7 @@ public class CartaMasAlta extends ManoSegunCompararTodas //implements Comparable
 		sb.append(ConstantesPR1.CARTA_MAS_ALTA);
 		sb.append(" ");
 		// sb.append(" carta mas alta : ");
-		sb.append(cartas.get(0).dameNombre());
+		sb.append(dom.toString(cartas.get(0)));//.dameNombre());
 
 		return sb.toString();
 	}

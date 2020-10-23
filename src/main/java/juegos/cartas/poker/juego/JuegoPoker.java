@@ -10,7 +10,7 @@ import juegos.cartas.cartas.juego.Apuesta;
 import juegos.cartas.cartas.juego.JuegoCartas;
 import juegos.cartas.cartas.juego.valorador.ValoradorJugadores;
 import juegos.cartas.cartas.juego.valorador.ValoradorJugadoresPorMano;
-import juegos.cartas.cartas.mazos.modelos.MazoCartasSimple;
+import juegos.cartas.cartas.mazos.modelos.func.MazoCartasSimple;
 import juegos.cartas.cartas.mesas.Jugador;
 import juegos.cartas.poker.crupier.CrupierPokerTexasHoldemAleatorio;
 import juegos.cartas.poker.juego.realizadorTurno.ia.RealizadorTurnoIAPoker;

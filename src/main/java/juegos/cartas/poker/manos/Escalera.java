@@ -2,7 +2,8 @@ package juegos.cartas.poker.manos;
 
 import java.util.List;
 
-import juegos.cartas.cartas.cartas.Carta;
+import juegos.cartas.cartas.cartas.CartaNumeroPalo;
+import juegos.cartas.cartas.cartas.dom.dominios.DominioValorPalo;
 import juegos.cartas.cartas.juego.Mano;
 import juegos.cartas.poker.ConstantesPR1;
 
@@ -11,7 +12,7 @@ import juegos.cartas.poker.ConstantesPR1;
  * @author victor
  *
  */
-public class Escalera extends EscaleraMano //implements Comparable<Escalera>
+public class Escalera<C extends CartaNumeroPalo<N, P>,N,P> extends EscaleraMano<C,N,P> //implements Comparable<Escalera>
 {
 
 	/*private Carta cartaMasAlta;
@@ -19,9 +20,9 @@ public class Escalera extends EscaleraMano //implements Comparable<Escalera>
 */
 	String nombre=ConstantesPR1.ESCALERA;
 	
-	public Escalera(List<Carta> mano )
+	public Escalera(List<C> mano, DominioValorPalo<N, P, C> dom )
 	{
-			super(mano);
+			super(mano,dom);
 			tipo=NombreManoPoker.straight;
 			//cartas =  (new OrdenarCartas()).ordenarPorNumeroAscendente(mano);
             /*cartas =  (new OrdenarCartas()).ordenarPorNumero(mano);
@@ -43,7 +44,7 @@ public class Escalera extends EscaleraMano //implements Comparable<Escalera>
 	@Override
 	public int compareTo(Mano m)
 	{
-		ManoPoker m2= (ManoPoker) m;
+		ManoPoker<C,N,P> m2= (ManoPoker) m;
 		
 		int retorno= super.compareTo(m2);
 		//if(retorno!=0)

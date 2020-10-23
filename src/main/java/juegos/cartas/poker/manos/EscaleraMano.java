@@ -2,7 +2,8 @@ package juegos.cartas.poker.manos;
 
 import java.util.List;
 
-import juegos.cartas.cartas.cartas.Carta;
+import juegos.cartas.cartas.cartas.CartaNumeroPalo;
+import juegos.cartas.cartas.cartas.dom.dominios.DominioValorPalo;
 import juegos.cartas.cartas.juego.Mano;
 import juegos.cartas.cartas.ordenar.OrdenarCartas;
 import juegos.cartas.poker.ConstantesPR1;
@@ -12,16 +13,16 @@ import juegos.cartas.poker.ConstantesPR1;
  * @author victor
  *
  */
-public abstract class EscaleraMano extends ManoPoker //implements Comparable<Escalera>
+public abstract class EscaleraMano<C extends CartaNumeroPalo<N, P>,N,P> extends ManoPoker<C,N,P> //implements Comparable<Escalera>
 {
-	private Carta cartaMasAlta;
-	private Carta cartaMasBaja;
+	private N cartaMasAlta;
+	private N cartaMasBaja;
 
 	String nombre=ConstantesPR1.ESCALERA;
 	
-	public EscaleraMano(List<Carta> mano )
+	public EscaleraMano(List<C> mano, DominioValorPalo<N, P, C> dom )
 	{
-			
+			super(mano,dom);
 			//tipo=ManoEnum.straight;
 			//cartas =  (new OrdenarCartas()).ordenarPorNumeroAscendente(mano);
             cartas =  (new OrdenarCartas()).ordenarPorNumero(mano);
@@ -29,13 +30,13 @@ public abstract class EscaleraMano extends ManoPoker //implements Comparable<Esc
             // si la escalera contiene un as, pero su carta mas baja es un 2, poner el as como ultima 
 			if(cartas.get(4).getNumero()==2 && cartas.get(0).getNumero()==1)
 			{
-				Carta as = cartas.get(0);
+				C as = cartas.get(0);
 				cartas.add(5,as);
 				cartas.remove(0);
 			}
 			
-			cartaMasAlta=cartas.get(0);
-			cartaMasBaja=cartas.get(4);
+			cartaMasAlta=cartas.get(0).getNumero();
+			cartaMasBaja=cartas.get(4).getNumero();
 
 	
 	}
@@ -43,12 +44,12 @@ public abstract class EscaleraMano extends ManoPoker //implements Comparable<Esc
 	@Override
 	public int compareTo(Mano m)
 	{
-		ManoPoker m2= (ManoPoker) m;	
+		ManoPoker<C,N,P> m2= (ManoPoker) m;	
 		int retorno= super.compareTo(m2);
 		if(retorno!=0)
 			return retorno;
 		//retorno= Integer.compare(cartaMasAlta, ((Escalera)m2).cartaMasAlta);
-		retorno= cartaMasAlta.compareTo(((EscaleraMano)m2).cartaMasAlta);
+		retorno= compValor.compare(cartaMasAlta,((EscaleraMano<C,N,P>)m2).cartaMasAlta);
 		return retorno;
 	}
 

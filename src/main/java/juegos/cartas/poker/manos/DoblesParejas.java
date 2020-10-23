@@ -2,7 +2,8 @@ package juegos.cartas.poker.manos;
 
 import java.util.List;
 
-import juegos.cartas.cartas.cartas.Carta;
+import juegos.cartas.cartas.cartas.CartaNumeroPalo;
+import juegos.cartas.cartas.cartas.dom.dominios.DominioValorPalo;
 import juegos.cartas.cartas.juego.Mano;
 import juegos.cartas.cartas.ordenar.OrdenarCartas;
 import juegos.cartas.poker.ConstantesPR1;
@@ -12,25 +13,28 @@ import juegos.cartas.poker.ConstantesPR1;
  * @author victor
  *
  */
-public class DoblesParejas extends ManoPoker
+public class DoblesParejas<C extends CartaNumeroPalo<N, P>,N,P> extends ManoPoker<C,N,P>
 {
 	
-	private Carta parejaMayor;
-	private Carta parejaMenor;
-	private Carta desparejada;
+	private N parejaMayor;
+	private N parejaMenor;
+	private N desparejada;
 	
-	public DoblesParejas(List<Carta> mano)
+	
+	
+	
+	public DoblesParejas(List<C> mano, DominioValorPalo<N, P, C> dom)
 	{
-		
+		super(mano,dom);
 		tipo=NombreManoPoker.two_pair;
-		List<Carta> manoOrd =  (new OrdenarCartas()).ordenarPorIguales(mano);
-		parejaMayor= manoOrd.get(0);
-		parejaMenor= manoOrd.get(2);
-		desparejada= manoOrd.get(4);
+		List<C> manoOrd =  (new OrdenarCartas()).ordenarPorIguales(mano);
+		parejaMayor= manoOrd.get(0).getNumero();
+		parejaMenor= manoOrd.get(2).getNumero();
+		desparejada= manoOrd.get(4).getNumero();
 
-		if(parejaMayor.compareTo(parejaMenor)==-1)
+		if(compValor.compare(parejaMayor,parejaMenor)==-1)
 		{
-			Carta cartaAux= parejaMayor;
+			N cartaAux= parejaMayor;
 			parejaMayor=parejaMenor;
 			parejaMenor=cartaAux;
 		}
@@ -42,18 +46,21 @@ public class DoblesParejas extends ManoPoker
 	@Override
 	public int compareTo(Mano m)
 	{
-		ManoPoker m2= (ManoPoker) m;
+		ManoPoker<C,N,P> m2= (ManoPoker) m;
 		int r= super.compareTo(m2);
 		if(r!=0)return r;
 		
-		DoblesParejas dp= (DoblesParejas) m2;
-		 r=parejaMayor.compareTo(dp.parejaMayor);
+		DoblesParejas<C,N,P> dp= (DoblesParejas<C,N,P>) m2;
+		// r=parejaMayor.compareTo(dp.parejaMayor);
+		 r=compValor.compare(parejaMayor,dp.parejaMayor);
 		 
 		 if(r!=0)return r;
-		 r=parejaMenor.compareTo(dp.parejaMenor);
+		// r=parejaMenor.compareTo(dp.parejaMenor);
+		 r=compValor.compare(parejaMenor,dp.parejaMenor);
 		 
 		 if(r!=0)return r;
-		 r=desparejada.compareTo(dp.desparejada);
+		 //r=desparejada.compareTo(dp.desparejada);
+		 r=compValor.compare(desparejada,dp.desparejada);
 		 
 		 return r;
 		
@@ -72,9 +79,9 @@ public class DoblesParejas extends ManoPoker
 		StringBuilder sb = new StringBuilder();
 		sb.append(ConstantesPR1.DOBLES_PAREJAS);
 		sb.append(" of ");
-		sb.append(parejaMayor.dameNombre());
+		sb.append(dom.getDomValor().toString(parejaMayor));//.dameNombre());
 		sb.append("s and ");
-		sb.append(parejaMenor.dameNombre());
+		sb.append(dom.getDomValor().toString(parejaMenor));//.dameNombre());
 		sb.append("s");	//\n
 		
 	

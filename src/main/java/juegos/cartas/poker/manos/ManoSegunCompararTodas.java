@@ -2,7 +2,8 @@ package juegos.cartas.poker.manos;
 
 import java.util.List;
 
-import juegos.cartas.cartas.cartas.Carta;
+import juegos.cartas.cartas.cartas.CartaNumeroPalo;
+import juegos.cartas.cartas.cartas.dom.dominios.DominioValorPalo;
 import juegos.cartas.cartas.juego.Mano;
 import juegos.cartas.cartas.ordenar.OrdenarCartas;
 
@@ -12,18 +13,19 @@ import juegos.cartas.cartas.ordenar.OrdenarCartas;
  * @author victor
  *
  */
-public class ManoSegunCompararTodas extends ManoPoker implements Mano//Comparable<ManoPoker> 
+public class ManoSegunCompararTodas<C extends CartaNumeroPalo<N, P>,N,P> extends ManoPoker<C,N,P> implements Mano//Comparable<ManoPoker> 
 {
 
 	/** Constructor de carta mas alta
 	 * 
 	 * @param mano
+	 * @param dom 
 	 */
-	public ManoSegunCompararTodas(List<Carta> mano)// ,ManoEnum me
+	public ManoSegunCompararTodas(List<C> mano, DominioValorPalo<N, P, C> dom)// ,ManoEnum me
 	{
-
+		super(mano, dom);
 		//tipo = ManoEnum.high_card;
-		List<Carta> manoOrd = (new OrdenarCartas()).ordenarPorNumero(mano);
+		List<C> manoOrd = (new OrdenarCartas()).ordenarPorNumero(mano);
 		cartas = manoOrd;
 
 	}
@@ -31,7 +33,7 @@ public class ManoSegunCompararTodas extends ManoPoker implements Mano//Comparabl
 	@Override
 	public int compareTo(Mano m)
 	{
-		ManoPoker m2= (ManoPoker) m;
+		ManoPoker<C,N,P> m2= (ManoPoker) m;
 		int r = super.compareTo(m2);
 		if (r != 0)
 			return r;
@@ -39,7 +41,7 @@ public class ManoSegunCompararTodas extends ManoPoker implements Mano//Comparabl
 
 		while (r == 0 && i < cartas.size()) 
 		{
-			r = cartas.get(i).compareTo(m2.cartas.get(i));
+			r = comp.compare(cartas.get(i),m2.cartas.get(i));//)//);
 			i++;
 		}
 		

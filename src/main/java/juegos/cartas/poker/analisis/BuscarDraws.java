@@ -3,7 +3,8 @@ package juegos.cartas.poker.analisis;
 import java.util.ArrayList;
 import java.util.List;
 
-import juegos.cartas.cartas.cartas.Carta;
+
+import juegos.cartas.cartas.cartas.CartaFrancesaOld;
 import juegos.cartas.cartas.cartas.palos.PaloFrances;
 import juegos.cartas.cartas.ordenar.OrdenarCartas;
 import juegos.cartas.cartas.utils.Combinaciones;
@@ -12,14 +13,14 @@ import juegos.cartas.cartas.utils.Combinaciones;
 public class BuscarDraws 
 {
 	
-	private ArrayList<Carta> cartas;
+	private ArrayList<CartaFrancesaOld> cartas;
 	
 	private boolean proyectoEscaleraAbierta;
 	private boolean proyectoEscaleraInterrumpida;
 	private boolean proyectoColor;
 	
 	
-	public BuscarDraws(ArrayList<Carta> manos)
+	public BuscarDraws(ArrayList<CartaFrancesaOld> manos)
 	{
 		proyectoEscaleraAbierta = false;
 		proyectoEscaleraInterrumpida = false;
@@ -42,7 +43,7 @@ public class BuscarDraws
 
                     for(ArrayList<Integer> indices : combinaciones)
                     {
-                            ArrayList<Carta > manoTemp = new  ArrayList<Carta >();
+                            ArrayList<CartaFrancesaOld > manoTemp = new  ArrayList< >();
                             for(Integer i : indices)
                                     manoTemp.add(manos.get(i));
 
@@ -87,7 +88,7 @@ public class BuscarDraws
 		
 		for(int i=0;i<5;i++)
 		{
-			ArrayList<Carta> manoTemp = new  ArrayList<Carta >();
+			ArrayList<CartaFrancesaOld> manoTemp = new  ArrayList<>();
 			for(int j=0;j<5;j++)
 			if(i!=j)manoTemp.add(cartas.get(j));
 			comprobarFragColor(manoTemp);
@@ -101,7 +102,7 @@ public class BuscarDraws
 	
 
 	
-	public void comprobarFragColor(ArrayList<Carta> manoTemp)
+	public void comprobarFragColor(ArrayList<CartaFrancesaOld> manoTemp)
 	{
 		int color=1;
 		PaloFrances p = manoTemp.get(0).getPalo();
@@ -124,14 +125,14 @@ public class BuscarDraws
 	{
 		
 		OrdenarCartas o = new OrdenarCartas();
-		List<Carta > cartasOrdenadas= o.ordenarPorNumero(cartas);
+		List<CartaFrancesaOld > cartasOrdenadas= o.ordenarPorNumero(cartas);
 		
 		
 		//Combinaciones cmb = new Combinaciones(5, 4);
 		//eijo que carta saco del mano
 		for(int i=0;i<5;i++)
 		{
-			ArrayList<Carta> manoTemp = new  ArrayList<Carta >();
+			ArrayList<CartaFrancesaOld> manoTemp = new  ArrayList< >();
 			for(int j=0;j<5;j++)
                             if(i!=j)
                                 manoTemp.add(cartasOrdenadas.get(j));
@@ -145,7 +146,7 @@ public class BuscarDraws
 	}
 
 	
-	public void comprobarFragEscalera(ArrayList<Carta> manoTemp)
+	public void comprobarFragEscalera(ArrayList<CartaFrancesaOld> manoTemp)
 	{
 		int esc=1;
 		
@@ -155,8 +156,8 @@ public class BuscarDraws
 		for(int i=0;i<3;i++)
 		{
                     //siempre c1>=c2
-                    Carta c1 = manoTemp.get(i);
-                    Carta c2 = manoTemp.get(i+1);
+                    CartaFrancesaOld c1 = manoTemp.get(i);
+                    CartaFrancesaOld c2 = manoTemp.get(i+1);
 
                     int n1=c1.getNumero();
                     int n2=c2.getNumero();
@@ -186,11 +187,11 @@ public class BuscarDraws
 		hueco=false;*/
 		
 		//tomo los ases como 1s////////////////////////////
-		ArrayList<Carta> manoTemp1 = new ArrayList<Carta>();
+		ArrayList<CartaFrancesaOld> manoTemp1 = new ArrayList<CartaFrancesaOld>();
 		manoTemp1.addAll(manoTemp);
 		
 		// si la primera carta es un as, la muevo al final 
-		Carta as= manoTemp1.get(0);
+		CartaFrancesaOld as= manoTemp1.get(0);
 		if(as.getNumero()==1)
 		{
 			manoTemp1.add(as);
@@ -202,8 +203,8 @@ public class BuscarDraws
 		
 		for(int i=0;i<3;i++)
 		{
-			Carta c1 = manoTemp.get(i);
-			Carta c2 = manoTemp.get(i+1);
+			CartaFrancesaOld c1 = manoTemp.get(i);
+			CartaFrancesaOld c2 = manoTemp.get(i+1);
 			
 			int n1=c1.getNumero();
 			int n2=c2.getNumero();
