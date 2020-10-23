@@ -2,7 +2,6 @@ package juegos.cartas.poker.manos.fact;
 
 import java.util.List;
 
-import juegos.cartas.cartas.cartas.CartaFrancesaOld;
 import juegos.cartas.cartas.cartas.CartaNumeroPalo;
 import juegos.cartas.cartas.cartas.dom.dominios.DominioValorPalo;
 import juegos.cartas.cartas.juego.Mano;
@@ -57,23 +56,23 @@ public class FactoriaMano <C extends CartaNumeroPalo<N, P>,N,P>
 		this.dom = dom;
 	}
 
-	private DominioValorPalo dom;
+	private DominioValorPalo<N,P,C> dom;
 
-	public Mano creaMano(List<CartaFrancesaOld> cartas,NombreManoPoker me)
+	public Mano creaMano(List<C> cartas,NombreManoPoker me)
 	{
 		//System.out.println("fabricar "+ me.getEsp() +" con  de "+hc1+" y "+ hc2) ;
 		
 		Mano mano = null;
 		
-		if	   (me.equals(NombreManoPoker.pair)) 			 mano = new Pareja			(cartas,dom);
-		else if(me.equals(NombreManoPoker.three_of_a_kind)) mano = new Trio			(cartas,dom);
-		else if(me.equals(NombreManoPoker.two_pair)) 		 mano = new DoblesParejas	(cartas,dom);
-		else if(me.equals(NombreManoPoker.straight)) 		 mano = new Escalera		(cartas,dom);
-		else if(me.equals(NombreManoPoker.flush)) 			 mano = new Color			(cartas,dom);
-		else if(me.equals(NombreManoPoker.full_house)) 	 mano = new Full			(cartas,dom);
-		else if(me.equals(NombreManoPoker.four_of_a_kind))  mano = new Poker			(cartas,dom);
-		else if(me.equals(NombreManoPoker.straight_flush))  mano = new EscaleraColor	(cartas,dom);
-		else if(me.equals(NombreManoPoker.high_card)) 		 mano = new CartaMasAlta	(cartas,dom);
+		if	   (me.equals(NombreManoPoker.pair)) 			mano = new Pareja<>			(cartas,dom);
+		else if(me.equals(NombreManoPoker.three_of_a_kind)) mano = new Trio	<>			(cartas,dom);
+		else if(me.equals(NombreManoPoker.two_pair)) 		mano = new DoblesParejas<>	(cartas,dom);
+		else if(me.equals(NombreManoPoker.straight)) 		mano = new Escalera<>		(cartas,dom);
+		else if(me.equals(NombreManoPoker.flush)) 			mano = new Color<>			(cartas,dom);
+		else if(me.equals(NombreManoPoker.full_house)) 	 	mano = new Full<>			(cartas,dom);
+		else if(me.equals(NombreManoPoker.four_of_a_kind))  mano = new Poker<>			(cartas,dom);
+		else if(me.equals(NombreManoPoker.straight_flush))  mano = new EscaleraColor<>	(cartas,dom);
+		else if(me.equals(NombreManoPoker.high_card)) 		mano = new CartaMasAlta<>	(cartas,dom);
 		
 		
 		

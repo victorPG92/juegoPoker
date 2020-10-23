@@ -1,8 +1,12 @@
 package juegos.cartas.poker.analisis;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import juegos.cartas.cartas.cartas.CartaFrancesaOld;
+import juegos.cartas.cartas.cartas.ICartaNumeroPalo;
+import juegos.cartas.cartas.cartas.dom.dominios.DominioValorPalo;
+import juegos.cartas.cartas.cartas.palos.PaloFrances;
 import juegos.cartas.cartas.juego.Mano;
 import juegos.cartas.cartas.utils.Combinaciones;
 
@@ -15,7 +19,7 @@ import juegos.cartas.cartas.utils.Combinaciones;
  * sacar de 7 cartas 5 , que den la jugada mayor
  *
  */
-public class EncontrarMejorJugada {
+public class EncontrarMejorJugada<C extends ICartaNumeroPalo<V,P>,V,P> {
 	
 	
 	private ArrayList<CartaFrancesaOld> cartas;
@@ -25,11 +29,13 @@ public class EncontrarMejorJugada {
 	//private int valorMejor;
 	//private ArrayList<CartaFrancesaOld> manoMejor;
 	private Mano manoMejor;//cambiado
+
+	private DominioValorPalo<V, P, C> dom;
 	
 	
 	
 	
-	public EncontrarMejorJugada(ArrayList<CartaFrancesaOld> cartas)
+	public EncontrarMejorJugada(List<CartaFrancesaOld> cartas)
 	{
 		if(cartas.size()>=5  && cartas.size()<=7)
 		{
@@ -60,7 +66,7 @@ public class EncontrarMejorJugada {
 			for(Integer i : indices)
 				manoTemp.add(cartas.get(i));
 
-			SaberJugada sj = new SaberJugada(manoTemp);
+			SaberJugada<CartaFrancesaOld,Integer,PaloFrances> sj = new SaberJugada<>(manoTemp,dom);
 			Mano m= sj.dameMano();
 			
 			

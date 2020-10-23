@@ -1,25 +1,25 @@
 package juegos.cartas.poker.manos.draws;
 
-import juegos.cartas.cartas.cartas.Carta;
+import juegos.cartas.cartas.cartas.CartaFrancesaOld;
 
 public class ManoSimple 
 {
-	private Carta[] cartas;
+	private CartaFrancesaOld[] cartas;
 	
 	
-	public ManoSimple(Carta c1, Carta c2)
+	public ManoSimple(CartaFrancesaOld c1, CartaFrancesaOld c2)
 	{
-		cartas = new Carta[2];
+		cartas = new CartaFrancesaOld[2];
 		cartas[0]=c1;
 		cartas[1]=c2;
 	}
 	
-	public ManoSimple(Carta[] c2)
+	public ManoSimple(CartaFrancesaOld[] c2)
 	{
 		if(c2.length==2) cartas= c2;
 		else
 		{
-			cartas = new Carta[2];
+			cartas = new CartaFrancesaOld[2];
 		}
 		
 	}
@@ -29,8 +29,8 @@ public class ManoSimple
 		
 		ManoRango m ;
 		
-		Carta c1= cartas[0];
-		Carta c2= cartas[1];
+		CartaFrancesaOld c1= cartas[0];
+		CartaFrancesaOld c2= cartas[1];
 		
 		
 		int n1= c1.getNumero()-2;

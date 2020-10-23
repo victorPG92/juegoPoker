@@ -28,8 +28,10 @@ public abstract class EscaleraMano<C extends CartaNumeroPalo<N, P>,N,P> extends 
             cartas =  (new OrdenarCartas()).ordenarPorNumero(mano);
                         
             // si la escalera contiene un as, pero su carta mas baja es un 2, poner el as como ultima 
-			if(cartas.get(4).getNumero()==2 && cartas.get(0).getNumero()==1)
-			{
+			//if(cartas.get(4).getNumero()==2 && cartas.get(0).getNumero()==1)
+			if(dom.getDomValor().get(1).equals(cartas.get(4).getNumero())
+			&&	dom.getDomValor().get(0).equals(cartas.get(0).getNumero())	)
+            {
 				C as = cartas.get(0);
 				cartas.add(5,as);
 				cartas.remove(0);

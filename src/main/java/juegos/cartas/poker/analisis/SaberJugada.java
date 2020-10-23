@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import juegos.cartas.cartas.cartas.CartaFrancesaOld;
+import juegos.cartas.cartas.cartas.CartaNumeroPalo;
+import juegos.cartas.cartas.cartas.dom.dominios.DominioValorPalo;
 import juegos.cartas.cartas.cartas.palos.PaloFrances;
 import juegos.cartas.cartas.juego.Mano;
 import juegos.cartas.cartas.ordenar.OrdenarCartas;
@@ -16,10 +18,10 @@ import juegos.cartas.poker.manos.fact.FactoriaMano;
  * Dadas 5 cartas, permite saber que mano  disponemos
  *
  */
-public class SaberJugada 
+public class SaberJugada <C extends CartaNumeroPalo<N, P>,N,P>
 {
 	
-	private ArrayList<CartaFrancesaOld> cartas;
+	private ArrayList<C> cartas;
 	
 	private boolean hayPareja;
 	private boolean hayDoblePareja;
@@ -31,19 +33,23 @@ public class SaberJugada
 	private boolean hayEscaleraColor;
 	
 		
-	private int hc1;
+	private N hc1;
 	
 	@SuppressWarnings("unused")
-	private int hc2;
+	private N hc2;
 	
 	
 	
 	private Mano mano;
+
+	private DominioValorPalo<N,P,C> dom;
 	
 	
 	
-	public SaberJugada(ArrayList<CartaFrancesaOld> manos)
+	public SaberJugada(ArrayList<C> manos,DominioValorPalo<N, P, C> dom)
 	{
+		
+		this.dom=dom;
 		if(manos.size()==5)
 		{
 			this.cartas=manos;
@@ -68,7 +74,7 @@ public class SaberJugada
 			
 			//System.out.println("parsea  algo con  de "+hc1+" y "+ hc2) ;
 			
-			FactoriaMano f = new FactoriaMano();
+			FactoriaMano<C,N,P> f = new FactoriaMano<>(dom);
 			
 			//metodo antiguo
 			/*
@@ -86,18 +92,18 @@ public class SaberJugada
 			//metodo mejor para comparar
 			if(hayEscaleraColor)	mano = f.creaMano(cartas, 	NombreManoPoker.straight_flush);
 			else if(hayPoker)		mano = f.creaMano(cartas, 	NombreManoPoker.four_of_a_kind);
-			else if(hayFull)		mano = f.creaMano(cartas, 		NombreManoPoker.full_house);
-			else if(hayColor)		mano = f.creaMano(cartas, 			NombreManoPoker.flush);
-			else if(hayEscalera)	mano = f.creaMano(cartas, 		NombreManoPoker.straight);
-			else if(hayTrio)		mano = f.creaMano(cartas, NombreManoPoker.three_of_a_kind);
-			else if(hayDoblePareja)	mano = f.creaMano(cartas, 		NombreManoPoker.two_pair);
-			else if(hayPareja)		mano = f.creaMano(cartas, 			NombreManoPoker.pair);
+			else if(hayFull)		mano = f.creaMano(cartas, 	NombreManoPoker.full_house);
+			else if(hayColor)		mano = f.creaMano(cartas, 	NombreManoPoker.flush);
+			else if(hayEscalera)	mano = f.creaMano(cartas, 	NombreManoPoker.straight);
+			else if(hayTrio)		mano = f.creaMano(cartas, 	NombreManoPoker.three_of_a_kind);
+			else if(hayDoblePareja)	mano = f.creaMano(cartas, 	NombreManoPoker.two_pair);
+			else if(hayPareja)		mano = f.creaMano(cartas, 	NombreManoPoker.pair);
 			
 			//else if(proyectoEscalera)		mano = f.creaMano(cartas, 			NombreManoPoker.proyectoEscalera);
 			//else if(proyectoEscalera)		mano = f.creaMano(cartas, 			NombreManoPoker.proyectoEscalera);
 			//else if(proyectoColor)		mano = f.creaMano(cartas, 			NombreManoPoker.proyectoColor);
 						
-			else 					mano = f.creaMano(cartas, 		NombreManoPoker.high_card);
+			else 					mano = f.creaMano(cartas, 	NombreManoPoker.high_card);
 			
 		}
 		else System.err.println("Mano mal hecha");
@@ -111,20 +117,20 @@ public class SaberJugada
 	 */
 	public void comprobarIguales()
 	{
-		int n;
+		N n;
 		int i=0;
-		for(CartaFrancesaOld c : cartas)
+		for(C c : cartas)
 		{
 			
 			n= c.getNumero();
 			if(n!=hc1)
 			{
 				i=1;
-				for(CartaFrancesaOld c2 : cartas)
+				for(C c2 : cartas)
 				{
 					if(c!=c2) // mismo objeto, no con equals
 					{
-						if(c2.getNumero()==n)i++;
+						if(c2.getNumero().equals(n))i++;
 					}
 					
 					
@@ -143,7 +149,7 @@ public class SaberJugada
 					{
 						
 						hayDoblePareja=true;
-						int hc = c.getNumero();
+						N hc = c.getNumero();
 						if(hc ==1 || (hc > hc1  && hc1!=1))
 						{
 							hc2=hc1;
@@ -183,12 +189,12 @@ public class SaberJugada
 	{
 		
 		boolean posible = true;
-		int max=0;
+		N max=null;
+		//N i=null;
 		int i=0;
+		P p = cartas.get(0).getPalo();
 		
-		PaloFrances p = cartas.get(0).getPalo();
-		
-		for(CartaFrancesaOld c : cartas)
+		for(C c : cartas)
 		{
 			
 			if(!c.getPalo().equals(p))
@@ -200,7 +206,8 @@ public class SaberJugada
 			else
 			{
 				i++;
-				if(c.getNumero()>max) max=c.getNumero();
+				//i=dom.getDomValor().sig(i);
+				if(dom.getDomValor().getComparator().compare(max, c.getNumero())==1) max=c.getNumero();//c.getNumero()>max
 			}
 		}
 		
@@ -260,9 +267,9 @@ public class SaberJugada
 	 */
 	public void comprobarEscalera()
 	{
-		OrdenarCartas o = new OrdenarCartas();
+		OrdenarCartas<C,N,P> o = new OrdenarCartas<>();
 		//ArrayList<CartaFrancesaOld > cartasOrdenadas= o.ordenarPorEscalera(cartas);
-        List<CartaFrancesaOld > cartasOrdenadas= o.ordenarPorNumero(cartas);
+        List<C > cartasOrdenadas= o.ordenarPorNumero(cartas);
 		
 		boolean as=false;
 		
@@ -272,12 +279,12 @@ public class SaberJugada
 		int esc=1;
 		while(i<cartasOrdenadas.size()-1)
 		{
-			CartaFrancesaOld c = cartasOrdenadas.get(i);
-			CartaFrancesaOld c1 = cartasOrdenadas.get(i+1);
-			int n1= c.getNumero();
-			int n2 = c1.getNumero();
+			C c = cartasOrdenadas.get(i);
+			C c1 = cartasOrdenadas.get(i+1);
+			N n1= c.getNumero();
+			N n2 = c1.getNumero();
 			
-			if(n1==1)
+			if(dom.getDomValor().indexOf(n1)==0)//if(n1==1)
 			{
 				n1=14;
 				as=true;
@@ -288,7 +295,7 @@ public class SaberJugada
 				as=true;
 			}
 						
-			if(n1-n2 == 1	) esc++;
+			if(dom.getDomValor().dif(n1, n2)==1) esc++;//n1-n2 == 1	) esc++;
 			
 			i++;
 		}
@@ -304,13 +311,13 @@ public class SaberJugada
 		if(as)
 		{
 			//System.out.println("Hay as");
-			ArrayList<CartaFrancesaOld> manoTemp1 = new ArrayList<CartaFrancesaOld>();
+			ArrayList<C> manoTemp1 = new ArrayList<>();
 			manoTemp1.addAll(cartasOrdenadas);
 			esc=1;
 			
                        
 			// si la primera carta es un as, la muevo al final 
-			CartaFrancesaOld cAs= manoTemp1.get(0);
+			C cAs= manoTemp1.get(0);
 			if(cAs.getNumero()==1)
 			{
 				manoTemp1.add(cAs);
@@ -322,15 +329,15 @@ public class SaberJugada
                          i=0;
 			while(i<manoTemp1.size()-1)
 			{
-                            CartaFrancesaOld c = manoTemp1.get(i);
-                            CartaFrancesaOld c1 = manoTemp1.get(i+1);
-                            int n1= c.getNumero();
-                            int n2 = c1.getNumero();
+                C c = manoTemp1.get(i);
+                C c1 = manoTemp1.get(i+1);
+                N n1= c.getNumero();
+                N n2 = c1.getNumero();
 
 
-                            if(n1-n2 == 1) esc++;
+                if(dom.getDomValor().dif(n1, n2)==1)esc++;//(n1-n2 == 1) esc++;
 
-                            i++;
+                i++;
 			}
 					
 			if(esc==5)

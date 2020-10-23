@@ -5,7 +5,9 @@ import java.util.List;
 import java.util.Random;
 import java.util.StringTokenizer;
 
-import juegos.cartas.cartas.cartas.Carta;
+import juegos.cartas.cartas.cartas.CartaFrancesaOld;
+import juegos.cartas.cartas.cartas.CartaNumeroPalo;
+
 import juegos.cartas.cartas.juego.RangoJugador;
 
 /**
@@ -16,7 +18,8 @@ import juegos.cartas.cartas.juego.RangoJugador;
  * @author victor
  *
  */
-public class Rango implements RangoJugador<Carta> 
+//public class Rango<C extends CartaNumeroPalo<N,P>,N,P> implements RangoJugador<C>
+public class Rango<C extends CartaFrancesaOld> implements RangoJugador<CartaFrancesaOld>
 {
 	private int Tam=Constantes.TAM;
 	
@@ -25,7 +28,7 @@ public class Rango implements RangoJugador<Carta>
 	private List<ManoRango> manos= new ArrayList<>();
 	
 	@Override
-	public boolean isJuega(List<Carta> cartas)
+	public boolean isJuega(List<CartaFrancesaOld> cartas)
 	{
 		ManoSimple manoSimple= new ManoSimple(cartas.get(0), cartas.get(0));
 		ManoRango manoRango = manoSimple.toManoRango();
