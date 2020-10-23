@@ -6,15 +6,18 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 
-import juegos.cartas.cartas.cartas.Carta;
+import juegos.cartas.cartas.cartas.CartaFrancesaOld;
+import juegos.cartas.cartas.cartas.dom.dominios.DominioValorPalo;
+import juegos.cartas.cartas.cartas.dom.fact.FactDominiosCartasEnumFr;
 import juegos.cartas.cartas.cartas.palos.PaloFrances;
 import juegos.cartas.poker.manos.Color;
 
 public class ColorTest
 {
 
-	
-	
+	FactDominiosCartasEnumFr f= new FactDominiosCartasEnumFr();
+	private DominioValorPalo<Integer,PaloFrances,CartaFrancesaOld> dom= f.creaDominioVP();
+
 	
 	@Test
 	public void testColor1Carta() throws Exception
@@ -22,24 +25,24 @@ public class ColorTest
 		
 		
 		
-		//List<Carta> cartas= new ArrayList<>();
-		List<Carta> cartas2= new ArrayList<>();
+		//List<CartaFrancesaOld> cartas= new ArrayList<>();
+		List<CartaFrancesaOld> cartas2= new ArrayList<>();
 
-		List<Carta> cartasBase1= new ArrayList<>();
-		List<Carta> cartasBase2= new ArrayList<>();
+		List<CartaFrancesaOld> cartasBase1= new ArrayList<>();
+		List<CartaFrancesaOld> cartasBase2= new ArrayList<>();
 		
-		cartasBase1.add(new Carta(10,PaloFrances.CORAZONES));
-		cartasBase1.add(new Carta(8,PaloFrances.CORAZONES));
-		cartasBase1.add(new Carta(7,PaloFrances.CORAZONES));
-		cartasBase1.add(new Carta(12,PaloFrances.CORAZONES));
-		cartasBase1.add(new Carta(11,PaloFrances.CORAZONES));
+		cartasBase1.add(new CartaFrancesaOld(10,PaloFrances.CORAZONES));
+		cartasBase1.add(new CartaFrancesaOld(8,PaloFrances.CORAZONES));
+		cartasBase1.add(new CartaFrancesaOld(7,PaloFrances.CORAZONES));
+		cartasBase1.add(new CartaFrancesaOld(12,PaloFrances.CORAZONES));
+		cartasBase1.add(new CartaFrancesaOld(11,PaloFrances.CORAZONES));
 		
 		
-		cartasBase2.add(new Carta(6,PaloFrances.CORAZONES));
-		cartasBase2.add(new Carta(4,PaloFrances.CORAZONES));
-		cartasBase2.add(new Carta(3,PaloFrances.CORAZONES));
-		cartasBase2.add(new Carta(5,PaloFrances.CORAZONES));
-		cartasBase2.add(new Carta(9,PaloFrances.CORAZONES));
+		cartasBase2.add(new CartaFrancesaOld(6,PaloFrances.CORAZONES));
+		cartasBase2.add(new CartaFrancesaOld(4,PaloFrances.CORAZONES));
+		cartasBase2.add(new CartaFrancesaOld(3,PaloFrances.CORAZONES));
+		cartasBase2.add(new CartaFrancesaOld(5,PaloFrances.CORAZONES));
+		cartasBase2.add(new CartaFrancesaOld(9,PaloFrances.CORAZONES));
 
 		
 
@@ -47,7 +50,7 @@ public class ColorTest
 		{
 			for(int j=0;j<5;j++)
 			{
-				Carta cartaElegida;
+				CartaFrancesaOld cartaElegida;
 				if(i<j)
 					cartaElegida=cartasBase1.get(j);
 				else
@@ -55,8 +58,8 @@ public class ColorTest
 
 				cartas2.add(cartaElegida);
 			}
-			Color cartaMasAlta1 = new Color(cartasBase1);
-			Color cartaMasAlta2 = new Color(cartas2);
+			Color cartaMasAlta1 = new Color(cartasBase1,dom);
+			Color cartaMasAlta2 = new Color(cartas2,dom);
 			
 			System.out.println("Comparando");
 			System.out.println(cartaMasAlta1 + cartasBase1.toString());

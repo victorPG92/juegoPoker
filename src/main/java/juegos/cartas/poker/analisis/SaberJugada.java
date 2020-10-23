@@ -148,7 +148,13 @@ public class SaberJugada <C extends ICartaNumeroPalo<N, P>,N,P>
 						
 						hayDoblePareja=true;
 						N hc = c.getNumero();
-						if(hc ==1 || (hc > hc1  && hc1!=1))
+						//if(hc ==1 || (hc > hc1  && hc1!=1))
+						if(dom.getDomValor().isFirst(hc)
+						|| (dom.getDomValor().getComparator().compare(hc, hc1)>0
+						&&			
+							!dom.getDomValor().isFirst(hc1)
+							)		
+								)
 						{
 							hc2=hc1;
 							hc1=hc;
@@ -284,12 +290,12 @@ public class SaberJugada <C extends ICartaNumeroPalo<N, P>,N,P>
 			
 			if(dom.getDomValor().indexOf(n1)==0)//if(n1==1)
 			{
-				n1=14;
+				n1=dom.getDomValor().last();//14;
 				as=true;
 			}
-			if(n2==1)
+			if(dom.getDomValor().isFirst(n2))//n2==1)
 			{
-				n2=14;
+				n2=dom.getDomValor().last();//14;
 				as=true;
 			}
 						
@@ -316,7 +322,7 @@ public class SaberJugada <C extends ICartaNumeroPalo<N, P>,N,P>
                        
 			// si la primera carta es un as, la muevo al final 
 			C cAs= manoTemp1.get(0);
-			if(cAs.getNumero()==1)
+			if(dom.getDomValor().isFirst(cAs.getNumero()))//cAs.getNumero()==1)
 			{
 				manoTemp1.add(cAs);
 				manoTemp1.remove(0);

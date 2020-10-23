@@ -1,6 +1,10 @@
 package juego.cartas.poker.manos;
 
 
+import juegos.cartas.cartas.cartas.CartaFrancesaOld;
+import juegos.cartas.cartas.cartas.dom.dominios.DominioValorPalo;
+import juegos.cartas.cartas.cartas.dom.fact.FactDominiosCartasEnumFr;
+import juegos.cartas.cartas.cartas.palos.PaloFrances;
 import juegos.cartas.poker.manos.Color;
 import juegos.cartas.poker.manos.DoblesParejas;
 import juegos.cartas.poker.manos.Escalera;
@@ -14,7 +18,10 @@ import juegos.cartas.poker.manos.fact.FactoriaMano;
 public class FactTestManosCreadas
 {
 	FactTestManos factTestManos= new FactTestManos();
-	FactoriaMano factManos= new FactoriaMano();
+	FactDominiosCartasEnumFr f= new FactDominiosCartasEnumFr();
+	private DominioValorPalo<Integer,PaloFrances,CartaFrancesaOld> dom= f.creaDominioVP();
+
+	FactoriaMano factManos= new FactoriaMano(dom);
 	
 	public Pareja creaPareja()
 	{

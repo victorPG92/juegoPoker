@@ -14,10 +14,11 @@ import juegos.cartas.poker.juego.JugadorPokerTexasHoldem;
  */
 public class MesaPokerTexasHoldem<C extends ICartaComparable> extends Mesa<C,JugadorPokerTexasHoldem<C>>
 {
-	MesaPosicionesJugadores<C,JugadorPokerTexasHoldem<C>> posiciones;
+	private MesaPosicionesJugadores<C,JugadorPokerTexasHoldem<C>> posiciones;
 
 	public MesaPokerTexasHoldem(List<JugadorPokerTexasHoldem<C>> jugadores) {
 		super(jugadores);
+		System.out.println("construyenfo posiciones");
 		posiciones= new MesaPosicionJugadoresMapaPosJug<>(jugadores);
 	}
 

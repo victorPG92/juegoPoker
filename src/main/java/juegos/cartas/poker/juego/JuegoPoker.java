@@ -60,6 +60,16 @@ public class JuegoPoker<C extends ICartaComparable> implements JuegoCartas<Fases
 		this.mazo=mazo;
 		crupier= new CrupierPokerTexasHoldemAleatorio<>(mazo);
 		
+		List<JugadorPokerTexasHoldem<C>> jugadores=creaJugadores();
+		
+		mesa= new MesaPokerTexasHoldem<>(jugadores);
+
+		fase= crupier.getFase();
+	}
+	
+	private List<JugadorPokerTexasHoldem<C>> creaJugadores()
+	{
+
 		List<JugadorPokerTexasHoldem<C>> jugadores= new ArrayList<>();
 		for (int i = 0; i < this.numJug; i++) 
 		{
@@ -71,9 +81,8 @@ public class JuegoPoker<C extends ICartaComparable> implements JuegoCartas<Fases
 			
 			
 		}
-		mesa= new MesaPokerTexasHoldem<>(jugadores);
-
-		fase= crupier.getFase();
+		
+		return jugadores;
 	}
 
 	@Override
@@ -124,11 +133,15 @@ public class JuegoPoker<C extends ICartaComparable> implements JuegoCartas<Fases
 	protected void fasePreflop() 
 	{
 		System.out.println(crupier.getFase());
+		System.out.println(mesa);
+		System.out.println(mesa.getPosiciones());
+		
 		for(Jugador<C> j: mesa.getJugadores())
 		{
 			j.setCartas(crupier.reparteCartasJugador());
 		}
 		
+		System.out.println("Fase apuesta jugadores");
 		//los jugadores realizan las apuestas despues de repartir las cartas
 		faseApuestaJugadores();
 		
@@ -153,7 +166,9 @@ public class JuegoPoker<C extends ICartaComparable> implements JuegoCartas<Fases
 	
 	protected void faseApuestaJugadores()
 	{
-	
+		System.out.println(crupier.getFase());
+		System.out.println(mesa);
+		System.out.println(mesa.getPosiciones());
 		for(Jugador<C> jugador: mesa.getPosiciones())
 		{
 			realizadores.get(jugador).realizaTurno();

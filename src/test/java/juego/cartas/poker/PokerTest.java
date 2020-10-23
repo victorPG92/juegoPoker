@@ -2,7 +2,8 @@ package juego.cartas.poker;
 
 import org.junit.jupiter.api.Test;
 
-import juegos.cartas.cartas.cartas.CartaNumeroPalo;
+import juegos.cartas.cartas.cartas.CartaFrancesaOld;
+import juegos.cartas.cartas.cartas.ICartaNumeroPalo;
 import juegos.cartas.cartas.cartas.palos.PaloFrances;
 import juegos.cartas.poker.juego.JuegoPoker;
 import juegos.cartas.poker.juego.fact.FactPoker;
@@ -13,10 +14,13 @@ class PokerTest {
 	@Test
 	void test() {
 
-		JuegoPoker<CartaNumeroPalo<Integer, PaloFrances>> poker=
+		JuegoPoker<CartaFrancesaOld> poker=
 				new FactPoker().creaPoker(2);
 		
-		PokerLauncherConsola<CartaNumeroPalo<Integer, PaloFrances>> launcher= new PokerLauncherConsola<>();
+		System.out.println(poker.getMazo());
+		System.out.println(poker.getMazo().size());
+		
+		PokerLauncherConsola<CartaFrancesaOld> launcher= new PokerLauncherConsola<>();
 		
 		launcher.loadPoker(poker);
 

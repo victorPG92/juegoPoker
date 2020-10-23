@@ -3,7 +3,7 @@ package juego.cartas.poker.mocks;
 import java.util.ArrayList;
 import java.util.List;
 
-import juegos.cartas.cartas.cartas.Carta;
+import juegos.cartas.cartas.cartas.CartaFrancesaOld;
 import juegos.cartas.cartas.cartas.palos.PaloFrances;
 import juegos.cartas.cartas.juego.Apuesta;
 import juegos.cartas.cartas.mazos.impl.gen.MazoGen;
@@ -14,18 +14,18 @@ import juegos.cartas.poker.juego.JugadorPokerTexasHoldem;
 import juegos.cartas.poker.juego.TipoJugador;
 import juegos.cartas.poker.mesas.MesaPokerTexasHoldem;
 
-public class JuegoPokerMock extends JuegoPoker<Carta>{
+public class JuegoPokerMock extends JuegoPoker<CartaFrancesaOld>{
 
 	Apuesta<AccionPoker> ultAccion;
-	private MesaPokerTexasHoldem<Carta> mesaMock;
-	FactJugadores<Carta> factJug= new FactJugadores<>();
+	private MesaPokerTexasHoldem<CartaFrancesaOld> mesaMock;
+	FactJugadores<CartaFrancesaOld> factJug= new FactJugadores<>();
 	
 	
-	public JuegoPokerMock(int numJug, MazoGen<Carta,Integer,PaloFrances> mazo,Apuesta<AccionPoker> ultA)
+	public JuegoPokerMock(int numJug, MazoGen<CartaFrancesaOld,Integer,PaloFrances> mazo,Apuesta<AccionPoker> ultA)
 	{
 		super(numJug, mazo);
-		List<JugadorPokerTexasHoldem<Carta>> jugadores = factJug.creaJugadores(numJug);
-		mesaMock= new MesaPokerTexasHoldem<Carta>(jugadores);
+		List<JugadorPokerTexasHoldem<CartaFrancesaOld>> jugadores = factJug.creaJugadores(numJug);
+		mesaMock= new MesaPokerTexasHoldem<CartaFrancesaOld>(jugadores);
 		
 		mesaMock.setCartasComunes(new ArrayList<>());
 		factJug.creaJugadores(jugadores,new TipoJugador[] {}, null);
@@ -45,7 +45,7 @@ public class JuegoPokerMock extends JuegoPoker<Carta>{
 	}
 	
 	@Override
-	public MesaPokerTexasHoldem<Carta> getMesa() {
+	public MesaPokerTexasHoldem<CartaFrancesaOld> getMesa() {
 		return mesaMock;
 	}
 
@@ -57,11 +57,11 @@ public class JuegoPokerMock extends JuegoPoker<Carta>{
 		this.ultAccion = ultAccion;
 	}
 
-	public MesaPokerTexasHoldem<Carta> getMesaMock() {
+	public MesaPokerTexasHoldem<CartaFrancesaOld> getMesaMock() {
 		return mesaMock;
 	}
 
-	public void setMesaMock(MesaPokerTexasHoldem<Carta> mesaMock) {
+	public void setMesaMock(MesaPokerTexasHoldem<CartaFrancesaOld> mesaMock) {
 		this.mesaMock = mesaMock;
 	}
 	

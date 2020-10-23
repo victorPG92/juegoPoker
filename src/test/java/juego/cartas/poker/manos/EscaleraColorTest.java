@@ -2,6 +2,10 @@ package juego.cartas.poker.manos;
 
 import org.junit.Test;
 
+import juegos.cartas.cartas.cartas.CartaFrancesaOld;
+import juegos.cartas.cartas.cartas.dom.dominios.DominioValorPalo;
+import juegos.cartas.cartas.cartas.dom.fact.FactDominiosCartasEnumFr;
+import juegos.cartas.cartas.cartas.palos.PaloFrances;
 import juegos.cartas.cartas.juego.Mano;
 import juegos.cartas.poker.manos.NombreManoPoker;
 import juegos.cartas.poker.manos.fact.FactoriaMano;
@@ -9,7 +13,10 @@ import juegos.cartas.poker.manos.fact.FactoriaMano;
 public class EscaleraColorTest
 {
 	FactTestManos factTestManos= new FactTestManos();
-	FactoriaMano factoriaMano= new FactoriaMano();
+	FactDominiosCartasEnumFr f= new FactDominiosCartasEnumFr();
+	private DominioValorPalo<Integer,PaloFrances,CartaFrancesaOld> dom= f.creaDominioVP();
+
+	FactoriaMano factoriaMano= new FactoriaMano(dom);
 	
 	
 	@Test
