@@ -111,7 +111,7 @@ extends RealizadorTurno<C,Apuesta<AccionPoker>,JuegoPoker<C>,JugadorPokerTexasHo
 
 
 
-	public Map<Jugador<C>, RealizadorTurnoIAPoker<C>> getRealizadores() {
+	public Map<Jugador<C>, RealizadorTurnoPoker<C>> getRealizadores() {
 		return juegoCartas.getRealizadores();
 	}
 

@@ -8,11 +8,13 @@ import java.util.Map;
 import juegos.cartas.cartas.cartas.ICartaComparable;
 import juegos.cartas.cartas.juego.Apuesta;
 import juegos.cartas.cartas.juego.JuegoCartas;
+import juegos.cartas.cartas.juego.RealizadorTurno;
 import juegos.cartas.cartas.juego.valorador.ValoradorJugadores;
 import juegos.cartas.cartas.juego.valorador.ValoradorJugadoresPorMano;
 import juegos.cartas.cartas.mazos.modelos.func.MazoCartasSimple;
 import juegos.cartas.cartas.mesas.Jugador;
 import juegos.cartas.poker.crupier.CrupierPokerTexasHoldemAleatorio;
+import juegos.cartas.poker.juego.realizadorTurno.RealizadorTurnoPoker;
 import juegos.cartas.poker.juego.realizadorTurno.ia.RealizadorTurnoIAPoker;
 import juegos.cartas.poker.juego.realizadorTurno.ia.RealizadorTurnoIAPokerPasota;
 import juegos.cartas.poker.mesas.Apuestas;
@@ -47,7 +49,7 @@ public class JuegoPoker<C extends ICartaComparable> implements JuegoCartas<Fases
 	Apuesta<AccionPoker> ultimaAccionRealizada;
 	
 	/**Realiza turno de cada jugador */
-	Map<Jugador<C>, RealizadorTurnoIAPoker<C>>realizadores= new HashMap<>();
+	Map<Jugador<C>, RealizadorTurnoPoker<C>>realizadores= new HashMap<>();
 	
 	/**Valora los jugadores */
 	ValoradorJugadores<C,JugadorPokerTexasHoldem<C>> valorador= new ValoradorJugadoresPorMano<>();
@@ -87,6 +89,9 @@ public class JuegoPoker<C extends ICartaComparable> implements JuegoCartas<Fases
 		return jugadores;
 	}
 
+	/**
+	 * TODO variar implementacion
+	 */
 	public void inicializaRealizadores()
 	{
 
@@ -96,10 +101,17 @@ public class JuegoPoker<C extends ICartaComparable> implements JuegoCartas<Fases
 	@Override
 	public void faseInicializacion()
 	{
-		inicializaRealizadores();
+		inicializaRealizadores();//TODO por que no en el constructor???
 		fasePreflop();
 	}
-
+/**
+ * RealizadorTurno<C, AccionPoker, JuegoPoker<C>, JugadorPokerTexasHoldem<C>, FasesPoker> realizador
+ * @param jug
+ */
+	public void estableceRealizadorParaJugador(Jugador<C> jug,RealizadorTurnoPoker realizador )
+	{
+		realizadores.put(jug, realizador);
+	}
 	
 
 	@Override
@@ -212,7 +224,7 @@ public class JuegoPoker<C extends ICartaComparable> implements JuegoCartas<Fases
 		return turno;
 	}
 
-	public Map<Jugador<C>, RealizadorTurnoIAPoker<C>> getRealizadores() {
+	public Map<Jugador<C>, RealizadorTurnoPoker<C>> getRealizadores() {
 		return realizadores;
 	}
 
