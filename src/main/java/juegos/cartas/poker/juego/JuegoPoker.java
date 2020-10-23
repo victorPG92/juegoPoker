@@ -14,6 +14,7 @@ import juegos.cartas.cartas.mazos.modelos.func.MazoCartasSimple;
 import juegos.cartas.cartas.mesas.Jugador;
 import juegos.cartas.poker.crupier.CrupierPokerTexasHoldemAleatorio;
 import juegos.cartas.poker.juego.realizadorTurno.ia.RealizadorTurnoIAPoker;
+import juegos.cartas.poker.juego.realizadorTurno.ia.RealizadorTurnoIAPokerPasota;
 import juegos.cartas.poker.mesas.Apuestas;
 import juegos.cartas.poker.mesas.MesaPokerTexasHoldem;
 import juegos.cartas.poker.mesas.PosicionJugador;
@@ -63,6 +64,7 @@ public class JuegoPoker<C extends ICartaComparable> implements JuegoCartas<Fases
 		List<JugadorPokerTexasHoldem<C>> jugadores=creaJugadores();
 		
 		mesa= new MesaPokerTexasHoldem<>(jugadores);
+		
 
 		fase= crupier.getFase();
 	}
@@ -85,10 +87,16 @@ public class JuegoPoker<C extends ICartaComparable> implements JuegoCartas<Fases
 		return jugadores;
 	}
 
+	public void inicializaRealizadores()
+	{
+
+		for(JugadorPokerTexasHoldem<C> j:mesa.getJugadores())
+			realizadores.put(j, new RealizadorTurnoIAPokerPasota<>(j, this));
+	}
 	@Override
 	public void faseInicializacion()
 	{
-		
+		inicializaRealizadores();
 		fasePreflop();
 	}
 

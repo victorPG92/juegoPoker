@@ -3,11 +3,11 @@ package juego.cartas.poker;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
+//@SpringBootTest
 class JuegoPokerApplicationTests {
 
-	@Test
+	/*@Test
 	void contextLoads() {
 	}
-
+*/
 }

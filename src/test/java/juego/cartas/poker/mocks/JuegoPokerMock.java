@@ -6,6 +6,7 @@ import java.util.List;
 import juegos.cartas.cartas.cartas.CartaFrancesaOld;
 import juegos.cartas.cartas.cartas.palos.PaloFrances;
 import juegos.cartas.cartas.juego.Apuesta;
+import juegos.cartas.cartas.mazos.fact.FactFachadaMazoEspFr;
 import juegos.cartas.cartas.mazos.impl.gen.MazoGen;
 import juegos.cartas.poker.juego.AccionPoker;
 import juegos.cartas.poker.juego.FactJugadores;
@@ -19,6 +20,7 @@ public class JuegoPokerMock extends JuegoPoker<CartaFrancesaOld>{
 	Apuesta<AccionPoker> ultAccion;
 	private MesaPokerTexasHoldem<CartaFrancesaOld> mesaMock;
 	FactJugadores<CartaFrancesaOld> factJug= new FactJugadores<>();
+	FactFachadaMazoEspFr f= FactFachadaMazoEspFr.getInst();
 	
 	
 	public JuegoPokerMock(int numJug, MazoGen<CartaFrancesaOld,Integer,PaloFrances> mazo,Apuesta<AccionPoker> ultA)
@@ -34,7 +36,7 @@ public class JuegoPokerMock extends JuegoPoker<CartaFrancesaOld>{
 	
 	public JuegoPokerMock(int numJug,Apuesta<AccionPoker> ultA)
 	{
-		this(numJug, null,ultA);
+		this(numJug, FactFachadaMazoEspFr.getInst().crearBarajaFrancesaIE(),ultA);
 	}
 	
 	@Override

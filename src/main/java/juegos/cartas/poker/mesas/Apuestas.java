@@ -2,6 +2,7 @@ package juegos.cartas.poker.mesas;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 import juegos.cartas.cartas.cartas.ICartaComparable;
 import juegos.cartas.cartas.juego.Apuesta;
@@ -36,8 +37,12 @@ public class Apuestas <C extends ICartaComparable>
 	 */
 	public int maximaApuesta()
 	{
-		return apuestaJugador.values().stream().
-				map(a-> a.getFichas()).max(Integer::compareTo).get();
+		Optional<Integer> opt = apuestaJugador.values().stream().
+				map(a-> a.getFichas()).max(Integer::compareTo);
+		
+		if(opt.isPresent())
+			return opt.get();
+		return 0;
 	}
 	
 	public Map<Jugador<C>, Apuesta<AccionPoker>> getApuestaJugador() {

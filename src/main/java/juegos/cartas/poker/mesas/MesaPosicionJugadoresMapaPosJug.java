@@ -1,5 +1,6 @@
 package juegos.cartas.poker.mesas;
 
+import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.Iterator;
 import java.util.List;
@@ -39,12 +40,14 @@ public class MesaPosicionJugadoresMapaPosJug<C extends ICartaComparable,J extend
 
 	private void construyeMapa() 
 	{
+		posicionesJugadas= new ArrayList<>();
 		if(jugadores.size()<=6)
 		{
 			PosicionJugador posIni= PosicionJugador.UTG;
 			for (J jugador : jugadores)
 			{
 				jugadorPorPosicion.put(posIni, new PosicionConJugador<>(posIni,jugador));
+				posicionesJugadas.add(posIni);
 				posIni = posIni.sig();
 			}
 		}
@@ -85,7 +88,7 @@ public class MesaPosicionJugadoresMapaPosJug<C extends ICartaComparable,J extend
 	@Override
 	public Iterator<J> iterator() {
 		
-		return null;
+		return jugadores.iterator();
 	}
 	
 	
