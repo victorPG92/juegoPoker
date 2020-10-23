@@ -4,22 +4,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 import juegos.cartas.cartas.cartas.CartaFrancesaOld;
+import juegos.cartas.cartas.cartas.ICartaNumeroPalo;
+import juegos.cartas.cartas.cartas.dom.dominios.DominioValorPalo;
 import juegos.cartas.cartas.juego.Mano;
 import juegos.cartas.cartas.utils.CombinacionesMultiples;
 import juegos.cartas.cartas.utils.ParTipo;
 
-public class EncontrarMejorJugadaOmaha 
+public class EncontrarMejorJugadaOmaha <C extends ICartaNumeroPalo<N,P>, N,P>
 {
 
 	
-	private ArrayList<CartaFrancesaOld> cartasJug;
-	private ArrayList<CartaFrancesaOld> cartasComunes;
+	private List<C> cartasJug;
+	private List<C> cartasComunes;
 	
-	private ArrayList<CartaFrancesaOld> manoTemp;
+	//private List<C> manoTemp;
 	
 	private Mano manoMejor;//cambiado
+	private DominioValorPalo<N, P, C> dom;
 	     
-	public EncontrarMejorJugadaOmaha(ArrayList<CartaFrancesaOld> cartasJug,ArrayList<CartaFrancesaOld> cartasComunes)
+	public EncontrarMejorJugadaOmaha(List<C> cartasJug,ArrayList<C> cartasComunes)
 	{
 		
 		/*
@@ -55,7 +58,7 @@ public class EncontrarMejorJugadaOmaha
 		//System.out.println(combinaciones.size());// 6 * (4 3) = 6*4=24 correcto 
 		for(ParTipo<ArrayList<Integer>> indices : combinaciones)///
 		{
-			manoTemp = new  ArrayList<CartaFrancesaOld >();
+			List<C> manoTemp = new  ArrayList<>();
 			
 			for(Integer i : indices.getElem1())
 				manoTemp.add(cartasJug.get(i));
@@ -63,7 +66,7 @@ public class EncontrarMejorJugadaOmaha
 			for(Integer i : indices.getElem2())//
 				manoTemp.add(cartasComunes.get(i));///
 
-			SaberJugada sj = new SaberJugada(manoTemp);
+			SaberJugada<C,N,P> sj = new SaberJugada<>(manoTemp,dom);
 			//System.out.println(manoTemp);
 			Mano m= sj.dameMano();
 			

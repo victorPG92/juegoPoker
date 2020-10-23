@@ -3,10 +3,8 @@ package juegos.cartas.poker.analisis;
 import java.util.ArrayList;
 import java.util.List;
 
-import juegos.cartas.cartas.cartas.CartaFrancesaOld;
 import juegos.cartas.cartas.cartas.ICartaNumeroPalo;
 import juegos.cartas.cartas.cartas.dom.dominios.DominioValorPalo;
-import juegos.cartas.cartas.cartas.palos.PaloFrances;
 import juegos.cartas.cartas.juego.Mano;
 import juegos.cartas.cartas.utils.Combinaciones;
 
@@ -22,9 +20,9 @@ import juegos.cartas.cartas.utils.Combinaciones;
 public class EncontrarMejorJugada<C extends ICartaNumeroPalo<V,P>,V,P> {
 	
 	
-	private ArrayList<CartaFrancesaOld> cartas;
+	private List<C> cartas;
 	
-	private ArrayList<CartaFrancesaOld> manoTemp;
+	//private List<C> manoTemp;
 	//private int valor;
 	//private int valorMejor;
 	//private ArrayList<CartaFrancesaOld> manoMejor;
@@ -35,7 +33,7 @@ public class EncontrarMejorJugada<C extends ICartaNumeroPalo<V,P>,V,P> {
 	
 	
 	
-	public EncontrarMejorJugada(List<CartaFrancesaOld> cartas)
+	public EncontrarMejorJugada(List<C> cartas)
 	{
 		if(cartas.size()>=5  && cartas.size()<=7)
 		{
@@ -62,11 +60,11 @@ public class EncontrarMejorJugada<C extends ICartaNumeroPalo<V,P>,V,P> {
 		
 		for(ArrayList<Integer> indices : combinaciones)
 		{
-			manoTemp = new  ArrayList<CartaFrancesaOld >();
+			List<C> manoTemp = new  ArrayList<C >();
 			for(Integer i : indices)
 				manoTemp.add(cartas.get(i));
 
-			SaberJugada<CartaFrancesaOld,Integer,PaloFrances> sj = new SaberJugada<>(manoTemp,dom);
+			SaberJugada<C,V,P> sj = new SaberJugada<>(manoTemp,dom);
 			Mano m= sj.dameMano();
 			
 			

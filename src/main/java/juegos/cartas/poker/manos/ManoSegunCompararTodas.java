@@ -2,7 +2,7 @@ package juegos.cartas.poker.manos;
 
 import java.util.List;
 
-import juegos.cartas.cartas.cartas.CartaNumeroPalo;
+import juegos.cartas.cartas.cartas.ICartaNumeroPalo;
 import juegos.cartas.cartas.cartas.dom.dominios.DominioValorPalo;
 import juegos.cartas.cartas.juego.Mano;
 import juegos.cartas.cartas.ordenar.OrdenarCartas;
@@ -13,7 +13,7 @@ import juegos.cartas.cartas.ordenar.OrdenarCartas;
  * @author victor
  *
  */
-public class ManoSegunCompararTodas<C extends CartaNumeroPalo<N, P>,N,P> extends ManoPoker<C,N,P> implements Mano//Comparable<ManoPoker> 
+public class ManoSegunCompararTodas<C extends ICartaNumeroPalo<N, P>,N,P> extends ManoPoker<C,N,P> implements Mano//Comparable<ManoPoker> 
 {
 
 	/** Constructor de carta mas alta

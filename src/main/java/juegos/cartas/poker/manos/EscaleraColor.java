@@ -2,7 +2,7 @@ package juegos.cartas.poker.manos;
 
 import java.util.List;
 
-import juegos.cartas.cartas.cartas.CartaNumeroPalo;
+import juegos.cartas.cartas.cartas.ICartaNumeroPalo;
 import juegos.cartas.cartas.cartas.dom.dominios.DominioValorPalo;
 import juegos.cartas.poker.ConstantesPR1;
 
@@ -11,7 +11,7 @@ import juegos.cartas.poker.ConstantesPR1;
  * @author victor
  *
  */
-public class EscaleraColor<C extends CartaNumeroPalo<N, P>,N,P> extends EscaleraMano<C,N,P>
+public class EscaleraColor<C extends ICartaNumeroPalo<N, P>,N,P> extends EscaleraMano<C,N,P>
 {
 	P color;
 

@@ -3,8 +3,7 @@ package juegos.cartas.poker.manos;
 import java.util.Comparator;
 import java.util.List;
 
-import juegos.cartas.cartas.cartas.CartaNumeroPalo;
-import juegos.cartas.cartas.cartas.ICartaComparable;
+import juegos.cartas.cartas.cartas.ICartaNumeroPalo;
 import juegos.cartas.cartas.cartas.dom.dominios.DominioValorPalo;
 import juegos.cartas.cartas.juego.Mano;
 
@@ -15,7 +14,7 @@ import juegos.cartas.cartas.juego.Mano;
  * Estructura de mano
  *
  */
-public abstract class ManoPoker<C extends CartaNumeroPalo<N, P>,N,P> implements /*Comparable<ManoPoker>,*/  Mano
+public abstract class ManoPoker<C extends ICartaNumeroPalo<N, P>,N,P> implements /*Comparable<ManoPoker>,*/  Mano
 {
 	
 	

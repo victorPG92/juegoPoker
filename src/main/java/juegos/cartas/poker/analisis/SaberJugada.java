@@ -3,10 +3,8 @@ package juegos.cartas.poker.analisis;
 import java.util.ArrayList;
 import java.util.List;
 
-import juegos.cartas.cartas.cartas.CartaFrancesaOld;
-import juegos.cartas.cartas.cartas.CartaNumeroPalo;
+import juegos.cartas.cartas.cartas.ICartaNumeroPalo;
 import juegos.cartas.cartas.cartas.dom.dominios.DominioValorPalo;
-import juegos.cartas.cartas.cartas.palos.PaloFrances;
 import juegos.cartas.cartas.juego.Mano;
 import juegos.cartas.cartas.ordenar.OrdenarCartas;
 import juegos.cartas.poker.manos.NombreManoPoker;
@@ -18,10 +16,10 @@ import juegos.cartas.poker.manos.fact.FactoriaMano;
  * Dadas 5 cartas, permite saber que mano  disponemos
  *
  */
-public class SaberJugada <C extends CartaNumeroPalo<N, P>,N,P>
+public class SaberJugada <C extends ICartaNumeroPalo<N, P>,N,P>
 {
 	
-	private ArrayList<C> cartas;
+	private List<C> cartas;
 	
 	private boolean hayPareja;
 	private boolean hayDoblePareja;
@@ -46,7 +44,7 @@ public class SaberJugada <C extends CartaNumeroPalo<N, P>,N,P>
 	
 	
 	
-	public SaberJugada(ArrayList<C> manos,DominioValorPalo<N, P, C> dom)
+	public SaberJugada(List<C> manos,DominioValorPalo<N, P, C> dom)
 	{
 		
 		this.dom=dom;

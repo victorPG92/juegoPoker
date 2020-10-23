@@ -2,7 +2,7 @@ package juegos.cartas.poker.manos.fact;
 
 import java.util.List;
 
-import juegos.cartas.cartas.cartas.CartaNumeroPalo;
+import juegos.cartas.cartas.cartas.ICartaNumeroPalo;
 import juegos.cartas.cartas.cartas.dom.dominios.DominioValorPalo;
 import juegos.cartas.cartas.juego.Mano;
 import juegos.cartas.poker.manos.CartaMasAlta;
@@ -24,7 +24,7 @@ import juegos.cartas.poker.manos.Trio;
  * dentro de las clases no se deberia reordenar, deberia recibir las cartas ordenadas
  *
  */
-public class FactoriaMano <C extends CartaNumeroPalo<N, P>,N,P>
+public class FactoriaMano <C extends ICartaNumeroPalo<N, P>,N,P>
 {
 	
 	
