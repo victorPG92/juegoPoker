@@ -3,8 +3,8 @@ package juego.cartas.poker.manos;
 import java.util.ArrayList;
 import java.util.List;
 
-import juegos.cartas.cartas.cartas.CartaFrancesaOld;
-import juegos.cartas.cartas.cartas.palos.PaloFrances;
+import juego.cartas.clasicos.cartas.CartaFrancesaOld;
+import juego.cartas.clasicos.palos.PaloFrances;
 
 public class FactTestManos 
 {

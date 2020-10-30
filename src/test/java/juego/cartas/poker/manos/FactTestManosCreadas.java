@@ -1,10 +1,10 @@
 package juego.cartas.poker.manos;
 
 
-import juegos.cartas.cartas.cartas.CartaFrancesaOld;
+import juego.cartas.clasicos.cartas.CartaFrancesaOld;
+import juego.cartas.clasicos.dom.fact.FactDominiosCartasEnumFr;
+import juego.cartas.clasicos.palos.PaloFrances;
 import juegos.cartas.cartas.cartas.dom.dominios.DominioValorPalo;
-import juegos.cartas.cartas.cartas.dom.fact.FactDominiosCartasEnumFr;
-import juegos.cartas.cartas.cartas.palos.PaloFrances;
 import juegos.cartas.poker.manos.Color;
 import juegos.cartas.poker.manos.DoblesParejas;
 import juegos.cartas.poker.manos.Escalera;

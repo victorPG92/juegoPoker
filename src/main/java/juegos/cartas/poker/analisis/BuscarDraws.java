@@ -3,17 +3,16 @@ package juegos.cartas.poker.analisis;
 import java.util.ArrayList;
 import java.util.List;
 
-
-import juegos.cartas.cartas.cartas.CartaFrancesaOld;
-import juegos.cartas.cartas.cartas.palos.PaloFrances;
-import juegos.cartas.cartas.ordenar.OrdenarCartas;
+import juego.cartas.clasicos.cartas.CartaFrancesaOld;
+import juego.cartas.clasicos.cartas.OrdenarCartas;
+import juego.cartas.clasicos.palos.PaloFrances;
 import juegos.cartas.cartas.utils.Combinaciones;
 
 
 public class BuscarDraws 
 {
 	
-	private ArrayList<CartaFrancesaOld> cartas;
+	private List<CartaFrancesaOld> cartas;
 	
 	private boolean proyectoEscaleraAbierta;
 	private boolean proyectoEscaleraInterrumpida;
@@ -39,11 +38,11 @@ public class BuscarDraws
                     
                     Combinaciones cmb = new Combinaciones(6, 5);
 		
-                    ArrayList<ArrayList<Integer>> combinaciones = cmb.dameTodasLasCombinaciones();
+                    List<List<Integer>> combinaciones = cmb.dameTodasLasCombinaciones();
 
-                    for(ArrayList<Integer> indices : combinaciones)
+                    for(List<Integer> indices : combinaciones)
                     {
-                            ArrayList<CartaFrancesaOld > manoTemp = new  ArrayList< >();
+                            List<CartaFrancesaOld > manoTemp = new  ArrayList< >();
                             for(Integer i : indices)
                                     manoTemp.add(manos.get(i));
 

@@ -3,10 +3,10 @@ package juego.cartas.poker.mocks;
 import java.util.ArrayList;
 import java.util.List;
 
-import juegos.cartas.cartas.cartas.CartaFrancesaOld;
-import juegos.cartas.cartas.cartas.palos.PaloFrances;
+import juego.cartas.clasicos.cartas.CartaFrancesaOld;
+import juego.cartas.clasicos.mazos.fact.FactFachadaMazoEspFr;
+import juego.cartas.clasicos.palos.PaloFrances;
 import juegos.cartas.cartas.juego.Apuesta;
-import juegos.cartas.cartas.mazos.fact.FactFachadaMazoEspFr;
 import juegos.cartas.cartas.mazos.impl.gen.MazoGen;
 import juegos.cartas.poker.juego.AccionPoker;
 import juegos.cartas.poker.juego.FactJugadores;

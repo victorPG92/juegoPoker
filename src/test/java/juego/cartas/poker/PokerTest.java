@@ -2,10 +2,8 @@ package juego.cartas.poker;
 
 import org.junit.jupiter.api.Test;
 
-import juegos.cartas.cartas.cartas.CartaFrancesaOld;
-import juegos.cartas.cartas.cartas.ICartaNumeroPalo;
-import juegos.cartas.cartas.cartas.modelos.ICartaNumeroPaloFrancesa;
-import juegos.cartas.cartas.cartas.palos.PaloFrances;
+import juego.cartas.clasicos.modelos.ICartaNumeroPaloFrancesa;
+import juego.cartas.clasicos.palos.PaloFrances;
 import juegos.cartas.poker.juego.JuegoPoker;
 import juegos.cartas.poker.juego.fact.FactPoker;
 import juegos.cartas.poker.launcher.PokerLauncherConsola;

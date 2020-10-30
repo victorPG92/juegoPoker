@@ -5,9 +5,9 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import juego.cartas.clasicos.cartas.CartaFrancesaOld;
+import juego.cartas.clasicos.palos.PaloFrances;
 import juego.cartas.poker.mocks.JuegoPokerMock;
-import juegos.cartas.cartas.cartas.CartaFrancesaOld;
-import juegos.cartas.cartas.cartas.palos.PaloFrances;
 import juegos.cartas.cartas.juego.Apuesta;
 import juegos.cartas.poker.juego.AccionPoker;
 import juegos.cartas.poker.juego.JugadorPokerTexasHoldem;

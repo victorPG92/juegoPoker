@@ -2,10 +2,9 @@ package juegos.cartas.poker.juego.fact;
 
 import java.util.List;
 
-import juegos.cartas.cartas.cartas.CartaFrancesaOld;
-import juegos.cartas.cartas.cartas.modelos.ICartaNumeroPaloFrancesa;
-import juegos.cartas.cartas.cartas.palos.PaloFrances;
-import juegos.cartas.cartas.mazos.fact.FactMazoConcretoEnums;
+import juego.cartas.clasicos.mazos.fact.FactMazoConcretoEnums;
+import juego.cartas.clasicos.modelos.ICartaNumeroPaloFrancesa;
+import juego.cartas.clasicos.palos.PaloFrances;
 import juegos.cartas.cartas.mazos.impl.gen.MazoGen;
 import juegos.cartas.poker.juego.JuegoPoker;
 import juegos.cartas.poker.juego.JugadorPokerTexasHoldem;

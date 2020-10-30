@@ -2,7 +2,7 @@ package juegos.cartas.poker.manos.draws;
 
 import java.util.List;
 
-import juegos.cartas.cartas.cartas.CartaFrancesaOld;
+import juego.cartas.clasicos.cartas.CartaFrancesaOld;
 
 public class CartaImpl2ManoRango implements Carta2ManoRango<CartaFrancesaOld>{
 

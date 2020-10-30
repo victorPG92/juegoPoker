@@ -2,10 +2,10 @@ package juego.cartas.poker.manos;
 
 import org.junit.Test;
 
-import juegos.cartas.cartas.cartas.CartaFrancesaOld;
+import juego.cartas.clasicos.cartas.CartaFrancesaOld;
+import juego.cartas.clasicos.dom.fact.FactDominiosCartasEnumFr;
+import juego.cartas.clasicos.palos.PaloFrances;
 import juegos.cartas.cartas.cartas.dom.dominios.DominioValorPalo;
-import juegos.cartas.cartas.cartas.dom.fact.FactDominiosCartasEnumFr;
-import juegos.cartas.cartas.cartas.palos.PaloFrances;
 import juegos.cartas.cartas.juego.Mano;
 import juegos.cartas.poker.manos.NombreManoPoker;
 import juegos.cartas.poker.manos.fact.FactoriaMano;

@@ -1,6 +1,6 @@
 package juegos.cartas.poker.manos.draws;
 
-import juegos.cartas.cartas.cartas.CartaFrancesaOld;
+import juego.cartas.clasicos.cartas.CartaFrancesaOld;
 
 public class ManoSimple 
 {

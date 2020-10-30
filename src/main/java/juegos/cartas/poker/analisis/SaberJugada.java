@@ -3,10 +3,10 @@ package juegos.cartas.poker.analisis;
 import java.util.ArrayList;
 import java.util.List;
 
+import juego.cartas.clasicos.cartas.OrdenarCartas;
 import juegos.cartas.cartas.cartas.ICartaNumeroPalo;
 import juegos.cartas.cartas.cartas.dom.dominios.DominioValorPalo;
 import juegos.cartas.cartas.juego.Mano;
-import juegos.cartas.cartas.ordenar.OrdenarCartas;
 import juegos.cartas.poker.manos.NombreManoPoker;
 import juegos.cartas.poker.manos.fact.FactoriaMano;
 

@@ -3,7 +3,6 @@ package juegos.cartas.poker.analisis;
 import java.util.ArrayList;
 import java.util.List;
 
-import juegos.cartas.cartas.cartas.CartaFrancesaOld;
 import juegos.cartas.cartas.cartas.ICartaNumeroPalo;
 import juegos.cartas.cartas.cartas.dom.dominios.DominioValorPalo;
 import juegos.cartas.cartas.juego.Mano;
@@ -52,11 +51,11 @@ public class EncontrarMejorJugadaOmaha <C extends ICartaNumeroPalo<N,P>, N,P>
 		
 		CombinacionesMultiples cmb = new CombinacionesMultiples(cartasJug.size(), 2, cartasComunes.size(), 3);///
 		
-		List<ParTipo<ArrayList<Integer>>> combinaciones = cmb.dameTodasLasCombinaciones();//
+		List<ParTipo<List<Integer>>> combinaciones = cmb.dameTodasLasCombinaciones();//
 		
 		
 		//System.out.println(combinaciones.size());// 6 * (4 3) = 6*4=24 correcto 
-		for(ParTipo<ArrayList<Integer>> indices : combinaciones)///
+		for(ParTipo<List<Integer>> indices : combinaciones)///
 		{
 			List<C> manoTemp = new  ArrayList<>();
 			

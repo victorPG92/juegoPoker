@@ -5,9 +5,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.StringTokenizer;
 
-import juegos.cartas.cartas.cartas.CartaFrancesaOld;
-import juegos.cartas.cartas.cartas.CartaNumeroPalo;
-
+import juego.cartas.clasicos.cartas.CartaFrancesaOld;
 import juegos.cartas.cartas.juego.RangoJugador;
 
 /**

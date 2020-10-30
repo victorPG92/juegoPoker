@@ -56,9 +56,9 @@ public class EncontrarMejorJugada<C extends ICartaNumeroPalo<V,P>,V,P> {
 		//Combinaciones cmb = new Combinaciones(7, 5);
 		Combinaciones cmb = new Combinaciones(cartas.size(), 5);
 		
-		ArrayList<ArrayList<Integer>> combinaciones = cmb.dameTodasLasCombinaciones();
+		List<List<Integer>> combinaciones = cmb.dameTodasLasCombinaciones();
 		
-		for(ArrayList<Integer> indices : combinaciones)
+		for(List<Integer> indices : combinaciones)
 		{
 			List<C> manoTemp = new  ArrayList<C >();
 			for(Integer i : indices)
